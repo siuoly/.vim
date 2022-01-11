@@ -7,6 +7,7 @@ nnoremap q :silent! wall<CR>| cnoremap qq q!| cnoremap qw wall<bar>qa
 nnoremap ZZ :wall <bar> qa<cr>
 nnoremap <M-w> :wall<cr>
 nnoremap <M-q> :q<cr>
+command! Q normal! qq
 nnoremap Q q
 tnoremap <M-q> exit<cr>
 
@@ -80,8 +81,11 @@ nnoremap <M-1> :w<CR>:exe getline("1")[2:]<CR>
 nnoremap <M-2> :w<CR>:exe getline("2")[2:]<CR>
 nnoremap <M-3> :w<CR>:exe getline("3")[2:]<CR>
 nnoremap <M-4> :w<CR>:exe getline("4")[2:]<CR>
+
 " f cyclic move in ~/projects/vim/fmove/a.vim
-nnoremap <silent><expr>; search(getcharsearch().char,"",line('.'))==0 ? ",,,,,,,,,,,,," : ";"
+" nnoremap <silent><expr>; search(getcharsearch().char,"",line('.'))==0 ? ",,,,,,,,,,,,," : ";"
+" f <char> move,  ; --> next<char>,  : --> previous<char>
+nnoremap <expr> : (&bt=="") ? "," : ":"
 
 " tab 間移動
 nnoremap <silent> <C-h> :tabp<CR>
