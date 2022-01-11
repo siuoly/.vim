@@ -23,6 +23,7 @@ call plug#begin('~/.vim/plugged')
 
 " Plug 'easymotion/vim-easymotion'
 " must use
+Plug 'siuoly/vim-misc' 
 Plug 'markonm/traces.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-commentary',
@@ -45,7 +46,6 @@ Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
 
 " not must use"
-Plug  'vim-scripts/foldlist'
 Plug  'vim-scripts/folddigest.vim'
 Plug 'turbio/bracey.vim' , {'do': 'npm install --prefix server','for':['html','javascript','css','php']}
                                         " html edit
