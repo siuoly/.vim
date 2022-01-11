@@ -11,6 +11,8 @@ nnoremap <buffer>\c :tabe /home/siuoly/cheatsheet/html.txt<CR>
 "run test
 " nnoremap <buffer><C-D> :w<CR>:!explorer.exe %<CR><CR>
 nnoremap <buffer><C-D> :w<CR>:call system("explorer.exe ".expand("%") )<CR>
+command! RefreshBrowser AsyncRun -silent -cwd=~/.vim/after/ftplugin/html explorer.exe refresh.ahk
+nnoremap <buffer><F5> :w<CR>:RefreshBrowser<cr>
 
 " comment
 nnoremap <expr> getline( ".")[ indent(".")] == '/' ?
