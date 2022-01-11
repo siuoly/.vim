@@ -1,0 +1,110 @@
+snippet pp "print()" b
+print( ${1:} )
+endsnippet
+ 
+
+snippet imtorch "learning madule matplotlib" b
+import pytorch
+endsnippet
+
+# imrequest imtorch pp snipcrawler imsys
+
+# request
+snippet imreq "crawler import data" b
+from bs4 import BeautifulSoup
+import json ,re, requests
+
+sess = requests.Session() # maintain cookies
+proxies = {'http': 'http://localhost:8888', 'https': 'http://localhost:8888'}
+sess.proxies = proxies
+# sess.verify = False
+sess.get('http://yahoo.com' )
+endsnippet
+
+snippet snipcrawler "crawler setting" b 
+headers = {
+		'Connection': 'keep-alive',
+		'accept': 'text/plain, */*; q=0.01',
+		'content-type': 'application/x-www-form-urlencoded',
+		'x-requested-with': 'XMLHttpRequest',
+		'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36 Edg/93.0.961.52',
+		'sec-ch-ua': '"Microsoft Edge";v="93", " Not;A Brand";v="99", "Chromium";v="93"',
+		'sec-ch-ua-platform': '"Windows"',
+		'sec-ch-ua-mobile': '?0',
+		'sec-fetch-site': 'same-origin',
+		'sec-fetch-mode': 'cors',
+		'sec-fetch-dest': 'empty',
+		'accept-language': 'zh-TW,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,ja;q=0.5',
+	}
+
+data = {
+		'curr_id': '6408',
+		'smlID': '1159963',
+}
+cookies = {'a':'123'}
+res = sess.post( url ,headers=headers, cookies=cookies, data=data)
+if res.status_code != requests.codes.ok:
+	print(res.status_code, " error" )
+	exit(1)
+endsnippet
+
+snippet snipConcurrent "concurnet thread" b
+from concurrent.futures import ThreadPoolExecutor ,as_completed
+with ThreadPoolExecutor(max_workers=5) as executor:
+		params = [[1,i] for i in range(100)]
+		results  = executor.map( lambda args: f(*args), params )
+		print( list(results))
+endsnippet
+
+
+snippet snipConcurrentProcess "concurrent process" b
+from multiprocessing import Pool
+with Pool(10) as p:
+		r = list( p.map(_foo, range(30)) )
+endsnippet
+
+# https://stackoverflow.com/a/21455138/12506676
+snippet snipElapsedTime "time it" b
+start = time.perf_counter()
+# do something
+end = time.perf_counter() - start
+endsnippet
+
+# sytanx
+snippet snipTry "try it" b
+try:
+	raise Exception("error")
+
+except Exception as e:
+	print( type(e), e )
+raise e
+endsnippet
+
+snippet impdb "import pdb" i
+import pdb; pdb.set_trace()
+endsnippet
+
+snippet imipdb "import ipdb" i
+import ipdb; ipdb.set_trace()
+endsnippet
+
+
+snippet imlog "import logging" b
+import logging
+
+logging.basicConfig( filename='test.log',
+	level= logging.WARNING ,
+	format = '%(relativeCreated)4d:%(levelname)8s: %(funcName)s:%(lineno)d\t%(message)s' ,
+	filemode = 'w' )
+endsnippet
+
+# module
+snippet imsys "import basic module" b
+import sys.getobjsize
+import sys.argv
+import os
+endsnippet
+
+
+
+

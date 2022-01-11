@@ -1,0 +1,30 @@
+{
+  "languageserver": {
+    "go": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "trace.server": "verbose",
+      "filetypes": ["go"]
+    }
+  },
+  "snippets":{
+    "shortcut": "S"
+  },
+
+  "tsserver":{
+    "enable" : false,
+    "githubUrl": " https://github.com/neoclide/coc-tsserver "
+  },
+  "pyright":{
+    "enable": false,
+
+    "githubUrl" :" https://github.com/fannheyward/coc-pyright ",
+    "linting" : { "enabled" : false } ,
+    "disableCompletion" : true
+  },
+
+  "python":{
+    "   linting": []
+  }
+}
+

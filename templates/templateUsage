@@ -1,0 +1,17 @@
+/*
+ * Copyright louislee at [:VIM_EVAL:]strftime("%Y %b %d %X")[:END_EVAL:]   function
+ * [:VIM_SYSTEM:]ls -a[:END_SYSTEM:]   shell
+ * [:VIM_SYSTEM:]date[:END_SYSTEM:]  shell
+ * [:VIM_EXE:]files[:END_EXE:]  vimL
+ *
+ */
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+int main(int argc ,char **argv){
+  
+}
