@@ -1,3 +1,12 @@
+# macro
+snippet #I  "include" b
+#include <${1:}>
+endsnippet
+
+snippet #i  "include" b
+#include <${1:}>
+endsnippet
+
 snippet pp "cout usage" b
 	cout << 
 endsnippet
@@ -19,7 +28,7 @@ snippet class "class" b
 class ${1:Class}{
 public:
 	// constructors, asssignment, destructor
-	$1();
+	$1(${2:});
 	$1(const $1&);
 	$1& operator=(const $1&);
 	~$1();

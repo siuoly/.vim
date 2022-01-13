@@ -46,6 +46,7 @@ Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
 
 " not must use"
+Plug 'junegunn/fzf.vim'
 Plug  'vim-scripts/folddigest.vim'
 Plug 'turbio/bracey.vim' , {'do': 'npm install --prefix server','for':['html','javascript','css','php']}
                                         " html edit
@@ -82,12 +83,14 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  } " previ
 
 call plug#end()
 if( has_key(g:plugs, "vim-markdown") )
+  let g:vim_markdown_no_default_key_mappings = 1
+  let g:vim_markdown_folding_disabled = 1
+  let g:vim_markdown_conceal = 0
   let g:vim_markdown_math = 1
+  let g:vim_markdown_conceal_code_blocks = 0
 endif
 
 
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_no_default_key_mappings = 1
 
 
 if( has_key(g:plugs, "vim-commentary") )
@@ -198,6 +201,11 @@ if( has_key(g:plugs, "asynctasks.vim") )
   nnoremap <leader>g :call Togglefile('.tasks')<cr>
   command! AE  if(filereadable(".tasks")) | vs .tasks | else | exec "AsyncTaskEdit" | endif
 
+  nnoremap <expr><F5> &bt=="" ? "<Cmd>call JumpQuickfixWin() <bar> ZoomToggle<cr>" : ":ZoomToggle<CR><C-w><c-p>"
+  
+  nnoremap <leader>G :call Togglefile('~/.vim/tasks.ini')<cr>
+endif
+
   " terminal setting
   let g:asynctasks_term_pos = 'bottom'  " term pos
   let g:asynctasks_term_rows = 10   " width"
@@ -211,16 +219,10 @@ if( has_key(g:plugs, "asynctasks.vim") )
     endfor
   endfunction
 
-
-
 if( has_key(g:plugs, "ultisnips") ) 
+  nnoremap \u  <Cmd>UltiSnipsEdit<cr>
   let g:UltiSnipsExpandTrigger = "®"
   inoremap <expr> <space> UltiSnips#CanExpandSnippet()? "\<C-R>=UltiSnips#ExpandSnippetOrJump()\<CR>":" "
-  
-endif
-  nnoremap <expr><F5> &bt=="" ? "<Cmd>call JumpQuickfixWin() <bar> ZoomToggle<cr>" : ":ZoomToggle<CR><C-w><c-p>"
-
-  nnoremap <leader>G :call Togglefile('~/.vim/tasks.ini')<cr>
 endif
 
 

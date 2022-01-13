@@ -22,6 +22,10 @@
     "linting" : { "enabled" : false } ,
     "disableCompletion" : true
   },
+  "pairs":{
+    "disableLanguages": [],
+    "enableCharacters":  ["(", "[", "{", "<", "'", "\"", "`" ]
+  },
 
   "python":{
     "   linting": []
