@@ -240,6 +240,4 @@ stty -ixon   # 使得 <C-S> 生效
 bashcompinit
 # source /home/siuoly/projects/c++/vcpkg/vcpkg/scripts/vcpkg_completion.zsh
 
-
-
-
+PROMPT="%n %~: "
