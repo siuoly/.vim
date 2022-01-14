@@ -240,4 +240,4 @@ stty -ixon   # 使得 <C-S> 生效
 bashcompinit
 # source /home/siuoly/projects/c++/vcpkg/vcpkg/scripts/vcpkg_completion.zsh
 
-PROMPT="%n %~: "
+PROMPT="%{$fg[cyan]%}%n%{$fg[green]%} %~"$'\n'"%{$fg[magenta]%}%T%{$reset_color%} "
