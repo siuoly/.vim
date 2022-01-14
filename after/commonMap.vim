@@ -199,3 +199,7 @@ EOF
 endfunction
 command! AutoFoldDir call AutoFoldDir() | source ./.vimrc
 
+
+
+
+
