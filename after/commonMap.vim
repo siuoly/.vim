@@ -3,7 +3,8 @@ inoremap jk <ESC>| inoremap kj <ESC>| cnoremap jk <esc>
 cnoremap kj <esc>
 
 " 使用q為存檔鍵, 做其他替換
-nnoremap q :silent! wall<CR>| cnoremap qq q!| cnoremap qw wall<bar>qa
+nnoremap q :silent! wall<CR>| cnoremap qq q!
+cnoremap qw silent! wall <bar>bufdo qa!
 nnoremap ZZ :wall <bar> qa<cr>
 nnoremap <M-w> :wall<cr>
 nnoremap <M-q> :q<cr>
@@ -198,4 +199,8 @@ with open( '.vimrc','a') as file:
 EOF
 endfunction
 command! AutoFoldDir call AutoFoldDir() | source ./.vimrc
+
+
+
+
 

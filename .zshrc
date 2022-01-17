@@ -79,14 +79,14 @@ plugins=(
 	command-not-found
   zsh-syntax-highlighting
   extract # 解壓縮
-  git-open  # 瀏覽器打開當前repo 
-	# zsh-z
+  # git-open  # 瀏覽器打開當前repo 
+	z
 	# colored-man-pages
   # rand-quote # 名言
   # zsh_reload # src , reload zshrc
 )
 
-eval "$(lua /home/siuoly/.local/bin/z.lua --init zsh enhanced once echo)"     # 取代zsh-z 目錄移動跳轉
+# eval "$(lua "/home/siuoly/.local/bin/z.lua"  --init zsh enhanced once echo)"     # 取代zsh-z 目錄移動跳轉
 
 source $ZSH/oh-my-zsh.sh
 
@@ -144,7 +144,6 @@ alias gitl="git log --oneline"
 
 alias envActive="source bin/activate"
 
-alias markdown="'/mnt/c/Program Files/Typora/Typora.exe'"
 alias vimless="/usr/local/share/vim/vim82/macros/less.sh"
 alias myip="curl -s https://ipecho.net/plain; echo"
 alias usage="du -h -d1"
@@ -236,7 +235,9 @@ stty -ixon   # 使得 <C-S> 生效
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh 
 
-source /home/siuoly/.config/broot/launcher/bash/br
+# source /home/siuoly/.config/broot/launcher/bash/br
 
 bashcompinit
-source /home/siuoly/projects/c++/vcpkg/vcpkg/scripts/vcpkg_completion.zsh
+# source /home/siuoly/projects/c++/vcpkg/vcpkg/scripts/vcpkg_completion.zsh
+
+PROMPT="%{$fg[cyan]%}%n%{$fg[green]%} %~"$'\n'"%{$fg[magenta]%}%T%{$reset_color%} "

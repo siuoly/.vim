@@ -59,8 +59,8 @@ Plug 'kshenoy/vim-signature'            " mark
 Plug 'skywind3000/asyncrun.vim', {'on': ['AsyncRun', 'AsyncStop'] }
 Plug 'skywind3000/asynctasks.vim', {'on': ['AsyncTask', 'AsyncTaskMacro', 'AsyncTaskList', 'AsyncTaskEdit'] }
 
-Plug 'neoclide/coc.nvim', {'branch': 'release','on':[]}
 
+Plug 'neoclide/coc.nvim', {'branch': 'release','on':[]}
 Plug 'yianwillis/vimcdoc'             " 中文vim help
 Plug 'flazz/vim-colorschemes'         " color scheme
 Plug 'yegappan/taglist',{'on':'Tlist'}               " taglist
