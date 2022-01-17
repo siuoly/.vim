@@ -46,7 +46,9 @@ Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
 
 " not must use"
+Plug 'voldikss/vim-floaterm'
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug  'vim-scripts/folddigest.vim'
 Plug 'turbio/bracey.vim' , {'do': 'npm install --prefix server','for':['html','javascript','css','php']}
                                         " html edit

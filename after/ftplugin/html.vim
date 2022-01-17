@@ -22,6 +22,7 @@ xnoremap  <esc>`>a */<c-o>`</* <esc>
 
 " configuration
 set iskeyword+=-
+set iskeyword+=.
 
 "edit
 "<NUL> 不可在新注音下,使用,  需用English輸入法
