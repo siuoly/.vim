@@ -10,7 +10,6 @@
 
 call plug#begin('~/.vim/plugged')
 " no use
-
 " Plug 'bling/vim-bufferline'
 " Plug 'maxbrunsfeld/vim-yankstack'   " 複製暫存器
 " Plug 'kien/ctrlp.vim'               " 搜尋buffer
@@ -19,9 +18,14 @@ call plug#begin('~/.vim/plugged')
 " Plug 'jceb/vim-orgmode'               "Todo list
 " Plug 'lifepillar/vim-cheat40'         "Todo list
 " Plug 'ashisha/image.vim'             " open ASCII image in vim
-
-
 " Plug 'easymotion/vim-easymotion'
+" Plug 'pi314/ime-phonetic.vim'
+" Plug 'pi314/ime.vim'
+if !has('win32') |
+  " Plug 'brglng/vim-im-select'           " IME switch
+endif
+
+
 " must use
 Plug 'siuoly/vim-misc' 
 Plug 'markonm/traces.vim'
@@ -32,11 +36,7 @@ Plug 'preservim/nerdtree',
       \{ 'on':  'NERDTreeToggle' } " 檔案瀏覽
 Plug 'godlygeek/tabular',{'on':'Tabularize'} " h Tabu  快速編輯
 Plug 'tpope/vim-surround'          " new help surround
-" Plug 'pi314/ime-phonetic.vim'
-" Plug 'pi314/ime.vim'
-if !has('win32') |
-  " Plug 'brglng/vim-im-select'           " IME switch
-endif
+Plug 'tpope/vim-repeat'
 Plug 'mattn/emmet-vim',{'for':['html','php']}
 Plug 'captbaritone/better-indent-support-for-php-with-html'
 
@@ -67,7 +67,7 @@ Plug 'yegappan/taglist',{'on':'Tlist'}               " taglist
 
 
 Plug 'jupyter-vim/jupyter-vim',{'for':'python'} " jupyter 互動工作
-Plug 'goerz/jupytext.vim'
+" Plug 'goerz/jupytext.vim'
 Plug 'hanschen/vim-ipython-cell',{'for':'python'}
 Plug 'jpalardy/vim-slime',{'for':'python'}
 

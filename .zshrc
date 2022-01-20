@@ -80,13 +80,13 @@ plugins=(
   zsh-syntax-highlighting
   extract # 解壓縮
   # git-open  # 瀏覽器打開當前repo 
-	z
+	# z
 	# colored-man-pages
   # rand-quote # 名言
   # zsh_reload # src , reload zshrc
 )
 
-# eval "$(lua "/home/siuoly/.local/bin/z.lua"  --init zsh enhanced once echo)"     # 取代zsh-z 目錄移動跳轉
+eval "$(lua "/home/siuoly/.local/bin/z.lua"  --init zsh enhanced once echo)"     # 取代zsh-z 目錄移動跳轉
 
 source $ZSH/oh-my-zsh.sh
 
