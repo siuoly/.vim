@@ -69,7 +69,7 @@ if has('gui')
   let $VIMFILES=$HOME..'/vimfiles'
   au GUIEnter * simalt ~x
 else
-  let $VIMFIELS=$HOME..'/.vim'
+  let $VIMFILES=$HOME..'/.vim'
 endif
 
 " hilight current line only
