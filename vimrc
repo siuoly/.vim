@@ -62,6 +62,16 @@ set statusline=%-15f%h%m%r%w%=[%{&fileencoding}]%-6y--%p%%[%l/%L]
 " File ,Help, Modify, Readonly w:Preview    
 " =:right     y:filetype,  lLine , Percent
 
+
+
+if has('gui')
+  set guifont=Cascadia\ Code:h11:cANSI
+  let $VIMFILES=$HOME..'/vimfiles'
+  au GUIEnter * simalt ~x
+else
+  let $VIMFIELS=$HOME..'/.vim'
+endif
+
 " hilight current line only
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline
@@ -69,8 +79,8 @@ autocmd TerminalOpen * setlocal nonumber norelativenumber
 
 augroup remember_view_global
   au!
-	au BufWinLeave ~/.vim/vimrc mkview! ~/.vim/view/~=+vimrc=
-	au BufWinEnter ~/.vim/vimrc silent! source ~/.vim/view/~=+vimrc= 
+  au BufWinLeave $VIMFILES/vimrc mkview! $VIMFILES/view/~=+vimrc=
+  au BufWinEnter $VIMFILES/vimrc silent! source $VIMFILES/view/~=+vimrc= 
 augroup END
 
 
@@ -160,16 +170,14 @@ function! OpenMakefile()
 endfunction
 
 
+  "source map
+  source $VIMFILES/after/commonMap.vim
 
-"source map
-source ~/.vim/after/commonMap.vim
+  "confugure
+  source $VIMFILES/after/configure.vim
 
-"confugure
-source ~/.vim/after/configure.vim
-
-
-" vim-plug
-source ~/.vim/after/plug.vim
+  " vim-plug
+  source $VIMFILES/after/plug.vim
 
 let folddigest_options = "vertical,flexnumwidth"
 let folddigest_size = 30

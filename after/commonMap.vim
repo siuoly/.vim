@@ -160,15 +160,16 @@ xnoremap <tab> >gv| xnoremap <s-tab> <gv
 nnoremap gse :w !translate -d zh-TW <cword><CR>
 xnoremap gse :w !xargs \| xargs -I {} translate -d zh-tw {}<CR>
 
-
 " open configuration about filetype
-nnoremap <leader>V :call Togglefile("~/.vim/after/ftplugin/" .&ft . ".vim")<CR>
-nnoremap <leader>t :call Togglefile("~/.vim/templates/template." .&ft)<CR>
-nnoremap <leader>c :call Togglefile("~/cheatsheet/" ..&ft ..".txt" )<CR>
+nnoremap <leader>V :call Togglefile($VIMFILES .. "/after/ftplugin/" .&ft . ".vim")<CR>
+nnoremap <leader>t :call Togglefile($VIMFILES .. "/templates/template." .&ft)<CR>
+nnoremap <leader>c :call Togglefile($VIMFILES .. "$HOME/cheatsheet/" ..&ft ..".txt" )<CR>
 " bash use"
-nnoremap <leader>v :call Togglefile('~/.vim/vimrc')<CR>
-nnoremap <leader>m :call Togglefile('~/.vim/after/commonMap.vim')<CR>
-nnoremap <leader>p :call Togglefile('~/.vim/after/plug.vim')<CR>
+nnoremap <leader>v :call Togglefile($VIMFILES .. '/vimrc')<CR>
+nnoremap <leader>m :call Togglefile($VIMFILES .. '/after/commonMap.vim')<CR>
+nnoremap <leader>p :call Togglefile($VIMFILES .. '/after/plug.vim')<CR>
+
+
 nnoremap <leader>e :NERDTreeToggle<CR>
 " ZoomToggle
 nnoremap <leader>z <Cmd>ZoomToggle<cr>

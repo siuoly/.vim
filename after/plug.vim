@@ -3,12 +3,8 @@
 "vim-plug
 
 " Profile https://github.com/hyiltiz/vim-plugins-profile
-"
-"
 
-
-
-call plug#begin('~/.vim/plugged')
+call plug#begin( '~/.vim/plugged' )
 " no use
 " Plug 'bling/vim-bufferline'
 " Plug 'maxbrunsfeld/vim-yankstack'   " 複製暫存器
@@ -81,9 +77,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  } " previ
 " Plug 'vim-airline/vim-airline'        " 美觀
 " Plug 'vim-airline/vim-airline-themes' " theme
 " Plug 'kyoz/purify', { 'rtp': 'vim' }  " color scheme
-
-
 call plug#end()
+
 if( has_key(g:plugs, "vim-markdown") )
   let g:vim_markdown_no_default_key_mappings = 1
   let g:vim_markdown_folding_disabled = 1
@@ -142,12 +137,11 @@ augroup load_us_coc   " lazy load
 augroup END
 
 if( has_key(g:plugs, "coc.nvim") )
-  source ~/.vim/after/cocset.vim 
-  let g:coc_node_path="/usr/bin/node"
+  source $VIMFILES/after/cocset.vim
+  " let g:coc_node_path="/usr/bin/node"
   let g:coc_global_extensions = [
         \ 'coc-pairs'
         \]
-  command! Coc CocConfig
 endif
 
 
@@ -205,7 +199,7 @@ if( has_key(g:plugs, "asynctasks.vim") )
 
   nnoremap <expr><F5> &bt=="" ? "<Cmd>call JumpQuickfixWin() <bar> ZoomToggle<cr>" : ":ZoomToggle<CR><C-w><c-p>"
   
-  nnoremap <leader>G :call Togglefile('~/.vim/tasks.ini')<cr>
+  nnoremap <leader>G :call Togglefile( $VIMFILES .. '/tasks.ini')<cr>
 endif
 
   " terminal setting
