@@ -67,7 +67,7 @@ Plug 'yegappan/taglist',{'on':'Tlist'}               " taglist
 
 
 Plug 'jupyter-vim/jupyter-vim',{'for':'python'} " jupyter 互動工作
-" Plug 'goerz/jupytext.vim'
+Plug 'goerz/jupytext.vim'
 Plug 'hanschen/vim-ipython-cell',{'for':'python'}
 Plug 'jpalardy/vim-slime',{'for':'python'}
 

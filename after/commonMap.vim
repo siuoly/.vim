@@ -177,6 +177,12 @@ nnoremap <leader>z <Cmd>ZoomToggle<cr>
 " visual mode fold
 xnoremap f zf
 
+" mouse key setting  1.右鍵複製  2.右鍵複製 3.alt-右鍵 復原
+nnoremap <RightMouse> p 
+" xnoremap <LeftMouse> y
+xnoremap <RightMouse> y
+map <m-RightMouse> u
+
 " folder function
 function! AutoFoldDir()
 pythonx << EOF

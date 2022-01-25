@@ -6,7 +6,7 @@
 runtime defaults.vim
 set notermguicolors
 
-set mouse=
+set mouse=a
 
 set shortmess+=I  
 set number relativenumber
