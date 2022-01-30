@@ -3,7 +3,9 @@ inoremap jk <ESC>| inoremap kj <ESC>| cnoremap jk <esc>
 cnoremap kj <esc>
 
 " 使用q為存檔鍵, 做其他替換
-nnoremap q :silent! wall<CR>| cnoremap qq q!
+" nnoremap q :silent! wall<CR>
+cnoremap qq q!
+cabbre ww silent! wall
 cnoremap qw silent! wall <bar>bufdo qa!
 nnoremap ZZ :wall <bar> qa<cr>
 nnoremap <M-w> :wall<cr>
@@ -14,6 +16,7 @@ tnoremap <M-q> exit<cr>
 
 " quick input command,quickfix window using ,or command window( <c-f> )
 nnoremap <expr><cr> (&ft=="qf" \|\| &bt=="nofile") ? "<cr>":":"
+xnoremap <cr> :
 nnoremap <BS> <C-^>
 
 " Home End
@@ -35,7 +38,7 @@ nnoremap g; 2g;
 
 
 " scroll page
-nnoremap <Up> <C-y> | nnoremap <Down> <C-e>
+nnoremap <Up> <C-y>| nnoremap <Down> <C-e>
 
 " search and no jump
 nnoremap * *``

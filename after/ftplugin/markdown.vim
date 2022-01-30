@@ -11,6 +11,10 @@ function! SlashEndLine()
     call setline('.', getline('.').'\' )
   endif
 endfunc
-nnoremap <buffer> ;; <Cmd>call SlashEndLine()<cr>
+" nnoremap <buffer> ;; <Cmd>call SlashEndLine()<cr>
 
 nmap <buffer><silent> <c-p> :call mdip#MarkdownClipboardImage()<CR>
+
+" high light text
+xmap gh S` 
+nmap gh viwgh

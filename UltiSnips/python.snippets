@@ -1,13 +1,22 @@
+# key alias
 snippet pp "print()" b
 print( ${1:} )
 endsnippet
+
+## import lib
+snippet #i "import abbr" b
+import 
+endsnippet
  
+snippet imnp "import numpy as np" b
+import numpy as np
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+endsnippet
 
 snippet imtorch "learning madule matplotlib" b
 import pytorch
 endsnippet
-
-# imrequest imtorch pp snipcrawler imsys
 
 # request
 snippet imreq "crawler import data" b
@@ -63,23 +72,6 @@ with Pool(10) as p:
 		r = list( p.map(_foo, range(30)) )
 endsnippet
 
-# https://stackoverflow.com/a/21455138/12506676
-snippet snipElapsedTime "time it" b
-start = time.perf_counter()
-# do something
-end = time.perf_counter() - start
-endsnippet
-
-# sytanx
-snippet snipTry "try it" b
-try:
-	raise Exception("error")
-
-except Exception as e:
-	print( type(e), e )
-raise e
-endsnippet
-
 snippet impdb "import pdb" i
 import pdb; pdb.set_trace()
 endsnippet
@@ -98,12 +90,35 @@ logging.basicConfig( filename='test.log',
 	filemode = 'w' )
 endsnippet
 
-# module
-snippet imsys "import basic module" b
+snippet imsys "import system module" b
 import sys.getobjsize
 import sys.argv
 import os
 endsnippet
+snippet ifname  "if name ==__main__" b
+if __name__ == "__main__":
+	${1:}
+endsnippet
+
+
+
+# https://stackoverflow.com/a/21455138/12506676
+snippet snipElapsedTime "time it" b
+start = time.perf_counter()
+# do something
+end = time.perf_counter() - start
+endsnippet
+
+# sytanx
+snippet snipTry "try it" b
+try:
+	raise Exception("error")
+
+except Exception as e:
+	print( type(e), e )
+raise e
+endsnippet
+
 
 
 

@@ -42,7 +42,7 @@ Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
 
 " not must use"
-Plug 'voldikss/vim-floaterm'
+" Plug 'voldikss/vim-floaterm'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug  'vim-scripts/folddigest.vim'
