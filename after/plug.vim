@@ -187,6 +187,11 @@ if( has_key(g:plugs, "asyncrun.vim") )
   xnoremap gss :AsyncRun cat \| xargs -0 -I {} translate -d zh-tw {}<CR>
   nnoremap gse :AsyncRun translate <cword><CR>
   xnoremap gse :AsyncRun cat \| xargs -0 -I {} translate {}<CR>
+
+  " pronounciation,  copy the mpg123.exe to windows System path
+  nnoremap gsd :AsyncRun -mode=term -pos=hide gtts-cli <cword> \| mpg123.exe -q - <cr>
+  xnoremap gsd :AsyncRun -mode=term -pos=hide gtts-cli - \| mpg123.exe -q - <cr>
+
 endif
 
 " asynctask setting
