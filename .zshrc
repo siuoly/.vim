@@ -241,3 +241,6 @@ bashcompinit
 # source /home/siuoly/projects/c++/vcpkg/vcpkg/scripts/vcpkg_completion.zsh
 
 PROMPT="%{$fg[cyan]%}%n%{$fg[green]%} %~"$'\n'"%{$fg[magenta]%}%T%{$reset_color%} "
+
+
+

@@ -175,4 +175,3 @@ source /home/siuoly/.config/broot/launcher/bash/br
               export BROWSER=$BROWSER:wsl-open
             fi
           fi
-          

@@ -85,6 +85,7 @@ if( has_key(g:plugs, "vim-markdown") )
   let g:vim_markdown_conceal = 0
   let g:vim_markdown_math = 1
   let g:vim_markdown_conceal_code_blocks = 0
+  let g:tex_conceal = ""
 endif
 
 
@@ -190,14 +191,14 @@ if( has_key(g:plugs, "asyncrun.vim") )
 
   " pronounciation,  copy the mpg123.exe to windows System path
   nnoremap gsd :AsyncRun -mode=term -pos=hide gtts-cli <cword> \| mpg123.exe -q - <cr>
-  xnoremap gsd :AsyncRun -mode=term -pos=hide gtts-cli - \| mpg123.exe -q - <cr>
+  xnoremap gsd :AsyncRun -silent gtts-cli - \| mpg123.exe -q - <cr>
 
 endif
 
 " asynctask setting
 if( has_key(g:plugs, "asynctasks.vim") )
   let g:asyncrun_open = 8
-  nnoremap <space>d :AsyncTask file-run<cr>
+  " nnoremap <space>d :AsyncTask file-run<cr>
   nnoremap <c-c> :AsyncStop<cr>
   nnoremap <leader>g :call Togglefile('.tasks')<cr>
   command! AE  if(filereadable(".tasks")) | vs .tasks | else | exec "AsyncTaskEdit" | endif
