@@ -72,6 +72,7 @@ else
   let $VIMFILES=$HOME..'/.vim'
 endif
 
+
 " hilight current line only
 autocmd WinEnter * set cursorline
 autocmd WinLeave * set nocursorline
