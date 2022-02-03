@@ -13,8 +13,12 @@ function! SlashEndLine()
 endfunc
 " nnoremap <buffer> ;; <Cmd>call SlashEndLine()<cr>
 
-nmap <buffer><silent> <c-p> :call mdip#MarkdownClipboardImage()<CR>
+nn <buffer><c-p> :call mdip#MarkdownClipboardImage()<cr>
 
 " high light text
-xmap gh S` 
-nmap gh viwgh
+xmap <buffer> g` S`
+nmap <buffer> g` m"ysiw``"l
+
+nmap <buffer> gi m"ysiw*`"l
+nmap <buffer> gb ciw**<c-r>"**<esc>
+

@@ -5,7 +5,7 @@ snippet bb "star surrounding, bold text" w
 **${1:}** ${2:}
 endsnippet
 
-snippet sp; "insert space" w
+snippet sp "insert space" w
 &nbsp;
 endsnippet
 
@@ -19,13 +19,14 @@ snippet lim "limit" w
 \lim_{${1:n} \to ${2:\infty}} 
 endsnippet
 
-snippet !time "inster current tie" w
->`!v strftime("%H:%M:%S")`
-endsnippet
+# snippet !time "inster current tie" w
+# >`!v strftime("%H:%M:%S")`
+# endsnippet
 
-snippet !date "inster current date" w
->`!v strftime("%Y/%m/%d")`
-endsnippet
+# snippet !date "inster current date" w
+# >`!v strftime("%Y/%m/%d")`
+# endsnippet
 
-snippet indent
+snippet lin "add link" w
+[${1:link}](${2:`!v getreg('+')`}) ${3:}
 endsnippet

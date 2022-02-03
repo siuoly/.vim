@@ -49,7 +49,7 @@ nnoremap gt vito<ESC>
 " inoremap {{ {<CR>}<C-O>O
 
 setlocal et
-setlocal ts=4 sw=4 sts=4
+setlocal ts=2 sw=2 sts=2
 
 " 貼上RGP 顏色
 command! -buffer RGB put='rgb('. getreg('+') .');'

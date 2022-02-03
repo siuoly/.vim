@@ -28,6 +28,7 @@ Plug 'markonm/traces.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-commentary',
       \{'on':['<plug>Commentary','<plug>CommentaryLine'] } " comment
+Plug 'suy/vim-context-commentstring',
 Plug 'preservim/nerdtree',
       \{ 'on':  'NERDTreeToggle' } " 檔案瀏覽
 Plug 'godlygeek/tabular',{'on':'Tabularize'} " h Tabu  快速編輯
@@ -171,8 +172,8 @@ endif
 
 " colorschemes
 if( has_key(g:plugs, "vim-colorschemes") )
-  colorscheme blues
-  hi StatusLine ctermbg=3 ctermfg=black
+  colorscheme Atelier_SeasideDark
+  " hi StatusLine ctermbg=3 ctermfg=black
 endif
 
 
@@ -184,14 +185,18 @@ let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
 if( has_key(g:plugs, "asyncrun.vim") )
   " trans, pip install googletrans=a3.0, 
   " zshrc: alias translate_stdin="xargs -0 -I {} translate {}"
-  nnoremap gss :AsyncRun translate -d zh-TW <cword><CR>
-  xnoremap gss :AsyncRun cat \| xargs -0 -I {} translate -d zh-tw {}<CR>
+  "
+  nnoremap gss :AsyncRun -cwd=$VIMFILES/script ./translateZH_TW.py <cword><CR>
+  xnoremap gss :AsyncRun -cwd=$VIMFILES/script ./translateZH_TW.py -<CR>
+  command! -nargs=* Translate AsyncRun -cwd=$VIMFILES/script ./translateZH_TW.py <q-args>
+
   nnoremap gse :AsyncRun translate <cword><CR>
   xnoremap gse :AsyncRun cat \| xargs -0 -I {} translate {}<CR>
 
   " pronounciation,  copy the mpg123.exe to windows System path
   nnoremap gsd :AsyncRun -mode=term -pos=hide gtts-cli <cword> \| mpg123.exe -q - <cr>
   xnoremap gsd :AsyncRun -silent gtts-cli - \| mpg123.exe -q - <cr>
+  command! -nargs=* Pronunce AsyncRun -silent gtts-cli <q-args> | mpg123.exe -q -
 
 endif
 
