@@ -1,6 +1,8 @@
 " let g:mdip_imgdir = 'img'
 " let g:mdip_imgname = 'image'
 
+nn mm :MarkdownPreview<cr>
+
 let b:coc_pairs = [["*","*"]]
 " autocmd FileType markdown let b:coc_pairs = [["*","*"]]
 function! SlashEndLine()

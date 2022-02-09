@@ -4,12 +4,12 @@
 
 " default setting , make problem less
 runtime defaults.vim
-set notermguicolors
 
+set notermguicolors
 set mouse=a
+set number relativenumber
 
 set shortmess+=I  
-set number relativenumber
 "set relativenumber
 set cursorline
 set enc=utf-8
@@ -21,9 +21,7 @@ set expandtab autoindent
 set hlsearch incsearch ignorecase smartcase
 set ambiwidth=double "prevent enter replace mode on Conemu"
 
-set modeline
-set exrc
-set secure
+set modeline exrc secure
 set scrolloff=9
 
 
@@ -33,14 +31,13 @@ set ssop-=fold,option "no save map,fode imformtion
 set clipboard=unnamedplus	"yank to the system register (*) by default  " work on xlaunch
 set noshowmatch		" Cursor no shows matching ) and }
 set showmode		" Show current mode
-set wildmenu            " wild char completion menu
+set wildmenu    " wild char completion menu
 
 " <c-a> <c-x> use
 set nrformats-=octal
 
 " ignore these files while expanding wild chars
 set wildignore=*.o,*.class,*.pyc
-
 
 
 " disable bell on all case
@@ -65,8 +62,9 @@ set statusline=%-15f%h%m%r%w%=[%{&fileencoding}]%-6y--%p%%[%l/%L]
 
 
 if has('gui')
-  set guifont=Cascadia\ Code:h11:cANSI
   let $VIMFILES=$HOME..'/vimfiles'
+  set guifont=Cascadia\ Code:h11:cANSI
+  " maxmum window
   au GUIEnter * simalt ~x
 else
   let $VIMFILES=$HOME..'/.vim'

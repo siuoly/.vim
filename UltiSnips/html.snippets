@@ -5,3 +5,11 @@ snippet lboot "bootstrap linl" b
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
 integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 endsnippet
+
+snippet !r "make a record" b
+{start: "`!v strftime("%Y-%m-%d %H:%M")`" , group:"${2:Other}",  content:"${3}" },
+endsnippet
+
+snippet !t "inster current date" w
+"`!v strftime("%Y-%m-%d %H:%M")`"
+endsnippet
