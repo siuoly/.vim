@@ -2,7 +2,7 @@
 " nnoremap <buffer>\V :vsp ~/.vim/after/ftplugin/python.vim
 
 ""run test  replace by "async-task plugin"
-nnoremap <buffer><m-d> :w<CR>:exec "H python3.8 " ..expand('%')<cr>
+nnoremap <buffer><m-d> :w<CR>:exec "H python " ..expand('%')<cr>
 " stop the Task
 map <buffer><m-c> <Cmd>call JumpTerminalWin()<cr><c-c>
 

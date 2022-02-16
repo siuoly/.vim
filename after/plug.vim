@@ -69,7 +69,7 @@ Plug 'hanschen/vim-ipython-cell',{'for':'python'}
 Plug 'jpalardy/vim-slime',{'for':'python'}
 
 " Plug 'iamcco/dict.vim'
-Plug 'plasticboy/vim-markdown' " markdown
+" Plug 'plasticboy/vim-markdown' " markdown
 Plug 'siuoly/md-img-paste.vim'  " my fork,  paste the markdown image
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  } " preview
 " Plug 'siuoly/typing_speed.vim'
@@ -159,9 +159,7 @@ augroup END
 if( has_key(g:plugs, "coc.nvim") )
   source $VIMFILES/after/cocset.vim
   " let g:coc_node_path="/usr/bin/node"
-  let g:coc_global_extensions = [
-        \ 'coc-pairs'
-        \]
+  let g:coc_global_extensions = [ ]
 endif
 
 
@@ -201,9 +199,8 @@ let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
 
 " asyncrun setting
 if( has_key(g:plugs, "asyncrun.vim") )
-  " trans, pip install googletrans=a3.0, 
+  " trans, pip install googletrans==a3.0, 
   " zshrc: alias translate_stdin="xargs -0 -I {} translate {}"
-  "
   nnoremap gss :AsyncRun -cwd=$VIMFILES/script ./translateZH_TW.py <cword><CR>
   xnoremap gss :AsyncRun -cwd=$VIMFILES/script ./translateZH_TW.py -<CR>
   command! -nargs=* Translate AsyncRun -cwd=$VIMFILES/script ./translateZH_TW.py <q-args>

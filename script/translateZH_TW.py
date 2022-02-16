@@ -1,4 +1,4 @@
-#!/bin/python3.8
+#!/bin/python
 
 from sys import argv
 from googletrans import Translator

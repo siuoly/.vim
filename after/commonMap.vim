@@ -1,6 +1,9 @@
 " exit i/c mode
-inoremap jk <ESC>| inoremap kj <ESC>| cnoremap jk <esc>
-cnoremap kj <esc>
+" inoremap jk <ESC>| inoremap kj <ESC>| cnoremap jk <esc>
+" cnoremap kj <esc>
+
+" paste 在新文本文之後
+nnoremap p gp
 
 " 使用q為存檔鍵, 做其他替換
 " nnoremap q :silent! wall<CR>
