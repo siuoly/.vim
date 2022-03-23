@@ -20,6 +20,7 @@ set expandtab autoindent
 
 set hlsearch incsearch ignorecase smartcase
 set ambiwidth=double "prevent enter replace mode on Conemu"
+call setcellwidths([[0x2588, 0x258f, 1]])
 
 set modeline exrc secure
 set scrolloff=9
@@ -78,8 +79,8 @@ autocmd TerminalOpen * setlocal nonumber norelativenumber
 
 augroup remember_view_global
   au!
-  au BufWinLeave $VIMFILES/vimrc mkview! $VIMFILES/view/~=+vimrc=
-  au BufWinEnter $VIMFILES/vimrc silent! source $VIMFILES/view/~=+vimrc= 
+  " au BufWinLeave $VIMFILES/vimrc mkview! $VIMFILES/view/~=+vimrc=
+  " au BufWinEnter $VIMFILES/vimrc silent! source $VIMFILES/view/~=+vimrc= 
 augroup END
 
 

@@ -1,62 +1,64 @@
 # key alias
+# call UltiSnips#RefreshSnippets()
 snippet pp "print()" b
-print( ${1:} )
+print( ${1:${VISUAL}} )
 endsnippet
+
+
+snippet "([^\s].*)\.pp" "print() postfix" r
+print( `!p snip.rv = match.group(1)`) $1
+endsnippet
+
+snippet "([^\s]+)\.sh" "show() postfix" r
+print( f"{`!p snip.rv = match.group(1)`=}" ) $1
+endsnippet
+
+snippet "([^\s]+)\.l" "len() postfix" r
+len( `!p snip.rv = match.group(1)`) $1
+endsnippet
+
+snippet "([^\s]+)\.ty" "type() postfix" r
+type( `!p snip.rv = match.group(1)`) $1
+endsnippet
+
+snippet "([^\s]+)\.li" "list() postfix" r
+list( `!p snip.rv = match.group(1)`) $1
+endsnippet
+
 
 ## import lib
 snippet #i "import abbr" b
 import 
 endsnippet
+snippet #I "import abbr" b
+import
+endsnippet
  
+## matplotlib
 snippet imnp "import numpy as np" b
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 endsnippet
 
-snippet imtorch "learning madule matplotlib" b
-import pytorch
+snippet pplot "plt.plot() and show" b
+plt.plot( ${1:x}, ${2:y} )
+plt.show()
 endsnippet
 
-# request
-snippet imreq "crawler import data" b
-from bs4 import BeautifulSoup
-import json ,re, requests
+snippet splot "plt.subplots() and show" b
+fig, ((ax1,ax2),(ax3,ax4)) = plt.subplots(2,2)
+fig.suptitle( 'long fig title' )
 
-sess = requests.Session() # maintain cookies
-proxies = {'http': 'http://localhost:8888', 'https': 'http://localhost:8888'}
-sess.proxies = proxies
-# sess.verify = False
-sess.get('http://yahoo.com' )
+ax1.plot()
+ax1.set_title("")
+
+fig.show()
+plt.show()
 endsnippet
 
-snippet snipcrawler "crawler setting" b 
-headers = {
-		'Connection': 'keep-alive',
-		'accept': 'text/plain, */*; q=0.01',
-		'content-type': 'application/x-www-form-urlencoded',
-		'x-requested-with': 'XMLHttpRequest',
-		'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36 Edg/93.0.961.52',
-		'sec-ch-ua': '"Microsoft Edge";v="93", " Not;A Brand";v="99", "Chromium";v="93"',
-		'sec-ch-ua-platform': '"Windows"',
-		'sec-ch-ua-mobile': '?0',
-		'sec-fetch-site': 'same-origin',
-		'sec-fetch-mode': 'cors',
-		'sec-fetch-dest': 'empty',
-		'accept-language': 'zh-TW,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,ja;q=0.5',
-	}
 
-data = {
-		'curr_id': '6408',
-		'smlID': '1159963',
-}
-cookies = {'a':'123'}
-res = sess.post( url ,headers=headers, cookies=cookies, data=data)
-if res.status_code != requests.codes.ok:
-	print(res.status_code, " error" )
-	exit(1)
-endsnippet
-
+## concurrency
 snippet snipConcurrent "concurnet thread" b
 from concurrent.futures import ThreadPoolExecutor ,as_completed
 with ThreadPoolExecutor(max_workers=5) as executor:
@@ -68,16 +70,67 @@ endsnippet
 
 snippet snipConcurrentProcess "concurrent process" b
 from multiprocessing import Pool
+def _foo(i):
+	print(i)
+	return i
 with Pool(10) as p:
 		r = list( p.map(_foo, range(30)) )
 endsnippet
 
+snippet ppool "multiprocessing for pools"
+import multiprocessing as mlp
+from multiprocessing import Process, Pool
+if __name__ == "__main__":
+	with Pool() as pool:
+		# create processes 
+		results = []
+		for url in urls[:5]:
+			res = pool.apply_async( getRes, args=(url,))
+			results.append( res )
+		results = [ res.get() for res in results ]
+		# pool.close()
+endsnippet
+
+snippet wworker "multiprocessing for workers" b
+import multiprocessing as mlp
+from multiprocessing import Process, Manager
+import time
+if __name__ == "__main__":
+	workers = []
+	m = Manager()
+	mlist = m.list()  # Q: need close?
+
+	# create processes 
+	for url in urls[:5]:
+		worker = Process( target= , args=(,mlist))
+		worker.start()
+		workers.append( worker )
+	for w in workers:
+		w.join()
+		w.close()
+	results = list( mlist )
+	mlist.close()
+endsnippet
+
+## import pdb
 snippet impdb "import pdb" i
 import pdb; pdb.set_trace()
 endsnippet
 
-snippet imipdb "import ipdb" i
+snippet bb "import pdb" i
+import pdb; pdb.set_trace()
+endsnippet
+
+snippet ipdb "import ipdb" i
 import ipdb; ipdb.set_trace()
+endsnippet
+
+## pandas
+snippet impd "import pandas" b
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
 endsnippet
 
 
@@ -92,34 +145,54 @@ endsnippet
 
 snippet imsys "import system module" b
 import sys.getobjsize
-import sys.argv
+import sys
 import os
 endsnippet
-snippet ifname  "if name ==__main__" b
+
+snippet imarg "import sys argv" b
+from sys import argv
+endsnippet 
+
+snippet ifmain  "if name ==__main__" b
 if __name__ == "__main__":
 	${1:}
 endsnippet
 
+snippet mmkdir "ensure the directory exists " b
+import pathlib
+${1:dir_name} = "${2:xxxxx}"
+pathlib.Path( $1 ).mkdir( parents=True, exist_ok=True)
+endsnippet
 
 
 # https://stackoverflow.com/a/21455138/12506676
-snippet snipElapsedTime "time it" b
+snippet ppass "time it" b
+import time
 start = time.perf_counter()
-# do something
 end = time.perf_counter() - start
 endsnippet
 
+
 # sytanx
-snippet snipTry "try it" b
+snippet ttry "try it" b
 try:
 	raise Exception("error")
-
 except Exception as e:
 	print( type(e), e )
 raise e
 endsnippet
 
+# json
+snippet jsload "json file load" b
+import json
+with open("${1:path}",'r') as file:
+	${2:jsfile} = json.load(file)
+endsnippet
 
-
+# open file
+snippet wopen "with open file" b
+with open( '${1:}' , '${2:}') as f:
+	${3:}
+endsnippet
 
 

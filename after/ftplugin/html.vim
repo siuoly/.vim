@@ -51,8 +51,6 @@ nnoremap gt vito<ESC>
 setlocal et
 setlocal ts=2 sw=2 sts=2
 
-" 貼上RGP 顏色
-command! -buffer RGB put='rgb('. getreg('+') .');'
 " 格式化 1 行html,  先取代<...></> 符號，再做縮排
 command! HtmlFormat s/></>\r</g |normal! =ip
 

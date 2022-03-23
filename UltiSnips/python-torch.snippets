@@ -1,0 +1,150 @@
+# refresh
+# call UltiSnips#RefreshSnippets()
+snippet imtorch "import pytorch package" b
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import Dataset, DataLoader
+import numpy as np, csv,os
+import matplotlib.pyplot as plt
+endsnippet
+
+snippet sseed "setting random seed" b
+import numpy as np
+import torch
+import random
+torch.manual_seed( 1212 )
+random.seed(1212)
+np.random.seed(1212)
+torch.backends.cudnn.enabled = False  # need
+torch.backends.cudnn.benchmark = False  # not need
+torch.backends.cudnn.deterministic = True # not need
+endsnippet
+
+snippet imdevice "wether device variable cuda or cup" b
+device = "cuda" if torch.cuda.is_available() else "cpu"
+endsnippet
+
+snippet snipdataset "dataser template" b
+class ${1:MyDataSet}(Dataset ):
+''' Dataset for loading and preprocessing the dataset '''
+	def __init__(self, path, mode='train' ):
+		self.mode,self.path  = mode , path
+
+		with open(path, 'r') as fp:
+
+		if mode=="train":
+			self.data = torch.FloatTensor()
+			self.target = torch.FloatTensor() 
+			self.dim = self.data.shape
+
+		elif mode=="test" :
+			data = get_testing_data(data)
+			self.data = torch.FloatTensor( data )
+			self.dim = self.data.shape[1]
+		else :
+			print( "loading dataset mode error" )
+
+		print(f'Finished reading the {mode} set of Dataset ({len(self.data)} samples found, each dim = {self.dim})')
+
+	def __getitem__(self,index):
+		if self.mode == "train":
+			return self.data[index], self.target[index]
+		else :
+			return self.data[index]
+	def __len__(self):
+		return len(self.data) 
+endsnippet
+
+snippet adataset "get torchvision dataset" b
+import torchaudio.datasets as downloadData
+from torchvision import transforms
+${1:TrainSet} = downloadData.${2:MNIST}( 
+			root="./data",
+			train=${3:True},
+			download=${4:False},
+			${5:transform = transforms.ToTensor()} )
+endsnippet
+snippet ddataset "get torchvision dataset" b
+import torchvision.datasets as downloadData
+from torchvision import transforms
+${1:TrainSet} = downloadData.${2:MNIST}( 
+			root="./data",
+			train=${3:True},
+			download=${4:False},
+			${5:transform = transforms.ToTensor()} )
+endsnippet
+
+
+snippet imMNIST "MNIST dataset import" b
+import torch
+import torch.nn as nn
+import torchvision.datasets as DownloadDataset
+import torchvision.transforms as  transforms
+
+import torch.optim as optim
+from torch.utils.data import Dataset, DataLoader
+import matplotlib.pyplot as plt
+
+# MNIST dataset load
+train_data = DownloadDataset.MNIST(
+			root='./data/MNIST/',
+			train = True,
+			download = True,
+			transform = transforms.ToTensor()
+		)
+test_data = DownloadDataset.MNIST(
+			root='./data/MNIST/',
+			train = False,
+			download = True,
+			transform = transforms.ToTensor()
+		)
+endsnippet
+
+snippet snipRNN "snippet for RNN model" b
+class RNN(nn.Module):
+	def __init__(self):
+		super(RNN,self).__init__()
+		self.rnn = nn.LSTM(
+			input_size = 28,
+			hidden_size = 64,
+			num_layers = 1,
+			batch_first = True
+		)
+		self.fc = nn.Linear(64,10) # fc: fully connect network
+
+	def forward(self,x):
+		r_out,(h_n,h_c) = self.rnn(x, None)
+		out = self.fc( r_out[:,-1,:] )
+		return out
+model = RNN().to(device)
+endsnippet
+
+snippet sniptrain "torch training" b
+optimizer = nn.${1:}
+criterion = ${2:}
+def ${3:train}(model,dataloader,num_epoch):
+	for i in num_epoch:
+	# metrics = Score()
+	for x,y in tqdm(dataloader):
+		x = x.to(device)
+		y = y.to(device)
+
+		predicts = model( x )
+		loss = criterion(x,y)
+
+		optimizer.zero_grad()
+		loss.backward()
+		optimizer.step()
+		loss,accuracy = metrics( predicts,y )
+	print( f"epoch: {epoch+1} loss:{loss} accuracy:{accuracy}" )
+endsnippet
+
+snippet pplay "play tensor object" b
+import sounddevice as sd
+def play_wave( wave, sr ):
+	if len( wave.shape ) >1:
+		wave = wave.reshape(-1)
+	sd.play( wave, sr )
+endsnippet
+

@@ -16,19 +16,19 @@
     "githubUrl": " https://github.com/neoclide/coc-tsserver "
   },
   "pyright":{
-    "enable": false,
-
+    "enable": true,
+    "disableCompletion" : false,
     "githubUrl" :" https://github.com/fannheyward/coc-pyright ",
-    "linting" : { "enabled" : false } ,
-    "disableCompletion" : true
+    "command" : "對於ture, false等命令, 不須加上引號, 但是對於其他字串則需要" ,
+    "disableDiagnostics" : true  ,
+    "description" : "上面用途 關閉左側欄位 很煩的錯誤行提示 linting"
+  },
+  "python":{
+    "linting.enabled" :  true 
   },
   "pairs":{
-    "disableLanguages": [],
+    "disableLanguages": [ "python"],
     "enableCharacters":  ["(", "[", "{", "<", "'", "\"", "`" ]
-  },
-
-  "python":{
-    "   linting": []
   }
-}
+  }
 

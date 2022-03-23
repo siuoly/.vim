@@ -25,17 +25,19 @@ endif
 " must use
 Plug 'siuoly/vim-misc' 
 Plug 'markonm/traces.vim'
-Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'  " 縮排小線
 Plug 'tpope/vim-commentary',
       \{'on':['<plug>Commentary','<plug>CommentaryLine'] } " comment
 Plug 'suy/vim-context-commentstring',
 Plug 'preservim/nerdtree',
       \{ 'on':  'NERDTreeToggle' } " 檔案瀏覽
-Plug 'godlygeek/tabular',{'on':'Tabularize'} " h Tabu  快速編輯
+Plug 'godlygeek/tabular'           " h Tabu  快速編輯
 Plug 'tpope/vim-surround'          " new help surround
-Plug 'tpope/vim-repeat'
-Plug 'mattn/emmet-vim',{'for':['html','php']}
+Plug 'tpope/vim-repeat'           " surround repeat
+Plug 'mattn/emmet-vim',{'for':['html','php']} "html tag
 Plug 'captbaritone/better-indent-support-for-php-with-html'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'tmhedberg/SimpylFold'
 
 " " Track the engine.
 Plug 'SirVer/ultisnips'
@@ -63,13 +65,16 @@ Plug 'flazz/vim-colorschemes'         " color scheme
 Plug 'yegappan/taglist',{'on':'Tlist'}               " taglist
 
 
-Plug 'jupyter-vim/jupyter-vim',{'for':'python'} " jupyter 互動工作
-Plug 'goerz/jupytext.vim'
+" Plug 'jupyter-vim/jupyter-vim',{'for':'python'} " jupyter 互動工作
+" Plug 'goerz/jupytext.vim'
 Plug 'hanschen/vim-ipython-cell',{'for':'python'}
 Plug 'jpalardy/vim-slime',{'for':'python'}
 
+" Plug 'untitled-ai/jupyter_ascending.vim'
+
+
 " Plug 'iamcco/dict.vim'
-" Plug 'plasticboy/vim-markdown' " markdown
+Plug 'plasticboy/vim-markdown' " markdown
 Plug 'siuoly/md-img-paste.vim'  " my fork,  paste the markdown image
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  } " preview
 " Plug 'siuoly/typing_speed.vim'
@@ -108,7 +113,9 @@ let g:mkdp_preview_options = {
     \ }
 endif
 
-
+if( has_key( g:plugs , "indentLine" ) )
+  let g:indentLine_bufTypeExclude = ['help', 'terminal']
+endif
 
 if( has_key(g:plugs, "vim-commentary") )
   xmap gc  <Plug>Commentary
@@ -158,8 +165,9 @@ augroup END
 
 if( has_key(g:plugs, "coc.nvim") )
   source $VIMFILES/after/cocset.vim
-  " let g:coc_node_path="/usr/bin/node"
-  let g:coc_global_extensions = [ ]
+  let g:coc_node_path="/usr/bin/node"
+  let g:coc_global_extensions = [ "coc-pyright"]
+  nnoremap <leader>c :tabe <bar>CocConfig<cr>
 endif
 
 
@@ -201,15 +209,16 @@ let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
 if( has_key(g:plugs, "asyncrun.vim") )
   " trans, pip install googletrans==a3.0, 
   " zshrc: alias translate_stdin="xargs -0 -I {} translate {}"
-  nnoremap gss :AsyncRun -cwd=$VIMFILES/script ./translateZH_TW.py <cword><CR>
-  xnoremap gss :AsyncRun -cwd=$VIMFILES/script ./translateZH_TW.py -<CR>
+  nnoremap gsg :cclose<cr>
+  " nnoremap gss :AsyncRun -cwd=$VIMFILES/script ./translateZH_TW.py <cword><CR>
+  " xnoremap gss :AsyncRun -cwd=$VIMFILES/script ./translateZH_TW.py -<CR>
   command! -nargs=* Translate AsyncRun -cwd=$VIMFILES/script ./translateZH_TW.py <q-args>
 
   nnoremap gse :AsyncRun translate <cword><CR>
   xnoremap gse :AsyncRun cat \| xargs -0 -I {} translate {}<CR>
 
   " pronounciation,  copy the mpg123.exe to windows System path
-  nnoremap gsd :AsyncRun -mode=term -pos=hide gtts-cli <cword> \| mpg123.exe -q - <cr>
+  nnoremap <silent>gsd :AsyncRun -mode=term -pos=hide gtts-cli <cword> \| mpg123.exe -q - <cr>
   xnoremap gsd :AsyncRun -silent gtts-cli - \| mpg123.exe -q - <cr>
   command! -nargs=* Pronunce AsyncRun -silent gtts-cli <q-args> | mpg123.exe -q -
 
@@ -243,15 +252,16 @@ endif
 
 if( has_key(g:plugs, "ultisnips") ) 
   nnoremap \u  <Cmd>UltiSnipsEdit<cr>
-  let g:UltiSnipsExpandTrigger = "®"
+  let g:UltiSnipsExpandTrigger = "<c-l>"
   inoremap <expr> <space> UltiSnips#CanExpandSnippet()? "\<C-R>=UltiSnips#ExpandSnippetOrJump()\<CR>":" "
+  xnoremap <expr> <space> UltiSnips#CanExpandSnippet()? "\<C-R>=UltiSnips#ExpandSnippetOrJump()\<CR>":" "
 endif
 
 
 let g:UltiSnipsListSnippets='<c-j>'
 let g:slime_target = "vimterminal"
 let g:slime_vimterminal_config = {"term_finish": "close"}
-let g:slime_vimterminal_cmd = "ipython"
+let g:slime_vimterminal_cmd = 'ipython'
 let g:slime_no_mappings = 1
 
 
@@ -259,3 +269,5 @@ let g:ime_plugins = ['zhuyin']
 let g:ime_show_2nd_mode = 0
 let g:ime_select_mode_style = 'popup'
 let g:ime_phonetic_cache_size = 2000
+
+source $VIMFILES/script/TranslateWord.vim

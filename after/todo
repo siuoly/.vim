@@ -1,0 +1,5 @@
+
+快速查看網頁response context的方法, 用以定位錯誤
+  %store content >a.html
+  !explorer a.html
+  !explorer a.txt

@@ -1,0 +1,81 @@
+# request
+snippet imreq "crawler import data" b
+from bs4 import BeautifulSoup
+import json ,re, requests
+
+sess = requests.Session() # maintain cookies
+proxies = {'http': 'http://localhost:8888', 'https': 'http://localhost:8888'}
+sess.proxies = proxies
+# sess.verify = False
+sess.get('http://yahoo.com' )
+endsnippet
+
+snippet mmain "generallly initial setting" b
+from bs4 import BeautifulSoup
+import json ,re, requests, os
+
+def display_response( res, path='a.html' ):
+	if res.status_code != 200:
+		print( res.status_code )
+		return
+	with open( path ,'w') as f:
+		f.write( res.text )
+	os.system( "explorer.exe " + path )
+	return
+
+headers = {
+		'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36 Edg/93.0.961.52'
+	}
+data = { 'curr_id': '6408', }
+cookies = {'a':'123'}
+sess = requests.Session()
+sess.headers.update( headers )
+url = '${1:url}'
+res = sess.get( url )
+display_response( res )
+###
+soup = BeautifulSoup( res.text , 'lxml')
+${2} = soup.find_all( "${3}", {"${4:}":"${5:}"} )
+
+endsnippet
+
+
+snippet snipcrawler "crawler setting" b 
+headers = {
+		'Connection': 'keep-alive',
+		'accept': 'text/plain, */*; q=0.01',
+		'content-type': 'application/x-www-form-urlencoded',
+		'x-requested-with': 'XMLHttpRequest',
+		'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36 Edg/93.0.961.52',
+		'sec-ch-ua': '"Microsoft Edge";v="93", " Not;A Brand";v="99", "Chromium";v="93"',
+		'sec-ch-ua-platform': '"Windows"',
+		'sec-ch-ua-mobile': '?0',
+		'sec-fetch-site': 'same-origin',
+		'sec-fetch-mode': 'cors',
+		'sec-fetch-dest': 'empty',
+		'accept-language': 'zh-TW,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,ja;q=0.5',
+	}
+
+data = {
+		'curr_id': '6408',
+		'smlID': '1159963',
+}
+cookies = {'a':'123'}
+res = sess.post( url ,headers=headers, cookies=cookies, data=data)
+if res.status_code != requests.codes.ok:
+	print(res.status_code, " error" )
+	exit(1)
+endsnippet
+
+snippet snipDisplay "display response content function" b
+def display_response( data, path="a.html" ):
+	import os
+	with open( path ,'w') as f:
+		f.write( data )
+	os.system( "explorer.exe " + path )
+endsnippet
+
+snippet ssoup "paset soup elemet" b
+soup = BeautifulSoup( res.text , 'lxml')
+${1} = soup.find_all( "${2}", {"${3:}":"${4:}"} )
+endsnippet

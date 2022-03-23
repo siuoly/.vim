@@ -2,14 +2,11 @@
 " inoremap jk <ESC>| inoremap kj <ESC>| cnoremap jk <esc>
 " cnoremap kj <esc>
 
-" paste 在新文本文之後
-nnoremap p gp
-
 " 使用q為存檔鍵, 做其他替換
 " nnoremap q :silent! wall<CR>
-cnoremap qq q!
+cnoremap qq q!<cr>
 cabbre ww silent! wall
-cnoremap qw silent! wall <bar>bufdo qa!
+cnoremap qw silent! wall <bar>bufdo qa!<cr>
 nnoremap ZZ :wall <bar> qa<cr>
 nnoremap <M-w> :wall<cr>
 nnoremap <M-q> :q<cr>
@@ -65,8 +62,10 @@ nnoremap Y y$
 nnoremap <expr>J  "m'" . v:count . "J`'"
 nnoremap n nzz|   nnoremap N Nzz
 " Jump list mutation
-nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
-nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+" nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
+" nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+nnoremap j gj
+nnoremap k gk
 " point For undo list
 inoremap ; ;<c-g>u| inoremap " "<c-g>u
 inoremap ( (<c-g>u| inoremap , ,<c-g>u
@@ -105,13 +104,19 @@ nnoremap <M-p> :bp<cr> | nnoremap <M-n> :bn<cr>
 nnoremap <m-b> :ls<cr>:b 
 
 " args move
-nnoremap <silent><C-j> :silent n <bar> ar<CR>
-nnoremap <silent><C-k> :silent N <bar> ar<CR>
+" nnoremap <silent><C-j> :silent n <bar> ar<CR>
+" nnoremap <silent><C-k> :silent N <bar> ar<CR>
 nnoremap <silent> <M-K> :m .-2<CR>
 nnoremap <silent> <M-J> :m .+1<CR>
 " Moving text
 xnoremap <m-J> :m '>+1<cr>gv
 xnoremap <m-K> :m '<-2<cr>gv
+
+" quickly move
+nnoremap <silent><C-j> 3j
+nnoremap <silent><C-k> 3k
+
+
 
 "window move
 nnoremap <silent><m-h> :wincmd h<CR>
@@ -167,13 +172,15 @@ nnoremap gse :w !translate -d zh-TW <cword><CR>
 xnoremap gse :w !xargs \| xargs -I {} translate -d zh-tw {}<CR>
 
 " open configuration about filetype
-nnoremap <leader>V :call Togglefile($VIMFILES .. "/after/ftplugin/" .&ft . ".vim")<CR>
+nnoremap <leader>V :exec "tabe $VIMFILES/after/ftplugin/" .&ft .".vim"<cr>
 nnoremap <leader>t :call Togglefile($VIMFILES .. "/templates/template." .&ft)<CR>
-nnoremap <leader>c :call Togglefile($VIMFILES .. "$HOME/cheatsheet/" ..&ft ..".txt" )<CR>
+" nnoremap <leader>c :call Togglefile($VIMFILES .. "$HOME/cheatsheet/" ..&ft ..".txt" )<CR>
 " bash use"
 nnoremap <leader>v :call Togglefile($VIMFILES .. '/vimrc')<CR>
-nnoremap <leader>m :call Togglefile($VIMFILES .. '/after/commonMap.vim')<CR>
+" nnoremap <leader>m :call Togglefile($VIMFILES .. '/after/commonMap.vim')<CR>
+nnoremap <leader>m :tabedit $VIMFILES/after/commonMap.vim<cr>
 nnoremap <leader>p :call Togglefile($VIMFILES .. '/after/plug.vim')<CR>
+nnoremap <leader>p :tabe $VIMFILES/after/plug.vim<CR>
 
 
 nnoremap <leader>e :NERDTreeToggle<CR>
@@ -189,6 +196,33 @@ nnoremap <RightMouse> p
 " xnoremap <LeftMouse> y
 xnoremap <RightMouse> y
 map <m-RightMouse> u
+
+
+function! SearchInline(key,direction)
+  " right search"
+  if a:direction == 'r'
+    " search and move , line('.') limit searching in current line "
+    let ret = search(')','',line('.') )
+    " res ==0 mean not found
+    if ret == 0
+      " call search from the line start position, and at the first match position
+      call search('^.\{-}' .. a:key , 'be' , line('.') )
+    endif
+  " left search
+  else
+    let ret = search( a:key,'b',line('.') )
+    if ret == 0
+      call search( '.*'.. a:key , 'e' , line('.') )
+    endif
+  endif
+endfunc
+
+nnoremap ) :call SearchInline(')', 'r')<cr>
+nnoremap ( :call SearchInline('(', 'l')<cr>
+onoremap ) :call SearchInline(')', 'r')<cr>
+onoremap ( :call SearchInline('(', 'l')<cr>
+
+
 
 " folder function
 function! AutoFoldDir()
