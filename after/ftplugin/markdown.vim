@@ -24,5 +24,5 @@ xmap <buffer> gi S*
 xmap <buffer> gb S*gvS*
 
 nmap <buffer> gi m"ysiw*`"l
-nmap <buffer> gb ciw**<c-r>"**<esc>
+nmap <buffer> gb viwS*gvS*
 

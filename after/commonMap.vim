@@ -64,8 +64,8 @@ nnoremap n nzz|   nnoremap N Nzz
 " Jump list mutation
 " nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 " nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
-nnoremap j gj
-nnoremap k gk
+nnoremap j gj|nnoremap k gk
+xnoremap k gk|xnoremap j gj 
 " point For undo list
 inoremap ; ;<c-g>u| inoremap " "<c-g>u
 inoremap ( (<c-g>u| inoremap , ,<c-g>u
@@ -186,10 +186,6 @@ nnoremap <leader>p :tabe $VIMFILES/after/plug.vim<CR>
 nnoremap <leader>e :NERDTreeToggle<CR>
 " ZoomToggle
 nnoremap <leader>z <Cmd>ZoomToggle<cr>
-
-
-" visual mode fold
-xnoremap f zf
 
 " mouse key setting  1.右鍵複製  2.右鍵複製 3.alt-右鍵 復原
 nnoremap <RightMouse> p 

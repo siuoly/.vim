@@ -255,6 +255,7 @@ if( has_key(g:plugs, "ultisnips") )
   let g:UltiSnipsExpandTrigger = "<c-l>"
   inoremap <expr> <space> UltiSnips#CanExpandSnippet()? "\<C-R>=UltiSnips#ExpandSnippetOrJump()\<CR>":" "
   xnoremap <expr> <space> UltiSnips#CanExpandSnippet()? "\<C-R>=UltiSnips#ExpandSnippetOrJump()\<CR>":" "
+  command! SnipRefresh call UltiSnips#RefreshSnippets() 
 endif
 
 

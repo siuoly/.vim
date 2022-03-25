@@ -54,12 +54,21 @@ command -buffer QTconsole !jupyter qtconsole&
 nnoremap <space>w :execute 'SlimeSend1 '.. expand("<cword>")<cr>
 nnoremap <space>W :execute 'SlimeSend1 '.. expand("<cWORD>")<cr>
 nnoremap <space>p :execute 'SlimeSend1 '.. 'print('.. expand("<cword>") ..')'<cr>
+xnoremap <space>w y:execute 'SlimeSend1 '.. @+ <cr>
+xnoremap <space><space> y:execute 'SlimeSend1 '.. @+ <cr>
 
 
 """"""""""""""""" Ultisnip pytorch """""""""""""""""""""""""
 command! -buffer Sniptorch UltiSnipsAddFiletypes python-torch
 command! -buffer Sniprequests UltiSnipsAddFiletypes python-requests
-command! SnipRefresh call UltiSnips#RefreshSnippets()
+command! -buffer Snip call SnippetPython()
+
+function! SnippetPython()
+  let snipList = readdir( '/home/siuoly/.vim/UltiSnips/' , {n->n=~'python*'})
+  let choicelist =  string(snipList) .. ": " 
+  let choice = str2nr( input(choicelist) ) - 1
+  execute "UltiSnipsAddFiletypes " .. snipList[choice]
+endfunction
 
 command! CmdTorch call CmdTorch()
 function! CmdTorch()
