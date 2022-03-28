@@ -20,9 +20,12 @@ nn <buffer><c-p> :call mdip#MarkdownClipboardImage()<cr>
 " high light text
 xmap <buffer> g` S`
 nmap <buffer> g` m"ysiw``"l
-xmap <buffer> gi S*
-xmap <buffer> gb S*gvS*
+nmap <buffer> g4 m"ysiw$`"l
+xmap <buffer> g4 S$
+
 
 nmap <buffer> gi m"ysiw*`"l
+xmap <buffer> gi S*
 nmap <buffer> gb viwS*gvS*
+xmap <buffer> gb S*gvS*
 

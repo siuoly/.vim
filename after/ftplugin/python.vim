@@ -55,6 +55,14 @@ nnoremap <space>w :execute 'SlimeSend1 '.. expand("<cword>")<cr>
 nnoremap <space>W :execute 'SlimeSend1 '.. expand("<cWORD>")<cr>
 nnoremap <space>p :execute 'SlimeSend1 '.. 'print('.. expand("<cword>") ..')'<cr>
 xnoremap <space>w y:execute 'SlimeSend1 '.. @+ <cr>
+nnoremap <silent><space>  e yy:SlimeSend0 @+<cr>
+
+nnoremap <space>s :execute 'SlimeSend1 '.. expand("<cword>")..".shape"<cr>
+nnoremap <space>S :execute 'SlimeSend1 '.. expand("<cWORD>")..".shape"<cr>
+xnoremap <space>s y:execute 'SlimeSend1 '.. @+ ..".shape"<cr>
+
+nnoremap <space>l :execute 'SlimeSend1 len('.. expand("<cWORD>")..')'<cr>
+xnoremap <space>l y:execute 'SlimeSend1 len('.. @+ ..')'<cr>
 xnoremap <space><space> y:execute 'SlimeSend1 '.. @+ <cr>
 
 
@@ -93,9 +101,9 @@ endfunction
 " xnoremap <silent> <space><space> :yank<cr>:silent call term_sendkeys(Get_term_buff(), "%paste -q \n")<cr>
 
 " list function, import, class
-nnoremap <space>l :g/\<def\>\<bar>\<class\><cr>:
-nnoremap <space>l :lvimgrep/^\s*\<def\>\<bar>^\s*\<class\>/j %<bar>:llist<cr>:silent ll 
-nnoremap <space>L :lvimgrep/###/j % <bar>llist<cr>:silent ll 
+nnoremap <space>f :g/\<def\>\<bar>\<class\><cr>:
+nnoremap <space>f :lvimgrep/^\s*\<def\>\<bar>^\s*\<class\>/j %<bar>:llist<cr>:silent ll 
+nnoremap <space>F :lvimgrep/###/j % <bar>llist<cr>:silent ll 
 
 
 

@@ -42,6 +42,8 @@ nnoremap <Up> <C-y>| nnoremap <Down> <C-e>
 
 " search and no jump
 nnoremap * *``
+" copy and no jump
+xnoremap y m"y`"
 
 
 "insert mode move
@@ -65,7 +67,7 @@ nnoremap n nzz|   nnoremap N Nzz
 " nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 " nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
 nnoremap j gj|nnoremap k gk
-xnoremap k gk|xnoremap j gj 
+xnoremap k gk|xnoremap j gj
 " point For undo list
 inoremap ; ;<c-g>u| inoremap " "<c-g>u
 inoremap ( (<c-g>u| inoremap , ,<c-g>u

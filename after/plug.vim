@@ -122,6 +122,9 @@ if( has_key(g:plugs, "vim-commentary") )
   nmap gc  <Plug>Commentary
   omap gc  <Plug>Commentary
   nmap gcc <Plug>CommentaryLine
+  nmap  <Plug>CommentaryLine
+  nmap gcp <Plug>Commentaryip}
+  nmap gicp <Plug>Commentaryip}
 endif
 
 if( has_key(g:plugs, "vim-im-select") )
@@ -251,7 +254,7 @@ endif
   endfunction
 
 if( has_key(g:plugs, "ultisnips") ) 
-  nnoremap \u  <Cmd>UltiSnipsEdit<cr>
+  nnoremap \u  <Cmd>UltiSnipsEdit<cr><c-^><Cmd>tabe #<cr>
   let g:UltiSnipsExpandTrigger = "<c-l>"
   inoremap <expr> <space> UltiSnips#CanExpandSnippet()? "\<C-R>=UltiSnips#ExpandSnippetOrJump()\<CR>":" "
   xnoremap <expr> <space> UltiSnips#CanExpandSnippet()? "\<C-R>=UltiSnips#ExpandSnippetOrJump()\<CR>":" "

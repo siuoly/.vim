@@ -31,7 +31,7 @@ snippet #i "import abbr" b
 import 
 endsnippet
 snippet #I "import abbr" b
-import
+import 
 endsnippet
  
 ## matplotlib
@@ -47,14 +47,19 @@ plt.show()
 endsnippet
 
 snippet splot "plt.subplots() and show" b
-fig, ((ax1,ax2),(ax3,ax4)) = plt.subplots(2,2)
+fig, ax = plt.subplots(1,1)
 fig.suptitle( 'long fig title' )
 
-ax1.plot()
-ax1.set_title("")
+ax.plot($1)
+ax.set_title("$2")
+ax.set_xlabel("$3")
+ax.set_ylabel("$4")
 
 fig.show()
-plt.show()
+endsnippet
+
+snippet hhist "plt.hist()" b
+plt.hist( $1, bin=100 )
 endsnippet
 
 
