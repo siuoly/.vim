@@ -26,6 +26,11 @@ list( `!p snip.rv = match.group(1)`) $1
 endsnippet
 
 
+## from lib
+snippet #f "from xxx import xxx" b
+from ${1:} import ${2:}
+endsnippet
+
 ## import lib
 snippet #i "import abbr" b
 import 
@@ -33,7 +38,31 @@ endsnippet
 snippet #I "import abbr" b
 import 
 endsnippet
- 
+
+# class definitoin
+global !p
+def get_args(line: str):
+	args = []
+	for arg in map(lambda x: x.lstrip(), line.split(',')):
+		temp = arg.split(':')
+		attr, anno = (temp[0], temp[1].lstrip()) if len(temp) > 1 else (temp[0], None)
+		args.append((attr, anno))
+	return args
+endglobal
+snippet cl "class ..." b
+class $1:
+	"""$2`!p
+if "\n" in t[2]:
+	snip >> 1
+	snip += '"""'
+else:
+	snip.rv = '"""'`
+	def __init__(self, $3):`!p
+snip >> 2
+for arg in get_args(t[3]):
+	snip += f"self.{arg[0]} = {arg[0]}"`$0
+endsnippet
+
 ## matplotlib
 snippet imnp "import numpy as np" b
 import numpy as np
@@ -172,9 +201,10 @@ endsnippet
 
 # https://stackoverflow.com/a/21455138/12506676
 snippet ppass "time it" b
-import time
+import time;
 start = time.perf_counter()
-end = time.perf_counter() - start
+
+print( "pass time: ", time.perf_counter() - start , "sec" )
 endsnippet
 
 
@@ -200,4 +230,11 @@ with open( '${1:}' , '${2:}') as f:
 	${3:}
 endsnippet
 
+# pickle_load, seve
+snippet ppload "pickle load" b
+with open( '' ,'wb') as f
+	pickle.dump( object, f )
+with open( '', 'rb' ) as f:
+	object = pickle.load(f)
+endsnippet
 

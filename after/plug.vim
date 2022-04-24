@@ -15,6 +15,7 @@ call plug#begin( '~/.vim/plugged' )
 " Plug 'lifepillar/vim-cheat40'         "Todo list
 " Plug 'ashisha/image.vim'             " open ASCII image in vim
 " Plug 'easymotion/vim-easymotion'
+" Plug 'godlygeek/tabular'           " h Tabu  快速編輯
 " Plug 'pi314/ime-phonetic.vim'
 " Plug 'pi314/ime.vim'
 if !has('win32') |
@@ -23,21 +24,24 @@ endif
 
 
 " must use
+Plug 'junegunn/vim-easy-align' " align 
+" Plug 'frazrepo/vim-rainbow' " 括號顏色
+Plug 'kana/vim-textobj-user' "text object custom
+Plug 'machakann/vim-highlightedyank' "high light yank
 Plug 'siuoly/vim-misc' 
 Plug 'markonm/traces.vim'
 Plug 'Yggdroot/indentLine'  " 縮排小線
 Plug 'tpope/vim-commentary',
-      \{'on':['<plug>Commentary','<plug>CommentaryLine'] } " comment
+      \{'on':['<plug>Commentary','<plug>CommentaryLine','Commentary'] } " comment
 Plug 'suy/vim-context-commentstring',
 Plug 'preservim/nerdtree',
       \{ 'on':  'NERDTreeToggle' } " 檔案瀏覽
-Plug 'godlygeek/tabular'           " h Tabu  快速編輯
 Plug 'tpope/vim-surround'          " new help surround
 Plug 'tpope/vim-repeat'           " surround repeat
 Plug 'mattn/emmet-vim',{'for':['html','php']} "html tag
 Plug 'captbaritone/better-indent-support-for-php-with-html'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'tmhedberg/SimpylFold'
+" Plug 'tmhedberg/SimpylFold'
 
 " " Track the engine.
 Plug 'SirVer/ultisnips'
@@ -45,7 +49,7 @@ Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
 
 " not must use"
-" Plug 'voldikss/vim-floaterm'
+Plug 'voldikss/vim-floaterm'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug  'vim-scripts/folddigest.vim'
@@ -62,7 +66,7 @@ Plug 'skywind3000/asynctasks.vim', {'on': ['AsyncTask', 'AsyncTaskMacro', 'Async
 Plug 'neoclide/coc.nvim', {'branch': 'release','on':[]}
 Plug 'yianwillis/vimcdoc'             " 中文vim help
 Plug 'flazz/vim-colorschemes'         " color scheme
-Plug 'yegappan/taglist',{'on':'Tlist'}               " taglist
+" Plug 'yegappan/taglist',{'on':'Tlist'}               " taglist
 
 
 " Plug 'jupyter-vim/jupyter-vim',{'for':'python'} " jupyter 互動工作
@@ -84,6 +88,19 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  } " previ
 " Plug 'vim-airline/vim-airline-themes' " theme
 " Plug 'kyoz/purify', { 'rtp': 'vim' }  " color scheme
 call plug#end()
+
+
+
+if( has_key(g:plugs, "vim-easy-align") )
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+endif
+
+if( has_key(g:plugs, "vim-rainbow") )
+  let g:rainbow_active = 1
+endif
 
 if( has_key(g:plugs, "vim-markdown") )
   let g:vim_markdown_no_default_key_mappings = 1
@@ -114,17 +131,20 @@ let g:mkdp_preview_options = {
 endif
 
 if( has_key( g:plugs , "indentLine" ) )
-  let g:indentLine_bufTypeExclude = ['help', 'terminal']
+  let g:indentLine_bufTypeExclude = [ 'help' ]
+  let g:indentLine_fileTypeExclude = [ 'codi','markdown']
+  autocmd TerminalOpen * IndentLinesDisable
+
 endif
 
 if( has_key(g:plugs, "vim-commentary") )
-  xmap gc  <Plug>Commentary
   nmap gc  <Plug>Commentary
-  omap gc  <Plug>Commentary
   nmap gcc <Plug>CommentaryLine
+  xmap gc  :Commentary <bar> normal! gv<cr>
   nmap  <Plug>CommentaryLine
-  nmap gcp <Plug>Commentaryip}
-  nmap gicp <Plug>Commentaryip}
+  xmap  :Commentary <bar> normal! gv<cr>
+  " omap gc  <Plug>Commentary
+  " nmap gcp <Plug>Commentaryip}
 endif
 
 if( has_key(g:plugs, "vim-im-select") )
@@ -139,6 +159,7 @@ if( has_key(g:plugs, "vim-im-select") )
 endif
 
 if(has_key(g:plugs, "goyo.vim") )
+  let g:goyo_width = 100
 endif
 
 "taglist
@@ -199,7 +220,8 @@ endif
 
 " colorschemes
 if( has_key(g:plugs, "vim-colorschemes") )
-  colorscheme Atelier_SeasideDark
+  " colorscheme Atelier_SeasideDark
+  colorscheme blues
   " hi StatusLine ctermbg=3 ctermfg=black
 endif
 

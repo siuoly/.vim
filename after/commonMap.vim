@@ -20,7 +20,8 @@ xnoremap <cr> :
 nnoremap <BS> <C-^>
 
 " Home End
-noremap H ^| noremap L g_
+noremap H g^| noremap L g$
+nnoremap M gM
 
 " for muscle memory
 
@@ -43,7 +44,7 @@ nnoremap <Up> <C-y>| nnoremap <Down> <C-e>
 " search and no jump
 nnoremap * *``
 " copy and no jump
-xnoremap y m"y`"
+" xnoremap y m"y`"
 
 
 "insert mode move
@@ -194,32 +195,6 @@ nnoremap <RightMouse> p
 " xnoremap <LeftMouse> y
 xnoremap <RightMouse> y
 map <m-RightMouse> u
-
-
-function! SearchInline(key,direction)
-  " right search"
-  if a:direction == 'r'
-    " search and move , line('.') limit searching in current line "
-    let ret = search(')','',line('.') )
-    " res ==0 mean not found
-    if ret == 0
-      " call search from the line start position, and at the first match position
-      call search('^.\{-}' .. a:key , 'be' , line('.') )
-    endif
-  " left search
-  else
-    let ret = search( a:key,'b',line('.') )
-    if ret == 0
-      call search( '.*'.. a:key , 'e' , line('.') )
-    endif
-  endif
-endfunc
-
-nnoremap ) :call SearchInline(')', 'r')<cr>
-nnoremap ( :call SearchInline('(', 'l')<cr>
-onoremap ) :call SearchInline(')', 'r')<cr>
-onoremap ( :call SearchInline('(', 'l')<cr>
-
 
 
 " folder function

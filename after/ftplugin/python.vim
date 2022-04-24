@@ -6,35 +6,33 @@ nnoremap <buffer><m-d> :w<CR>:exec "H python " ..expand('%')<cr>
 " stop the Task
 map <buffer><m-c> <Cmd>call JumpTerminalWin()<cr><c-c>
 
-"map <buffer><C-D> :w<CR>:!python3.8 %<CR>
-"map <buffer><C-C> :w<CR>:!ipython -i %<CR>
-"map <buffer><C-C> :w<CR>:!chmod +x % && ./%<CR>
-
-setlocal foldmethod=indent
-setlocal foldlevel=99
-
-
 " for "chmod +x" autoload
 setlocal autoread
 
-"abbreviation
-iabbr #i import
-
-" run current line code
-nnoremap <buffer><C-s> :exe "pyx "..getline(".")<cr>
-" run region code in visual mode
-" xnoremap <buffer><c-s> :RunPy<cr>
-" run region code in normal mode
-nnoremap <buffer><m-s> vip:RunPy<cr>
-
-" function --> command
-command! -buffer -range -nargs=0 RunPy call RunPy(<line1>, <line2>)
-
-" python console terminal
-command! -buffer PythonConsole belowright terminal ++rows=10 ++close python3.8
-
 " python terminal mode
-nnoremap <buffer><f7> :SlimeConfig <cr><c-w>H<Cmd>sb cmd<cr><C-_>T<Cmd>tabp<cr>
+nnoremap <buffer><f7> :call Maketerm()<cr>
+nnoremap <f7> :call Maketerm()<cr>
+
+function! TabhasTerm()
+  for i in  tabpagebuflist()
+    if index(term_list(),i) > -1| return 1| endif
+  endfor
+  return 0
+endfunction
+
+function! Maketerm()
+  if !TabhasTerm()
+    if len(term_list()) > 0
+      let n = term_list()[0]
+      execute "rightbelow vertical sb ".. n
+    else
+      SlimeConfig
+      call feedkeys("\<c-w>H")
+    endif
+  endif 
+  wincmd h
+endfunction
+
 
 """"""""""""""""""""""""""""""""""""""""
 " 建立 ## 區域,  刪除 ## 區域
@@ -50,25 +48,36 @@ nnoremap <space>r :IPythonCellRun<cr>
 nnoremap <expr><space>r ":SlimeSend1 run " ..expand('%') .. "<cr>"
 nnoremap <space>c :SlimeSend1 <c-v><c-c><cr>
 command -buffer QTconsole !jupyter qtconsole&
-" Ipython Vim display variable to REPL window
+"""""" Ipython Vim display variable to REPL window
+" send word
 nnoremap <space>w :execute 'SlimeSend1 '.. expand("<cword>")<cr>
 nnoremap <space>W :execute 'SlimeSend1 '.. expand("<cWORD>")<cr>
-nnoremap <space>p :execute 'SlimeSend1 '.. 'print('.. expand("<cword>") ..')'<cr>
 xnoremap <space>w y:execute 'SlimeSend1 '.. @+ <cr>
-nnoremap <silent><space>  e yy:SlimeSend0 @+<cr>
-
+" sned print
+nnoremap <space>t :execute 'SlimeSend1 type('.. expand("<cword>")..")"<cr>
+" send variable.shape
 nnoremap <space>s :execute 'SlimeSend1 '.. expand("<cword>")..".shape"<cr>
 nnoremap <space>S :execute 'SlimeSend1 '.. expand("<cWORD>")..".shape"<cr>
 xnoremap <space>s y:execute 'SlimeSend1 '.. @+ ..".shape"<cr>
-
+" send len(variable)
 nnoremap <space>l :execute 'SlimeSend1 len('.. expand("<cWORD>")..')'<cr>
 xnoremap <space>l y:execute 'SlimeSend1 len('.. @+ ..')'<cr>
-xnoremap <space><space> y:execute 'SlimeSend1 '.. @+ <cr>
+" run line
+nnoremap <space>q yy:execute 'SlimeSend1 ' .. @+[:-2]<cr>
+xnoremap <space><space> y:execute 'SlimeSend1 '.. @+[:-2] <cr>
+
+" send to anothoer tmux window , print the globals() variable
+function! Showvar()
+  SlimeSend1 _show_global_var()
+  " let cmd = 'tmux send-keys -t .0 "cat .var" ENTER'
+  " call system(cmd)
+endfunction
+command! Showvar call Showvar()
+nnoremap <space>v :Showvar<cr>
 
 
 """"""""""""""""" Ultisnip pytorch """""""""""""""""""""""""
-command! -buffer Sniptorch UltiSnipsAddFiletypes python-torch
-command! -buffer Sniprequests UltiSnipsAddFiletypes python-requests
+
 command! -buffer Snip call SnippetPython()
 
 function! SnippetPython()
@@ -82,29 +91,13 @@ command! CmdTorch call CmdTorch()
 function! CmdTorch()
   let g:slime_target = "vimterminal"
   let g:slime_vimterminal_cmd ="cmd.exe /k conda activate base && ipython"
-
 endf
 
-
-" Ipython Cell send range
-function! Get_term_buff()
-  for i in term_list()
-    for j in tabpagebuflist()
-      if i == j
-        return i
-      endif
-    endfor
-  endfor
-  return 0
-endfunction
-
-" xnoremap <silent> <space><space> :yank<cr>:silent call term_sendkeys(Get_term_buff(), "%paste -q \n")<cr>
 
 " list function, import, class
 nnoremap <space>f :g/\<def\>\<bar>\<class\><cr>:
 nnoremap <space>f :lvimgrep/^\s*\<def\>\<bar>^\s*\<class\>/j %<bar>:llist<cr>:silent ll 
 nnoremap <space>F :lvimgrep/###/j % <bar>llist<cr>:silent ll 
-
 
 
 " down, size exit directly"
@@ -128,5 +121,20 @@ for p in sys.path:
   if os.path.isdir(p): 
     vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
 EOF
+
+
+" ------------ un use --------------------------
+
+" function --> command
+command! -buffer -range -nargs=0 RunPy call RunPy(<line1>, <line2>)
+" python console terminal
+command! -buffer PythonConsole belowright terminal ++rows=10 ++close python3.8
+" run current line code
+nnoremap <buffer><C-s> :exe "pyx "..getline(".")<cr>
+" run region code in visual mode
+" xnoremap <buffer><c-s> :RunPy<cr>
+" run region code in normal mode
+nnoremap <buffer><m-s> vip:RunPy<cr>
+
 
 

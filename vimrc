@@ -91,19 +91,10 @@ syntax on
 
 
 " text object
-xnoremap il :<c-u>normal! g_v^<cr>
-xnoremap al :<c-u>normal! $v0<cr>
-onoremap <silent> il :<c-u>normal! g_v^<cr>
-onoremap <silent> al :<c-u>normal! $v0<cr>
-xnoremap <silent> id :<c-u>normal! G$Vgg0<cr>
-onoremap <silent> id :<c-u>normal! GVgg<cr>
-" /* ......   */
-xnoremap i/ ?\/\*<cr>o/\*\//s+1<cr>
-" last input text
-xnoremap ii `[<esc>v`]h
+source $VIMFILES/script/text-obj.vim
+
 
 "####################  command ##################### 
-"###################################################
 " change pwd to dir which current file locate
 command! LCD lcd %:p:h
 command! CD cd %:p:h
@@ -111,9 +102,6 @@ command! CD cd %:p:h
 
 command! ANSI e ++enc=cp950 
 " open terminal window with using current buffer window
-
-" open terminal in the bottom window
-command! Terminal rightbelow terminal ++rows=13
 
 command! Url call system( 'explorer.exe ' . getline('.') )
 
