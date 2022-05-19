@@ -62,11 +62,12 @@ xnoremap <buffer>im :<c-u>call SelectInsideOrNext('\$','i')<cr>
 onoremap <buffer>im :normal vim<cr>
 xnoremap <buffer>am :<c-u>call SelectInsideOrNext('\$','a')<cr>
 onoremap <buffer>am :normal vam<cr>
+noremap <buffer>H g^| noremap <buffer> L g$
 
 " next object region
-nnoremap <space>b :call search('\*\zs.\+\ze\*')<cr>
-nnoremap <space>m :call search('\$\zs.\+\ze\$')<cr>
-nnoremap <space>j :call search('^#')<cr>
+nnoremap <buffer><space>b :call search('\*\zs.\+\ze\*')<cr>
+nnoremap <buffer><space>m :call search('\$\zs.\+\ze\$')<cr>
+nnoremap <buffer><space>j :call search('^#')<cr>
 
 
 function! SelectInsideOrNext(char,mode) " select region for text-object, inside or next item

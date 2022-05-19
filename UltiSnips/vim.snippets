@@ -10,8 +10,8 @@ snippet autoFold "make a fold setting .vimrc text" b
 augroup remember_view
 au!
 " 在目前資料夾底下, 建立才會建立 view 檔案"
-    au BufWinLeave * if filereadable(expand('%:t')) | execute 'mkview! '. expandcmd('%:p:h/.fold.%:t') | endif
-    au BufWinEnter * if filereadable(expand('%:t')) | execute 'silent! source '. expandcmd('%:p:h/.fold.%:t') | endif
+	au BufWinLeave * if filereadable(expand('%:t')) | execute 'mkview! '. expandcmd('%:p:h/.fold.%:t') | endif
+	au BufWinEnter * if filereadable(expand('%:t')) | execute 'silent! source '. expandcmd('%:p:h/.fold.%:t') | endif
 augroup END '''
 endsnippet
 

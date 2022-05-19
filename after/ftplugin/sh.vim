@@ -1,5 +1,5 @@
 " nnoremap \V :vsp ~/.vim/after/ftplugin/sh.vim
-nnoremap \c :tabe ~/cheatsheet/bashsheet<CR>
+" nnoremap \c :tabe ~/cheatsheet/bashsheet<CR>
 
 
 "run shell  " replace by AsyncTask plugin"

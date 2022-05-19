@@ -24,6 +24,7 @@ endif
 
 
 " must use
+Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/vim-easy-align' " align 
 " Plug 'frazrepo/vim-rainbow' " 括號顏色
 Plug 'kana/vim-textobj-user' "text object custom
@@ -32,10 +33,10 @@ Plug 'siuoly/vim-misc'
 Plug 'markonm/traces.vim'
 Plug 'Yggdroot/indentLine'  " 縮排小線
 Plug 'tpope/vim-commentary',
-      \{'on':['<plug>Commentary','<plug>CommentaryLine','Commentary'] } " comment
+     ""\{'on':['<plug>Commentary','<plug>CommentaryLine','Commentary'] } " comment
 Plug 'suy/vim-context-commentstring',
 Plug 'preservim/nerdtree',
-      \{ 'on':  'NERDTreeToggle' } " 檔案瀏覽
+     \{ 'on':  'NERDTreeToggle' } " 檔案瀏覽
 Plug 'tpope/vim-surround'          " new help surround
 Plug 'tpope/vim-repeat'           " surround repeat
 Plug 'mattn/emmet-vim',{'for':['html','php']} "html tag
@@ -49,10 +50,11 @@ Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
 
 " not must use"
+Plug 'unblevable/quick-scope'
+Plug 'haya14busa/vim-asterisk' " start search 
 Plug 'voldikss/vim-floaterm'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug  'vim-scripts/folddigest.vim'
 Plug 'turbio/bracey.vim' , {'do': 'npm install --prefix server','for':['html','javascript','css','php']}
                                         " html edit
 Plug 'junegunn/goyo.vim',{'on': 'Goyo'} " 小黑屋模式
@@ -62,7 +64,7 @@ Plug 'kshenoy/vim-signature'            " mark
 Plug 'skywind3000/asyncrun.vim', {'on': ['AsyncRun', 'AsyncStop'] }
 Plug 'skywind3000/asynctasks.vim', {'on': ['AsyncTask', 'AsyncTaskMacro', 'AsyncTaskList', 'AsyncTaskEdit'] }
 
-
+" Plug 'puremourning/vimspector' "debugger
 Plug 'neoclide/coc.nvim', {'branch': 'release','on':[]}
 Plug 'yianwillis/vimcdoc'             " 中文vim help
 Plug 'flazz/vim-colorschemes'         " color scheme
@@ -72,7 +74,7 @@ Plug 'flazz/vim-colorschemes'         " color scheme
 " Plug 'jupyter-vim/jupyter-vim',{'for':'python'} " jupyter 互動工作
 " Plug 'goerz/jupytext.vim'
 Plug 'hanschen/vim-ipython-cell',{'for':'python'}
-Plug 'jpalardy/vim-slime',{'for':'python'}
+Plug 'jpalardy/vim-slime',{'for':'python','on':'SlimeConfig'}
 
 " Plug 'untitled-ai/jupyter_ascending.vim'
 
@@ -89,7 +91,15 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  } " previ
 " Plug 'kyoz/purify', { 'rtp': 'vim' }  " color scheme
 call plug#end()
 
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
+
+if( has_key(g:plugs, "vim-asterisk" ) )
+  map *  <Plug>(asterisk-z*)
+  map #  <Plug>(asterisk-z#)
+  map g* <Plug>(asterisk-gz*)
+  map g# <Plug>(asterisk-gz#)
+endif
 
 if( has_key(g:plugs, "vim-easy-align") )
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -130,12 +140,6 @@ let g:mkdp_preview_options = {
     \ }
 endif
 
-if( has_key( g:plugs , "indentLine" ) )
-  let g:indentLine_bufTypeExclude = [ 'help' ]
-  let g:indentLine_fileTypeExclude = [ 'codi','markdown']
-  autocmd TerminalOpen * IndentLinesDisable
-
-endif
 
 if( has_key(g:plugs, "vim-commentary") )
   nmap gc  <Plug>Commentary
@@ -165,12 +169,7 @@ endif
 "taglist
 let Tlist_Enable_Fold_Column = 0
 "let Tlist_Close_On_Select = 1
-
-
 let g:user_emmet_leader_key='<M-,>'
-
-
-
 
 "easy-motion
 if( has_key(g:plugs, "vim-easymotion") )
@@ -194,8 +193,6 @@ if( has_key(g:plugs, "coc.nvim") )
   nnoremap <leader>c :tabe <bar>CocConfig<cr>
 endif
 
-
-
 " vim-terminal-help
 if( has_key( g:plugs, "vim-terminal-help") )
   let g:terminal_close=1  "自動關閉shell
@@ -208,11 +205,7 @@ if( has_key( g:plugs, "vim-terminal-help") )
 " 3.resize max line height   4.move previous position 
 " using exec for using &terminal_height key
   " se termwinkey=<c-_>
-  function! JumpTerminalWin()   
-    exec bufwinnr(t:__terminal_bid__) . "wincmd w"  
-  endfunction
-  nnoremap <expr><F4> &bt=="" ? ":call JumpTerminalWin()<cr><c-\><c-n>:ZoomToggle<cr>" : "<cmd>ZoomToggle<cr>i<Cmd>wincmd p<cr>"
-  tnoremap <m-w> <Cmd>wincmd p<cr>
+  " tnoremap <m-w> <Cmd>wincmd p<cr>
   " nnoremap <expr><m-w> &bt == "" ? "<Cmd>call JumpTerminalWin()<cr>" :"<Cmd>p"
   tnoremap <m-q> <Cmd>q<cr>
 endif
@@ -222,10 +215,11 @@ endif
 if( has_key(g:plugs, "vim-colorschemes") )
   " colorscheme Atelier_SeasideDark
   colorscheme blues
-  " hi StatusLine ctermbg=3 ctermfg=black
+  " 游標行的背景色,  註解斜體字
+  hi CursorLine   ctermbg=234 
+  hi CursorColumn ctermbg=234
+  hi Comment cterm=italic
 endif
-
-
 
 " closetag
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
@@ -258,6 +252,7 @@ if( has_key(g:plugs, "asynctasks.vim") )
   command! AE  if(filereadable(".tasks")) | vs .tasks | else | exec "AsyncTaskEdit" | endif
 
   nnoremap <expr><F5> &bt=="" ? "<Cmd>call JumpQuickfixWin() <bar> ZoomToggle<cr>" : ":ZoomToggle<CR><C-w><c-p>"
+
   
   nnoremap <leader>G :call Togglefile( $VIMFILES .. '/tasks.ini')<cr>
 endif
@@ -297,3 +292,6 @@ let g:ime_select_mode_style = 'popup'
 let g:ime_phonetic_cache_size = 2000
 
 source $VIMFILES/script/TranslateWord.vim
+
+
+

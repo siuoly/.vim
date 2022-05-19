@@ -223,6 +223,22 @@ import json
 with open("${1:path}",'r') as file:
 	${2:jsfile} = json.load(file)
 endsnippet
+snippet jssave "json file save" b
+with open("${1:path}",'w') as file:
+	json.dump( ${2:object} , file)
+endsnippet
+# csv
+snippet cwriter "csv writer" b
+with open( '${1:file.csv}' , 'w') as f:
+	writer = csv.writer( f, delimiter=',' )
+	writer.writerow( $0 )
+endsnippet
+snippet creader "csv reader" b
+with open( '${1:file.csv}' , 'r') as f:
+	rows = csv.reader( f, delimiter=',' )
+	for row in rows:
+		print(row)
+endsnippet
 
 # open file
 snippet wopen "with open file" b
@@ -238,3 +254,28 @@ with open( '', 'rb' ) as f:
 	object = pickle.load(f)
 endsnippet
 
+# parse args
+snippet aarg "create argments" b
+from argparse import ArgumentParser
+parser = ArgumentParser()
+parser.add_argument('--${1}', type=bool, defaule="" ,help="${2:description}")
+args = parser.parse_args()
+endsnippet
+snippet argsave "save args to file" b
+import json
+with open('commandline_args.txt', 'w') as f:
+	json.dump(args.__dict__, f, indent=2)
+endsnippet
+snippet argload "load args from file" b
+import json
+args = parser.parse_args()
+with open('commandline_args.txt', 'r') as f:
+	args.__dict__ = json.load(f)
+endsnippet
+
+
+snippet fornum "limite times of iteration" b
+from itertools import islice
+for i in islice( ${1:iterable}, ${2:nums}) :
+	$0
+endsnippet

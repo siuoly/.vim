@@ -8,7 +8,7 @@ cnoremap qq q!<cr>
 cabbre ww silent! wall
 cnoremap qw silent! wall <bar>bufdo qa!<cr>
 nnoremap ZZ :wall <bar> qa<cr>
-nnoremap <M-w> :wall<cr>
+nnoremap <M-w> :w<cr>:bd %<cr>
 nnoremap <M-q> :q<cr>
 command! Q normal! qq
 nnoremap Q q
@@ -20,7 +20,7 @@ xnoremap <cr> :
 nnoremap <BS> <C-^>
 
 " Home End
-noremap H g^| noremap L g$
+noremap H ^| noremap L g_
 nnoremap M gM
 
 " for muscle memory
@@ -61,6 +61,7 @@ inoremap <M-J> <end>| inoremap <M-K> <Home>
 
 " Behave Vim
 nnoremap Y y$
+
 " Keeping it centered
 nnoremap <expr>J  "m'" . v:count . "J`'"
 nnoremap n nzz|   nnoremap N Nzz
@@ -99,11 +100,12 @@ nnoremap <expr> : (&bt=="") ? "," : ":"
 " tab 間移動
 nnoremap <silent> <C-h> :tabp<CR>
 nnoremap <silent> <C-l> :tabn<CR>
+nnoremap <tab> :tabn<cr>
+nnoremap <s-tab> :tabp<cr>
+
 " 當前檔案 在new tab中開啟
 nnoremap <C-W><C-T> <C-W>T
-command! SplitTab normal <c-w>T
-" buffer move , list
-nnoremap <M-p> :bp<cr> | nnoremap <M-n> :bn<cr>
+" buffer list
 nnoremap <m-b> :ls<cr>:b 
 
 " args move
@@ -179,11 +181,17 @@ nnoremap <leader>V :exec "tabe $VIMFILES/after/ftplugin/" .&ft .".vim"<cr>
 nnoremap <leader>t :call Togglefile($VIMFILES .. "/templates/template." .&ft)<CR>
 " nnoremap <leader>c :call Togglefile($VIMFILES .. "$HOME/cheatsheet/" ..&ft ..".txt" )<CR>
 " bash use"
-nnoremap <leader>v :call Togglefile($VIMFILES .. '/vimrc')<CR>
+nnoremap <leader>v :tabe $MYVIMRC<cr>
 " nnoremap <leader>m :call Togglefile($VIMFILES .. '/after/commonMap.vim')<CR>
 nnoremap <leader>m :tabedit $VIMFILES/after/commonMap.vim<cr>
 nnoremap <leader>p :call Togglefile($VIMFILES .. '/after/plug.vim')<CR>
 nnoremap <leader>p :tabe $VIMFILES/after/plug.vim<CR>
+
+" Prevent selecting and pasting from overwriting what you originally copied.
+xnoremap p pgvy
+" Keep cursor at the bottom of the visual selection after you yank it.
+xnoremap y ygv<Esc>
+
 
 
 nnoremap <leader>e :NERDTreeToggle<CR>

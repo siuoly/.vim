@@ -11,27 +11,44 @@ setlocal autoread
 
 " python terminal mode
 nnoremap <buffer><f7> :call Maketerm()<cr>
-nnoremap <f7> :call Maketerm()<cr>
-
 function! TabhasTerm()
   for i in  tabpagebuflist()
     if index(term_list(),i) > -1| return 1| endif
   endfor
   return 0
 endfunction
-
 function! Maketerm()
   if !TabhasTerm()
     if len(term_list()) > 0
       let n = term_list()[0]
       execute "rightbelow vertical sb ".. n
     else
-      SlimeConfig
-      call feedkeys("\<c-w>H")
+      SlimeConfig | wincmd H
     endif
   endif 
   wincmd h
 endfunction
+" open ternimal when start
+if !has_key(g:,'py_start') && bufnr('$')==1 && term_list()==[]
+  " call Maketerm()
+  " let g:py_start = 1
+endif
+
+
+nnoremap <m-w> :call JumpTerminalWin()<cr>
+tnoremap <m-w> <Cmd>call JumpTerminalWin()<cr>
+tmap <m-e> <f2>| map <m-e> <f2>
+function! JumpTerminalWin()
+  if &ft=='python' && &bt=='' && len( term_list() )>0
+    echo win_gotoid( bufwinid( term_list()[0] ) )
+    return
+  endif
+  if &ft=='' && &bt=='terminal' 
+    echo win_gotoid( bufwinid('#') )
+    return
+  endif
+endfunction
+
 
 
 """"""""""""""""""""""""""""""""""""""""
@@ -39,16 +56,18 @@ endfunction
 nnoremap <space>j :IPythonCellNextCell<cr>
 nnoremap <space>k :IPythonCellPrevCell<cr>
 " nnoremap <space>b :IPythonCellInsertBelow<cr>
-nnoremap <space>b o<esc>3i#<esc>j
-
-
+nnoremap <space>b o<esc>3i#<esc>a<space><esc>
 " Ipython Vim
 nnoremap <space><space> :IPythonCellExecuteCell<cr>
 nnoremap <space>r :IPythonCellRun<cr>
 nnoremap <expr><space>r ":SlimeSend1 run " ..expand('%') .. "<cr>"
-nnoremap <space>c :SlimeSend1 <c-v><c-c><cr>
 command -buffer QTconsole !jupyter qtconsole&
 """""" Ipython Vim display variable to REPL window
+" fold region, move to bottom boundary (### > 3 or EOF), VisualLine select ,
+" and move to top boundary (### >3 or Begin of file)
+nnoremap <space>d /#\{3,}\<bar>\%$/-2<cr>V?#\{3,}\<bar>\%^<cr>zf
+" copy region
+nnoremap <space>y /###\<bar>\%$/-1<cr>V?###\<bar>\%^<cr>y
 " send word
 nnoremap <space>w :execute 'SlimeSend1 '.. expand("<cword>")<cr>
 nnoremap <space>W :execute 'SlimeSend1 '.. expand("<cWORD>")<cr>
@@ -64,16 +83,21 @@ nnoremap <space>l :execute 'SlimeSend1 len('.. expand("<cWORD>")..')'<cr>
 xnoremap <space>l y:execute 'SlimeSend1 len('.. @+ ..')'<cr>
 " run line
 nnoremap <space>q yy:execute 'SlimeSend1 ' .. @+[:-2]<cr>
-xnoremap <space><space> y:execute 'SlimeSend1 '.. @+[:-2] <cr>
+xnoremap <space><space> y:execute 'SlimeSend1 %paste'<cr>
+
+" list function, import, class
+nnoremap <space>f :g/\<def\>\<bar>\<class\><cr>:
+nnoremap <space>f :lvimgrep/^\s*\<def\>\<bar>^\s*\<class\>/j %<bar>:llist<cr>:silent ll 
+nnoremap <space>F :lvimgrep/###/j % <bar>llist<cr>:silent ll 
 
 " send to anothoer tmux window , print the globals() variable
-function! Showvar()
-  SlimeSend1 _show_global_var()
-  " let cmd = 'tmux send-keys -t .0 "cat .var" ENTER'
-  " call system(cmd)
-endfunction
-command! Showvar call Showvar()
-nnoremap <space>v :Showvar<cr>
+" function! Showvar()
+"   SlimeSend1 _show_global_var()
+"   let cmd = 'tmux send-keys -t .0 "cat .var" ENTER'
+"   call system(cmd)
+" endfunction
+" command! Showvar call Showvar()
+" nnoremap <space>v :Showvar<cr>
 
 
 """"""""""""""""" Ultisnip pytorch """""""""""""""""""""""""
@@ -86,18 +110,6 @@ function! SnippetPython()
   let choice = str2nr( input(choicelist) ) - 1
   execute "UltiSnipsAddFiletypes " .. snipList[choice]
 endfunction
-
-command! CmdTorch call CmdTorch()
-function! CmdTorch()
-  let g:slime_target = "vimterminal"
-  let g:slime_vimterminal_cmd ="cmd.exe /k conda activate base && ipython"
-endf
-
-
-" list function, import, class
-nnoremap <space>f :g/\<def\>\<bar>\<class\><cr>:
-nnoremap <space>f :lvimgrep/^\s*\<def\>\<bar>^\s*\<class\>/j %<bar>:llist<cr>:silent ll 
-nnoremap <space>F :lvimgrep/###/j % <bar>llist<cr>:silent ll 
 
 
 " down, size exit directly"
@@ -135,6 +147,5 @@ nnoremap <buffer><C-s> :exe "pyx "..getline(".")<cr>
 " xnoremap <buffer><c-s> :RunPy<cr>
 " run region code in normal mode
 nnoremap <buffer><m-s> vip:RunPy<cr>
-
 
 

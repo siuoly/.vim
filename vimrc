@@ -11,12 +11,11 @@ set number relativenumber
 
 set shortmess+=I  
 "set relativenumber
-set cursorline
-set enc=utf-8
-set cpoptions+=y " ("1y) ("1p) using
+set cursorline cursorcolumn
 
-set shiftwidth=2 tabstop=2 softtabstop=2
-set expandtab autoindent
+set enc=utf-8 cpoptions+=y " ("1y) ("1p) using
+
+set shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent 
 
 set hlsearch incsearch ignorecase smartcase
 set ambiwidth=double "prevent enter replace mode on Conemu"
@@ -40,11 +39,10 @@ set nrformats-=octal
 " ignore these files while expanding wild chars
 set wildignore=*.o,*.class,*.pyc
 
-
 " disable bell on all case
 set belloff=all
 set t_vb=
-
+set t_SH=
 
 " --- move around splits {
 set wmw=0             " set the min width of a window to 0 so we can maximize others 
@@ -73,14 +71,31 @@ endif
 
 
 " hilight current line only
-autocmd WinEnter * set cursorline
-autocmd WinLeave * set nocursorline
+augroup CursorLine
+    au!
+    au WinEnter * setlocal cursorline cursorcolumn
+    au WinLeave * setlocal nocursorline nocursorcolumn
+augroup END
+
 autocmd TerminalOpen * setlocal nonumber norelativenumber
+
+" Auto-resize splits when Vim gets resized.
+autocmd VimResized * wincmd =
+
+" Update a buffer's contents on focus if it changed outside of Vim.
+au FocusGained,BufEnter * :checktime
+" Make sure all types of requirements.txt files get syntax highlighting.
+autocmd BufNewFile,BufRead requirements*.txt set ft=python
+" Ensure tabs don't get converted to spaces in Makefiles.
+autocmd FileType make setlocal noexpandtab
+
 
 augroup remember_view_global
   au!
   " au BufWinLeave $VIMFILES/vimrc mkview! $VIMFILES/view/~=+vimrc=
   " au BufWinEnter $VIMFILES/vimrc silent! source $VIMFILES/view/~=+vimrc= 
+  " au BufWinLeave *.ft mkview
+  " au BufWinEnter *.ft loadview
 augroup END
 
 
