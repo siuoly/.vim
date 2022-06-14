@@ -1,4 +1,3 @@
-
 " Reload .vimrc and ":PlugInstall" to install plugin 
 "vim-plug
 
@@ -6,93 +5,98 @@
 
 call plug#begin( '~/.vim/plugged' )
 " no use
-" Plug 'bling/vim-bufferline'
-" Plug 'maxbrunsfeld/vim-yankstack'   " 複製暫存器
-" Plug 'kien/ctrlp.vim'               " 搜尋buffer
-" Plug 'preservim/tagbar'               " taglist
-" Plug 'siuoly/YankRing.vim'            " yankring
-" Plug 'jceb/vim-orgmode'               "Todo list
-" Plug 'lifepillar/vim-cheat40'         "Todo list
-" Plug 'ashisha/image.vim'             " open ASCII image in vim
+" if !has('win32') |
+"   Plug 'brglng/vim-im-select'           " IME switch
+" endif
+" Plug 'maxbrunsfeld/vim-yankstack' " 複製暫存器
+" Plug 'kien/ctrlp.vim'             " 搜尋buffer
+" Plug 'preservim/tagbar'           " taglist
+" Plug 'siuoly/YankRing.vim'        " yankring
+" Plug 'jceb/vim-orgmode'           " Todo list
+" Plug 'lifepillar/vim-cheat40'     " Todo list
+" Plug 'ashisha/image.vim'          " open ASCII image in vim
 " Plug 'easymotion/vim-easymotion'
-" Plug 'godlygeek/tabular'           " h Tabu  快速編輯
 " Plug 'pi314/ime-phonetic.vim'
 " Plug 'pi314/ime.vim'
-if !has('win32') |
-  " Plug 'brglng/vim-im-select'           " IME switch
-endif
 
 
 " must use
-Plug 'terryma/vim-multiple-cursors'
-Plug 'junegunn/vim-easy-align' " align 
-" Plug 'frazrepo/vim-rainbow' " 括號顏色
-Plug 'kana/vim-textobj-user' "text object custom
-Plug 'machakann/vim-highlightedyank' "high light yank
+Plug 'wellle/context.vim'            " context look
+Plug 'rhysd/clever-f.vim'            " f,F,t,T move quickly
+Plug 'terryma/vim-multiple-cursors'  " <c-n> multiple select
+Plug 'junegunn/vim-easy-align'       " align
+Plug 'kana/vim-textobj-user'         " text object custom
+Plug 'machakann/vim-highlightedyank' " high light yank
 Plug 'siuoly/vim-misc' 
-Plug 'markonm/traces.vim'
-Plug 'Yggdroot/indentLine'  " 縮排小線
-Plug 'tpope/vim-commentary',
-     ""\{'on':['<plug>Commentary','<plug>CommentaryLine','Commentary'] } " comment
-Plug 'suy/vim-context-commentstring',
+Plug 'markonm/traces.vim'            " 預覽 :s/xxxx/yyyy 命令
+Plug 'Yggdroot/indentLine'           " 縮排虛線
+Plug 'tpope/vim-commentary',         " 註解 快速鍵
+Plug 'suy/vim-context-commentstring', " 根據游標所在區域類型註解
 Plug 'preservim/nerdtree',
-     \{ 'on':  'NERDTreeToggle' } " 檔案瀏覽
-Plug 'tpope/vim-surround'          " new help surround
-Plug 'tpope/vim-repeat'           " surround repeat
-Plug 'mattn/emmet-vim',{'for':['html','php']} "html tag
+     \{ 'on':  'NERDTreeToggle' }             " 檔案瀏覽
+Plug 'tpope/vim-surround'                     " new help surround
+Plug 'tpope/vim-repeat'                       " surround repeat
+Plug 'mattn/emmet-vim',{'for':['html','php']} " html tag
 Plug 'captbaritone/better-indent-support-for-php-with-html'
-Plug 'michaeljsmith/vim-indent-object'
-" Plug 'tmhedberg/SimpylFold'
-
-" " Track the engine.
+Plug 'michaeljsmith/vim-indent-object'        " vii, vai 選擇 縮排區塊
 Plug 'SirVer/ultisnips'
 " " Snippets are separated from the engine. Add this if you want them:
 " Plug 'honza/vim-snippets'
+" Plug 'frazrepo/vim-rainbow' " 括號顏色
+" Plug 'tmhedberg/SimpylFold'
 
-" not must use"
-Plug 'unblevable/quick-scope'
-Plug 'haya14busa/vim-asterisk' " start search 
+
+" not must use
+" Plug 'AndrewRadev/sideways.vim'                                          " 左右移動 參數文字 方便
+Plug 'airblade/vim-rooter' " working directory
+Plug 'liuchengxu/vim-clap' , { 'do': { -> clap#installer#force_download() } } " finder with cache feature
+Plug 'dstein64/vim-startuptime'                                          " 計算啟動vim花費時間, :StratupTime
+Plug 'webdevel/tabulous'                                                 " tabpage bar custom
+Plug 'haya14busa/vim-asterisk'                                           " start(*) search
 Plug 'voldikss/vim-floaterm'
+Plug 'kshenoy/vim-signature'                                             " mark
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'turbio/bracey.vim' , {'do': 'npm install --prefix server','for':['html','javascript','css','php']}
-                                        " html edit
-Plug 'junegunn/goyo.vim',{'on': 'Goyo'} " 小黑屋模式
-Plug 'alvan/vim-closetag'               " html tag use
-Plug 'siuoly/vim-terminal-help'     " terminal
-Plug 'kshenoy/vim-signature'            " mark
-Plug 'skywind3000/asyncrun.vim', {'on': ['AsyncRun', 'AsyncStop'] }
-Plug 'skywind3000/asynctasks.vim', {'on': ['AsyncTask', 'AsyncTaskMacro', 'AsyncTaskList', 'AsyncTaskEdit'] }
-
-" Plug 'puremourning/vimspector' "debugger
-Plug 'neoclide/coc.nvim', {'branch': 'release','on':[]}
-Plug 'yianwillis/vimcdoc'             " 中文vim help
-Plug 'flazz/vim-colorschemes'         " color scheme
-" Plug 'yegappan/taglist',{'on':'Tlist'}               " taglist
+Plug 'turbio/bracey.vim' 
+      \,{'do': 'npm install --prefix server', 
+      \'for':['html','javascript','css','php']}                          " html edit
+Plug 'junegunn/goyo.vim',{'on': 'Goyo'}                                  " 小黑屋模式
+Plug 'alvan/vim-closetag'                                                " html tag use
+Plug 'skywind3000/asyncrun.vim'                                          " , {'on': ['AsyncRun', 'AsyncStop'] }
 
 
-" Plug 'jupyter-vim/jupyter-vim',{'for':'python'} " jupyter 互動工作
-" Plug 'goerz/jupytext.vim'
+" Plug 'siuoly/vim-terminal-help'                                          " terminal
+" Plug 'skywind3000/asynctasks.vim', {'on': ['AsyncTask', 'AsyncTaskMacro', 'AsyncTaskList', 'AsyncTaskEdit'] }
+Plug 'yianwillis/vimcdoc'                                                " 中文vim help
+Plug 'flazz/vim-colorschemes'                                            " color scheme
 Plug 'hanschen/vim-ipython-cell',{'for':'python'}
 Plug 'jpalardy/vim-slime',{'for':'python','on':'SlimeConfig'}
-
-" Plug 'untitled-ai/jupyter_ascending.vim'
-
-
-" Plug 'iamcco/dict.vim'
-Plug 'plasticboy/vim-markdown' " markdown
-Plug 'siuoly/md-img-paste.vim'  " my fork,  paste the markdown image
+Plug 'plasticboy/vim-markdown'                                           " markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  } " preview
+Plug 'siuoly/md-img-paste.vim' ,{ 'for': 'markdown' }                     " my fork,  paste the markdown image
+" Plug 'ap/vim-css-color', { 'for': ['html', 'css'] } " preview css color on vim
+" Plug 'RRethy/vim-hexokinase'  " 輕量化的 css color
+" Plug 'puremourning/vimspector' "debugger
+" Plug 'yegappan/taglist',{'on':'Tlist'} " taglist
+" Plug 'jupyter-vim/jupyter-vim',{'for':'python'} " jupyter 互動工作
+Plug 'goerz/jupytext.vim'
+" Plug 'untitled-ai/jupyter_ascending.vim'
+" Plug 'iamcco/dict.vim'
 " Plug 'siuoly/typing_speed.vim'
-
-
 " Plug 'vim-airline/vim-airline'        " 美觀
 " Plug 'vim-airline/vim-airline-themes' " theme
-" Plug 'kyoz/purify', { 'rtp': 'vim' }  " color scheme
+
+" Language Server
+" Plug 'davidhalter/jedi-vim' " python lsp
+" Plug 'mattn/vim-lsp-settings'
+" Plug 'prabirshrestha/vim-lsp'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'dense-analysis/ale'  " lsp
+
 call plug#end()
 
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
+let g:context_add_mappings = 0
 
 if( has_key(g:plugs, "vim-asterisk" ) )
   map *  <Plug>(asterisk-z*)
@@ -103,9 +107,9 @@ endif
 
 if( has_key(g:plugs, "vim-easy-align") )
 " Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+  xmap ga <Plug>(EasyAlign)
+  " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+  nmap ga <Plug>(EasyAlign)
 endif
 
 if( has_key(g:plugs, "vim-rainbow") )
@@ -119,11 +123,14 @@ if( has_key(g:plugs, "vim-markdown") )
   let g:vim_markdown_math = 1
   let g:vim_markdown_conceal_code_blocks = 0
   let g:tex_conceal = ""
+  highlight htmlBold ctermfg=blue
+  highlight htmlItalic ctermfg=yellow
+  highlight htmlBoldItalic cterm=italic ctermfg=blue
 endif
 
 if( has_key(g:plugs, "markdown-preview.nvim") )
   let g:mkdp_auto_close = 0
-let g:mkdp_refresh_slow = 1
+  let g:mkdp_refresh_slow = 1
 
 let g:mkdp_preview_options = {
     \ 'mkit': {},
@@ -140,6 +147,47 @@ let g:mkdp_preview_options = {
     \ }
 endif
 
+if( has_key(g:plugs, "sideways.vim") )
+  nnoremap <m-H> :SidewaysLeft<cr>
+  nnoremap <m-L> :SidewaysRight<cr>
+endif
+
+if( has_key(g:plugs, "vim-clap") )  " TODO add file history
+  nnoremap <m-o> <Cmd>Clap files<cr>
+  nnoremap <m-i> <Cmd>Clap<cr>
+  nnoremap <m-b> <Cmd>Clap buffers<cr>
+  let g:clap_theme = 'material_design_dark'
+  " let g:clap_open_preview = 'never'
+  function! On_move()
+    let cur_line = g:clap.display.getcurline()
+    call g:clap.preview.show(  )
+  endfunction
+  let g:clap_provider_vim = {
+        \ 'source': 'ls  ~/.vim/**/*.vim' ,
+        \ 'sink': 'e' ,
+        \ 'description': 'diaplay ~/.vim directory',
+        \ }
+  let g:clap_provider_oldfiles = {
+        \ 'source':  {-> v:oldfiles},
+        \ 'sink': 'e' ,
+        \ 'on_move' : function('clap#provider#files#on_move_impl'),
+        \ 'description': 'jumps to the old files',
+        \ }
+  let g:clap_provider_snip = {
+        \ 'source': 'ls -d '..$VIMFILES..'/UltiSnips/*', 
+        \ 'sink': 'e' ,
+        \ 'on_move' : function('clap#provider#files#on_move_impl'),
+        \ 'description': 'jumps to the snipfile ',
+        \ }
+  nnoremap <m-m> :Clap make<cr>
+  nnoremap <m-u> :Clap command_history<cr>
+  let g:clap_provider_make = {
+        \ 'source': "make -qpRr | egrep -e '^[a-z].*:$$' | sed -e 's~:~~g' | sort", 
+        \ 'sink': 'make! ' ,
+        \ 'description': 'show make file command',
+        \ }
+        " \ 'on_move_async' : function('clap#impl#on_move#async'),
+endif
 
 if( has_key(g:plugs, "vim-commentary") )
   nmap gc  <Plug>Commentary
@@ -151,17 +199,6 @@ if( has_key(g:plugs, "vim-commentary") )
   " nmap gcp <Plug>Commentaryip}
 endif
 
-if( has_key(g:plugs, "vim-im-select") )
-  " im-select
-  let g:im_select_default = '1033'
-  let g:im_select_get_im_cmd = ['im-select.exe']
-  let g:im_select_command = '/usr/local/bin/im-select.exe'
-  "set noesckey  " function key eg. <F5> <F4> ,cursor key couldn't using
-  " but can make Insetereave event fastly, needn't wait 1 sec
-  set ttimeoutlen=5
-  let g:im_select_enable_focus_events = 0 " i-mode <C-O> will switch IME
-endif
-
 if(has_key(g:plugs, "goyo.vim") )
   let g:goyo_width = 100
 endif
@@ -171,26 +208,25 @@ let Tlist_Enable_Fold_Column = 0
 "let Tlist_Close_On_Select = 1
 let g:user_emmet_leader_key='<M-,>'
 
-"easy-motion
-if( has_key(g:plugs, "vim-easymotion") )
-  map <Leader>j <Plug>(easymotion-j)
-  map <Leader>k <Plug>(easymotion-k)
-  map <space> <Plug>(easymotion-overwin-f)
-endif
-
 "----------- COS setting ---------------------
 "coc.nvim  "https://github.com/junegunn/vim-plug/wiki/tips
-augroup load_us_coc   " lazy load
-  autocmd!  
-  autocmd InsertEnter * call plug#load('coc.nvim') | autocmd! load_us_coc
-  autocmd CursorHold * call plug#load('coc.nvim') | autocmd! load_us_coc
-augroup END
 
 if( has_key(g:plugs, "coc.nvim") )
+  augroup load_us_coc   " lazy load
+    autocmd!  
+    autocmd InsertEnter * call plug#load('coc.nvim') | autocmd! load_us_coc
+    autocmd CursorHold * call plug#load('coc.nvim') | autocmd! load_us_coc
+  augroup END
+
   source $VIMFILES/after/cocset.vim
   let g:coc_node_path="/usr/bin/node"
   let g:coc_global_extensions = [ "coc-pyright"]
+  nnoremap <leader>C :CocCommand<cr>
   nnoremap <leader>c :tabe <bar>CocConfig<cr>
+endif
+
+if( has_key(g:plugs,'nerdtree') ) 
+nnoremap <leader>e :NERDTreeToggle<CR>
 endif
 
 " vim-terminal-help
@@ -224,14 +260,17 @@ endif
 " closetag
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
 
+" hello world ,this is a good day
 " asyncrun setting
 if( has_key(g:plugs, "asyncrun.vim") )
+  let g:asyncrun_open = 8
   " trans, pip install googletrans==a3.0, 
   " zshrc: alias translate_stdin="xargs -0 -I {} translate {}"
-  nnoremap gsg :cclose<cr>
-  " nnoremap gss :AsyncRun -cwd=$VIMFILES/script ./translateZH_TW.py <cword><CR>
+  " nnoremap gsg :cclose<cr>
+  nnoremap gss :AsyncRun -mode=term -focus=0 -rows=2 python $VIMFILES/script/translateZH_TW.py <cword><CR>
+  xnoremap gss y:call asyncrun#run('',{'mode':'term', 'focus':0, 'rows':2 ,'cwd': $VIMFILES.."/script" } , "./translateZH_TW.py "..getreg('"') )<cr>
   " xnoremap gss :AsyncRun -cwd=$VIMFILES/script ./translateZH_TW.py -<CR>
-  command! -nargs=* Translate AsyncRun -cwd=$VIMFILES/script ./translateZH_TW.py <q-args>
+  command! -nargs=* Translate AsyncRun  python $VIMFILES/script/translateZH_TW.py <q-args>
 
   nnoremap gse :AsyncRun translate <cword><CR>
   xnoremap gse :AsyncRun cat \| xargs -0 -I {} translate {}<CR>
@@ -240,12 +279,14 @@ if( has_key(g:plugs, "asyncrun.vim") )
   nnoremap <silent>gsd :AsyncRun -mode=term -pos=hide gtts-cli <cword> \| mpg123.exe -q - <cr>
   xnoremap gsd :AsyncRun -silent gtts-cli - \| mpg123.exe -q - <cr>
   command! -nargs=* Pronunce AsyncRun -silent gtts-cli <q-args> | mpg123.exe -q -
-
+else
+  " trans,  pip install googletrans=a3.0
+  nnoremap gse :w !translate -d zh-TW <cword><CR>
+  xnoremap gse :w !xargs \| xargs -I {} translate -d zh-tw {}<CR>
 endif
 
 " asynctask setting
 if( has_key(g:plugs, "asynctasks.vim") )
-  let g:asyncrun_open = 8
   " nnoremap <space>d :AsyncTask file-run<cr>
   nnoremap <c-c> :AsyncStop<cr>
   nnoremap <leader>g :call Togglefile('.tasks')<cr>
@@ -272,26 +313,20 @@ endif
 
 if( has_key(g:plugs, "ultisnips") ) 
   nnoremap \u  <Cmd>UltiSnipsEdit<cr><c-^><Cmd>tabe #<cr>
-  let g:UltiSnipsExpandTrigger = "<c-l>"
+  let g:UltiSnipsListSnippets='<c-j>'
+  let g:UltiSnipsExpandTrigger = "\<Nop>"
   inoremap <expr> <space> UltiSnips#CanExpandSnippet()? "\<C-R>=UltiSnips#ExpandSnippetOrJump()\<CR>":" "
   xnoremap <expr> <space> UltiSnips#CanExpandSnippet()? "\<C-R>=UltiSnips#ExpandSnippetOrJump()\<CR>":" "
   command! SnipRefresh call UltiSnips#RefreshSnippets() 
 endif
 
-
-let g:UltiSnipsListSnippets='<c-j>'
+let g:slime_python_ipython = 1
+let g:slime_target = 'tmux'
 let g:slime_target = "vimterminal"
 let g:slime_vimterminal_config = {"term_finish": "close"}
 let g:slime_vimterminal_cmd = 'ipython'
 let g:slime_no_mappings = 1
 
-
-let g:ime_plugins = ['zhuyin']
-let g:ime_show_2nd_mode = 0
-let g:ime_select_mode_style = 'popup'
-let g:ime_phonetic_cache_size = 2000
-
 source $VIMFILES/script/TranslateWord.vim
-
 
 

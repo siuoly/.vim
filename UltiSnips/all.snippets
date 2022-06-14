@@ -14,5 +14,10 @@ snippet !put "paste from the clibber" wA
 	`!v getreg('+')`
 endsnippet
 
+snippet thefile "put current file name" w
+`!v expand('%:p')`
+endsnippet
 
-
+snippet thepwd "put current working directory" w
+`! pwd`
+endsnippet

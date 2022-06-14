@@ -5,30 +5,61 @@
       "rootPatterns": ["go.mod"],
       "trace.server": "verbose",
       "filetypes": ["go"]
+    },
+    "vimls": {
+      "module": "/usr/lib/node_modules/vim-language-server/bin/index.js",
+      "args": ["--node-ipc"],
+      "initializationOptions": {
+        "isNeovim": false, // is neovim, default false
+        "iskeyword": "@,48-57,_,192-255,-#", // vim iskeyword option
+        "vimruntime": "", // $VIMRUNTIME option
+        "runtimepath": "",   // vim runtime path separate by `,`
+        "diagnostic": {
+          "enable": true
+        },
+        "indexes": {
+          "runtimepath": true,      // if index runtimepath's vim files this will effect the suggest
+          "gap": 100,               // index time gap between next file
+          "count": 3,               // count of files index at the same time
+          "projectRootPatterns" : ["strange-root-pattern", ".git", "autoload", "plugin"] 
+          // Names of files used as the mark of project root. If empty, the default value [".git", "autoload", "plugin"] will be used
+        },
+        "suggest": {
+          "fromVimruntime": true,   // completionItems from vimruntime's vim files
+          "fromRuntimepath": false  // completionItems from runtimepath's vim files, if this is true that fromVimruntime is true
+        }
+      },
+      "filetypes": [ "vim" ]
     }
   },
   "snippets":{
     "shortcut": "S"
   },
-
   "tsserver":{
-    "enable" : false,
+    "enable" : true,
     "githubUrl": " https://github.com/neoclide/coc-tsserver "
   },
-  "pyright":{
+
+  "pyright":{  //  https://github.com/fannheyward/coc-pyright 
     "enable": true,
     "disableCompletion" : false,
-    "githubUrl" :" https://github.com/fannheyward/coc-pyright ",
     "command" : "對於ture, false等命令, 不須加上引號, 但是對於其他字串則需要" ,
-    "disableDiagnostics" : true  ,
-    "description" : "上面用途 關閉左側欄位 很煩的錯誤行提示 linting"
+    "disableDiagnostics" :   true,
+    "description" : "上面用途 關閉左側欄位 很煩的錯誤行提示 linting",
+    "completion.snippetSupport": false,
+    "analysis":{
+      "autoSearchPaths": true,
+    }
   },
   "python":{
-    "linting.enabled" :  true 
+    "linting":{
+      "enabled" :  false ,
+      "flake8Enabled": true,
+    }
   },
   "pairs":{
     "disableLanguages": [ "python"],
     "enableCharacters":  ["(", "[", "{", "<", "'", "\"", "`" ]
   }
-  }
+}
 

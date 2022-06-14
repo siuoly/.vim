@@ -4,37 +4,28 @@
 
 " default setting , make problem less
 runtime defaults.vim
-
 set notermguicolors
+set ttymouse=sgr
 set mouse=a
-set number relativenumber
-
-set shortmess+=I  
-"set relativenumber
-set cursorline cursorcolumn
-
+set number relativenumber numberwidth=1
+set shortmess+=I shortmess-=S
+set cursorline 
 set enc=utf-8 cpoptions+=y " ("1y) ("1p) using
-
 set shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent 
-
 set hlsearch incsearch ignorecase smartcase
+autocmd! InsertEnter * call feedkeys("\<Cmd>noh\<cr>" , 'n') " close hlsearch when search
 set ambiwidth=double "prevent enter replace mode on Conemu"
 call setcellwidths([[0x2588, 0x258f, 1]])
-
 set modeline exrc secure
 set scrolloff=9
-
-
 set ssop-=fold,option "no save map,fode imformtion
-
 
 set clipboard=unnamedplus	"yank to the system register (*) by default  " work on xlaunch
 set noshowmatch		" Cursor no shows matching ) and }
 set showmode		" Show current mode
 set wildmenu    " wild char completion menu
 
-" <c-a> <c-x> use
-set nrformats-=octal
+set nrformats-=octal " <c-a> <c-x> use
 
 " ignore these files while expanding wild chars
 set wildignore=*.o,*.class,*.pyc
@@ -58,7 +49,9 @@ set statusline=%-15f%h%m%r%w%=[%{&fileencoding}]%-6y--%p%%[%l/%L]
 " File ,Help, Modify, Readonly w:Preview    
 " =:right     y:filetype,  lLine , Percent
 
-
+filetype indent on
+filetype plugin on
+syntax on
 
 if has('gui')
   let $VIMFILES=$HOME..'/vimfiles'
@@ -69,12 +62,11 @@ else
   let $VIMFILES=$HOME..'/.vim'
 endif
 
-
 " hilight current line only
 augroup CursorLine
     au!
-    au WinEnter * setlocal cursorline cursorcolumn
-    au WinLeave * setlocal nocursorline nocursorcolumn
+    au WinEnter * setlocal cursorline 
+    au WinLeave * setlocal nocursorline 
 augroup END
 
 autocmd TerminalOpen * setlocal nonumber norelativenumber
@@ -83,12 +75,15 @@ autocmd TerminalOpen * setlocal nonumber norelativenumber
 autocmd VimResized * wincmd =
 
 " Update a buffer's contents on focus if it changed outside of Vim.
-au FocusGained,BufEnter * :checktime
+au FocusGained * checktime
+
 " Make sure all types of requirements.txt files get syntax highlighting.
 autocmd BufNewFile,BufRead requirements*.txt set ft=python
 " Ensure tabs don't get converted to spaces in Makefiles.
 autocmd FileType make setlocal noexpandtab
 
+" remove trailing whitespace
+" autocmd BufWritePre *.py :%s/\s\+$//e
 
 augroup remember_view_global
   au!
@@ -97,12 +92,6 @@ augroup remember_view_global
   " au BufWinLeave *.ft mkview
   " au BufWinEnter *.ft loadview
 augroup END
-
-
-
-filetype indent on
-filetype plugin on
-syntax on
 
 
 " text object
@@ -120,8 +109,14 @@ command! ANSI e ++enc=cp950
 
 command! Url call system( 'explorer.exe ' . getline('.') )
 
+" open csv file format
+command! -complete=file -nargs=1 Csv tabe| .!column -s, -t <args>
+
 " put now time
 command! Now execute 'normal! i ' ."\<c-r>=strftime('%H:%M:%S')\<cr>"
+
+" put the output of command, e.g. PutCommand map, show all the mapping keys
+command! -nargs=+ PutCommand put =execute( '<args>')
 
 " delete file command
 command! -complete=file -nargs=1 Delete 
@@ -133,16 +128,10 @@ command! -complete=file -nargs=1 Delete
 command! -nargs=+ CmdSilent
 \   execute 'silent !'.. '<args>'
 \ | execute 'redraw!'
-"  unix like command,  mv the current file name
-"
-function s:Move( newname )
-  let oldname = expand('%:p')
-  exec "saveas " .a:newname
-  exec "bdelete " . oldname
-  call delete(oldname)
-endfun
-command! -nargs=1 Mv call s:Move( <f-args> )
 
+
+"  unix like command,  mv the current file name
+command! -nargs=1 -complete=file -bang Mv file <args>|w<bang>
 
 " when :tab term, the cursor wont change
 if &term =~ '^xterm'
@@ -165,24 +154,15 @@ endif
 " endif
 
 
-function! OpenMakefile()
-	if !filereadable(expand("%:p:h")."/makefile")
-		:!cp ~/.vim/autoload/makefile %:p:h/makefile
-	endif
-	:vsp makefile
-endfunction
 
+"source map
+source $VIMFILES/after/commonMap.vim
 
-  "source map
-  source $VIMFILES/after/commonMap.vim
+"confugure
+source $VIMFILES/after/configure.vim
 
-  "confugure
-  source $VIMFILES/after/configure.vim
-
-  " vim-plug
-  source $VIMFILES/after/plug.vim
+" vim-plug
+source $VIMFILES/after/plug.vim
 
 let folddigest_options = "vertical,flexnumwidth"
 let folddigest_size = 30
-
-

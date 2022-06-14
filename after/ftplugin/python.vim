@@ -8,22 +8,28 @@ map <buffer><m-c> <Cmd>call JumpTerminalWin()<cr><c-c>
 
 " for "chmod +x" autoload
 setlocal autoread
+setlocal signcolumn=yes
 
 " python terminal mode
-nnoremap <buffer><f7> :call Maketerm()<cr>
+let ipython='rightbelow vertical terminal ++close ++shell cd %:p:h && ipython'
+nnoremap <buffer><f7> :call Maketerm(ipython)<bar>SlimeConfig<cr>
+
 function! TabhasTerm()
   for i in  tabpagebuflist()
     if index(term_list(),i) > -1| return 1| endif
   endfor
   return 0
 endfunction
-function! Maketerm()
+
+function! Maketerm(ipython)
   if !TabhasTerm()
     if len(term_list()) > 0
       let n = term_list()[0]
       execute "rightbelow vertical sb ".. n
     else
-      SlimeConfig | wincmd H
+      " SlimeConfig | wincmd H
+      execute a:ipython
+      wincmd w
     endif
   endif 
   wincmd h
@@ -38,14 +44,23 @@ endif
 nnoremap <m-w> :call JumpTerminalWin()<cr>
 tnoremap <m-w> <Cmd>call JumpTerminalWin()<cr>
 tmap <m-e> <f2>| map <m-e> <f2>
+"找出所有 terminal buffer, 聯集winbuffer, 找出 buffer , 轉換 winid , 跳躍
+" return terminal buffer num in current page
+function! GetWinTerminalBuffer() 
+  for i in term_list()
+    for j in tabpagebuflist()
+      if i == j| return i| endif
+    endfor
+  endfor
+  return -1
+endfunction
 function! JumpTerminalWin()
-  if &ft=='python' && &bt=='' && len( term_list() )>0
-    echo win_gotoid( bufwinid( term_list()[0] ) )
+  if &ft=='python' && &bt=='' && GetWinTerminalBuffer() != -1
+    echo win_gotoid( bufwinid( GetWinTerminalBuffer() ) )
     return
   endif
   if &ft=='' && &bt=='terminal' 
-    echo win_gotoid( bufwinid('#') )
-    return
+    execute "normal \<c-w>p"| return
   endif
 endfunction
 
@@ -53,10 +68,10 @@ endfunction
 
 """"""""""""""""""""""""""""""""""""""""
 " 建立 ## 區域,  刪除 ## 區域
-nnoremap <space>j :IPythonCellNextCell<cr>
-nnoremap <space>k :IPythonCellPrevCell<cr>
-" nnoremap <space>b :IPythonCellInsertBelow<cr>
+nnoremap <c-j> :IPythonCellNextCell<cr>
+nnoremap <c-k> :IPythonCellPrevCell<cr>
 nnoremap <space>b o<esc>3i#<esc>a<space><esc>
+nnoremap <f5> :tab terminal pudb3 %:p<cr>
 " Ipython Vim
 nnoremap <space><space> :IPythonCellExecuteCell<cr>
 nnoremap <space>r :IPythonCellRun<cr>
@@ -67,7 +82,7 @@ command -buffer QTconsole !jupyter qtconsole&
 " and move to top boundary (### >3 or Begin of file)
 nnoremap <space>d /#\{3,}\<bar>\%$/-2<cr>V?#\{3,}\<bar>\%^<cr>zf
 " copy region
-nnoremap <space>y /###\<bar>\%$/-1<cr>V?###\<bar>\%^<cr>y
+nnoremap <space>y m"/###\<bar>\%$/-1<cr>V?###\<bar>\%^<cr>y`"
 " send word
 nnoremap <space>w :execute 'SlimeSend1 '.. expand("<cword>")<cr>
 nnoremap <space>W :execute 'SlimeSend1 '.. expand("<cWORD>")<cr>
@@ -82,7 +97,7 @@ xnoremap <space>s y:execute 'SlimeSend1 '.. @+ ..".shape"<cr>
 nnoremap <space>l :execute 'SlimeSend1 len('.. expand("<cWORD>")..')'<cr>
 xnoremap <space>l y:execute 'SlimeSend1 len('.. @+ ..')'<cr>
 " run line
-nnoremap <space>q yy:execute 'SlimeSend1 ' .. @+[:-2]<cr>
+nnoremap <space>q yy:execute 'SlimeSend1 ' .. @"[:-2]<cr>
 xnoremap <space><space> y:execute 'SlimeSend1 %paste'<cr>
 
 " list function, import, class

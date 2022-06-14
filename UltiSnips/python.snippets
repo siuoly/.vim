@@ -4,7 +4,6 @@ snippet pp "print()" b
 print( ${1:${VISUAL}} )
 endsnippet
 
-
 snippet "([^\s].*)\.pp" "print() postfix" r
 print( `!p snip.rv = match.group(1)`) $1
 endsnippet
@@ -73,6 +72,10 @@ endsnippet
 snippet pplot "plt.plot() and show" b
 plt.plot( ${1:x}, ${2:y} )
 plt.show()
+endsnippet
+
+snippet pltlegend "beautifully plot lengend" b
+plt.legend(shadow=True, fontsize=12, facecolor='inherit', edgecolor='inherit', loc='best')
 endsnippet
 
 snippet splot "plt.subplots() and show" b
@@ -152,7 +155,7 @@ import pdb; pdb.set_trace()
 endsnippet
 
 snippet bb "import pdb" i
-import pdb; pdb.set_trace()
+breakpoint()
 endsnippet
 
 snippet ipdb "import ipdb" i
@@ -228,12 +231,12 @@ with open("${1:path}",'w') as file:
 	json.dump( ${2:object} , file)
 endsnippet
 # csv
-snippet cwriter "csv writer" b
+snippet cssave "csv writer" b
 with open( '${1:file.csv}' , 'w') as f:
 	writer = csv.writer( f, delimiter=',' )
 	writer.writerow( $0 )
 endsnippet
-snippet creader "csv reader" b
+snippet csload "csv reader" b
 with open( '${1:file.csv}' , 'r') as f:
 	rows = csv.reader( f, delimiter=',' )
 	for row in rows:
@@ -247,7 +250,7 @@ with open( '${1:}' , '${2:}') as f:
 endsnippet
 
 # pickle_load, seve
-snippet ppload "pickle load" b
+snippet pload "pickle load" b
 with open( '' ,'wb') as f
 	pickle.dump( object, f )
 with open( '', 'rb' ) as f:
@@ -278,4 +281,12 @@ snippet fornum "limite times of iteration" b
 from itertools import islice
 for i in islice( ${1:iterable}, ${2:nums}) :
 	$0
+endsnippet
+
+snippet delm "del module" b
+del sys.modules['$1']
+endsnippet
+
+snippet padda "parser add argument" b
+parser.add_argument('--$1', type=${2:str}, default='$3', help='$4')
 endsnippet

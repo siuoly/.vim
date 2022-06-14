@@ -15,8 +15,8 @@ EOF
 endfunction
 
 
-nnoremap <silent> gss :echo expand('<cword>') .. ' --> ' .. Translate(expand('<cword>'))<cr>
-xnoremap <silent> gss y`>:echo @" .. " --> " .. Translate(@")<cr>
+" nnoremap <silent> gss :echo expand('<cword>') .. ' --> ' .. Translate(expand('<cword>'))<cr>
+" xnoremap <silent> gss y`>:echo @" .. " --> " .. Translate(@")<cr>
 nnoremap gsS yiwea(<c-r>=Translate(@")<cr>)<esc>
 xnoremap <silent> gsS y`>a(<c-r>=Translate(@")<cr>)<esc>
 
