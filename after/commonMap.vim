@@ -64,7 +64,6 @@ inoremap <c-z> <c-o>u
 nnoremap <expr> <F2> &bt!="terminal" ? ":nohlsearch<cr>" : "i"
 nnoremap <silent> <F6> :Tlist<CR>
 command! VirEditToggle exe 'set ve=' . (&ve== "all"? "" : "all")|se ve
-command! MouseToggle exe 'set mouse=' . (&mouse=="v" ? "":"v")|se mouse
 command! Number set number! relativenumber!
 
 "terminal mapping
@@ -119,6 +118,7 @@ nnoremap gx :call system("explorer.exe ".expand('<cWORD>'))<CR>
 cabbre h vert bo h
 cabbre th tab h
 cabbre term vert terminal
+cabbre tterm tab terminal
 cabbre ee tabe
 " write file with sudo permission
 cabbre w!! w !sudo tee %
