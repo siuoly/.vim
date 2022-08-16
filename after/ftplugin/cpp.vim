@@ -32,7 +32,7 @@ autocmd! VimLeave *.cc call delete('t.cc')
 
 "cppman open manpage for c++
 ":help Terminal-mode for switch mode
-nnoremap <buffer><silent> K :tab term ++shell ++close man <cWORD> \|\|  cppman <cWORD><CR>
+" nnoremap <buffer><silent> K :tab term ++shell ++close man <cWORD> \|\|  cppman <cWORD><CR>
 
 
 "fold quickly

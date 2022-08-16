@@ -69,6 +69,10 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 endsnippet
 
+snippet imra "import librosa" b
+import librosa as ra
+endsnippet
+
 snippet pplot "plt.plot() and show" b
 plt.plot( ${1:x}, ${2:y} )
 plt.show()
@@ -164,9 +168,6 @@ endsnippet
 
 ## pandas
 snippet impd "import pandas" b
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-import seaborn as sns
 import pandas as pd
 endsnippet
 
@@ -251,10 +252,12 @@ endsnippet
 
 # pickle_load, seve
 snippet pload "pickle load" b
-with open( '' ,'wb') as f
-	pickle.dump( object, f )
-with open( '', 'rb' ) as f:
-	object = pickle.load(f)
+with open( '$1', 'rb' ) as f:
+	$2 = pickle.load(f)
+endsnippet
+snippet psave "pickle save file" b
+with open( '$1' ,'wb') as f:
+	pickle.dump( $2, f )
 endsnippet
 
 # parse args

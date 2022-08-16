@@ -4,21 +4,31 @@
 
 " default setting , make problem less
 runtime defaults.vim
-set notermguicolors
+set termguicolors
 set ttymouse=sgr
 set mouse=a
 set number relativenumber numberwidth=1
-set shortmess+=I shortmess-=S
 set cursorline 
+set shortmess+=I shortmess-=S
 set enc=utf-8 cpoptions+=y " ("1y) ("1p) using
 set shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent 
 set hlsearch incsearch ignorecase smartcase
 autocmd! InsertEnter * call feedkeys("\<Cmd>noh\<cr>" , 'n') " close hlsearch when search
-set ambiwidth=double "prevent enter replace mode on Conemu"
+set ambiwidth=double        "prevent enter replace mode on Conemu"
 call setcellwidths([[0x2588, 0x258f, 1]])
 set modeline exrc secure
 set scrolloff=9
 set ssop-=fold,option "no save map,fode imformtion
+"
+set foldlevelstart=0
+" You can also use one of ¦, ┆, │, ⎸, or ▏ , ❚   
+" 關閉fold 水平線, 設定foldcolumn風格, " beatufile window split board
+set fillchars=fold:\ ,foldsep:\|,foldopen:▾,foldclose:▸,vert:\|
+set foldcolumn=1 " 設定 fold 左欄提示
+set signcolumn=number
+set list
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,
+set showbreak=↪
 
 set clipboard=unnamedplus	"yank to the system register (*) by default  " work on xlaunch
 set noshowmatch		" Cursor no shows matching ) and }
@@ -36,13 +46,14 @@ set t_vb=
 set t_SH=
 
 " --- move around splits {
-set wmw=0             " set the min width of a window to 0 so we can maximize others 
-set wmh=0             " set the min height of a window to 0 so we can maximize others
+set wmw=0         " set the min width of a window to 0 so we can maximize others 
+set wmh=0         " set the min height of a window to 0 so we can maximize others
 " }
 " complete fast
 set complete-=i   " disable scanning included files
 set complete-=t   " disable searching tags
 
+set secure
 " statusline
 set laststatus=2
 set statusline=%-15f%h%m%r%w%=[%{&fileencoding}]%-6y--%p%%[%l/%L]
@@ -85,13 +96,13 @@ autocmd FileType make setlocal noexpandtab
 " remove trailing whitespace
 " autocmd BufWritePre *.py :%s/\s\+$//e
 
-augroup remember_view_global
-  au!
+" augroup remember_view_global
+"   au!
   " au BufWinLeave $VIMFILES/vimrc mkview! $VIMFILES/view/~=+vimrc=
   " au BufWinEnter $VIMFILES/vimrc silent! source $VIMFILES/view/~=+vimrc= 
   " au BufWinLeave *.ft mkview
   " au BufWinEnter *.ft loadview
-augroup END
+" augroup END
 
 
 " text object
@@ -166,3 +177,7 @@ source $VIMFILES/after/plug.vim
 
 let folddigest_options = "vertical,flexnumwidth"
 let folddigest_size = 30
+
+
+" remote server
+command! KDD tab terminal ++close ssh siuoly@140.118.46.94 -p 2222

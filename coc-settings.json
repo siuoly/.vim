@@ -1,4 +1,6 @@
 {
+  // "coc.preferences.enableMarkdown": true,
+  "修正pyright &nbsp提示錯誤" :"",
   "languageserver": {
     "go": {
       "command": "gopls",
@@ -30,8 +32,16 @@
         }
       },
       "filetypes": [ "vim" ]
+    },
+    "clangd": {
+      "command": "clangd",
+      "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
+      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
     }
   },
+  // tab 第一下 選擇第一項目，false則是跳至第二項
+  "suggest.noselect": true,
+
   "snippets":{
     "shortcut": "S"
   },
@@ -39,7 +49,6 @@
     "enable" : true,
     "githubUrl": " https://github.com/neoclide/coc-tsserver "
   },
-
   "pyright":{  //  https://github.com/fannheyward/coc-pyright 
     "enable": true,
     "disableCompletion" : false,
@@ -49,7 +58,8 @@
     "completion.snippetSupport": false,
     "analysis":{
       "autoSearchPaths": true,
-    }
+    },
+    "trace.server": "verbose" ,
   },
   "python":{
     "linting":{
@@ -58,7 +68,7 @@
     }
   },
   "pairs":{
-    "disableLanguages": [ "python"],
+    "disableLanguages": [ "python", "c" ],
     "enableCharacters":  ["(", "[", "{", "<", "'", "\"", "`" ]
   }
 }

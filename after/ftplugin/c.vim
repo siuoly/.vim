@@ -37,6 +37,7 @@ iabbr #i #include
 iabbr #d #define
 iabbr #e #endif
 iabbr #f #ifdef
+inoremap <buffer>{{ {<cr>}<c-o>b<c-o>o
 
 "miss input
 iabbr itn int

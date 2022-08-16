@@ -8,11 +8,9 @@ map <buffer><m-c> <Cmd>call JumpTerminalWin()<cr><c-c>
 
 " for "chmod +x" autoload
 setlocal autoread
-setlocal signcolumn=yes
 
 " python terminal mode
 let ipython='rightbelow vertical terminal ++close ++shell cd %:p:h && ipython'
-nnoremap <buffer><f7> :call Maketerm(ipython)<bar>SlimeConfig<cr>
 
 function! TabhasTerm()
   for i in  tabpagebuflist()
@@ -40,47 +38,29 @@ if !has_key(g:,'py_start') && bufnr('$')==1 && term_list()==[]
   " let g:py_start = 1
 endif
 
-
-nnoremap <m-w> :call JumpTerminalWin()<cr>
-tnoremap <m-w> <Cmd>call JumpTerminalWin()<cr>
-tmap <m-e> <f2>| map <m-e> <f2>
-"找出所有 terminal buffer, 聯集winbuffer, 找出 buffer , 轉換 winid , 跳躍
-" return terminal buffer num in current page
-function! GetWinTerminalBuffer() 
-  for i in term_list()
-    for j in tabpagebuflist()
-      if i == j| return i| endif
-    endfor
-  endfor
-  return -1
-endfunction
-function! JumpTerminalWin()
-  if &ft=='python' && &bt=='' && GetWinTerminalBuffer() != -1
-    echo win_gotoid( bufwinid( GetWinTerminalBuffer() ) )
-    return
-  endif
-  if &ft=='' && &bt=='terminal' 
-    execute "normal \<c-w>p"| return
-  endif
-endfunction
-
-
-
 """"""""""""""""""""""""""""""""""""""""
-" 建立 ## 區域,  刪除 ## 區域
-nnoremap <c-j> :IPythonCellNextCell<cr>
-nnoremap <c-k> :IPythonCellPrevCell<cr>
-nnoremap <space>b o<esc>3i#<esc>a<space><esc>
+let g:ipython_cell_insert_tag='###'
+" append below,above cell, split cell,
+nnoremap <buffer><c-j> :IPythonCellNextCell<cr>
+nnoremap <buffer><c-k> :IPythonCellPrevCell<cr>
+nnoremap <space>s <Cmd>call append('.',g:ipython_cell_insert_tag)<cr>
+nnoremap <space>a <Cmd>IPythonCellInsertAbove<cr>
+nnoremap <space>b <Cmd>IPythonCellInsertBelow<cr>
+nnoremap <space>B o<c-o>50i#<esc>
 nnoremap <f5> :tab terminal pudb3 %:p<cr>
+nnoremap <f6> :Tmux<cr>
 " Ipython Vim
+nmap <space><space> <Plug>SlimeSendCell
 nnoremap <space><space> :IPythonCellExecuteCell<cr>
+xnoremap <space><space> y:execute 'SlimeSend1 %paste -q'<cr>
+
 nnoremap <space>r :IPythonCellRun<cr>
 nnoremap <expr><space>r ":SlimeSend1 run " ..expand('%') .. "<cr>"
 command -buffer QTconsole !jupyter qtconsole&
 """""" Ipython Vim display variable to REPL window
 " fold region, move to bottom boundary (### > 3 or EOF), VisualLine select ,
 " and move to top boundary (### >3 or Begin of file)
-nnoremap <space>d /#\{3,}\<bar>\%$/-2<cr>V?#\{3,}\<bar>\%^<cr>zf
+nnoremap <space>d <Cmd>IPythonCellNextCell<cr>m"<Cmd>IPythonCellPrevCell<cr><Cmd>.,'"-1fold<cr>
 " copy region
 nnoremap <space>y m"/###\<bar>\%$/-1<cr>V?###\<bar>\%^<cr>y`"
 " send word
@@ -90,7 +70,7 @@ xnoremap <space>w y:execute 'SlimeSend1 '.. @+ <cr>
 " sned print
 nnoremap <space>t :execute 'SlimeSend1 type('.. expand("<cword>")..")"<cr>
 " send variable.shape
-nnoremap <space>s :execute 'SlimeSend1 '.. expand("<cword>")..".shape"<cr>
+" nnoremap <space>s :execute 'SlimeSend1 '.. expand("<cword>")..".shape"<cr>
 nnoremap <space>S :execute 'SlimeSend1 '.. expand("<cWORD>")..".shape"<cr>
 xnoremap <space>s y:execute 'SlimeSend1 '.. @+ ..".shape"<cr>
 " send len(variable)
@@ -98,12 +78,16 @@ nnoremap <space>l :execute 'SlimeSend1 len('.. expand("<cWORD>")..')'<cr>
 xnoremap <space>l y:execute 'SlimeSend1 len('.. @+ ..')'<cr>
 " run line
 nnoremap <space>q yy:execute 'SlimeSend1 ' .. @"[:-2]<cr>
-xnoremap <space><space> y:execute 'SlimeSend1 %paste'<cr>
 
 " list function, import, class
 nnoremap <space>f :g/\<def\>\<bar>\<class\><cr>:
 nnoremap <space>f :lvimgrep/^\s*\<def\>\<bar>^\s*\<class\>/j %<bar>:llist<cr>:silent ll 
 nnoremap <space>F :lvimgrep/###/j % <bar>llist<cr>:silent ll 
+
+" Ctrl-c ,stop ipython running, send  signal
+nnoremap <c-c> :SlimeSend0 "<c-v><c-c>"<cr>
+command! Tmux rightbelow vertical terminal ++close tmux new-session ipython
+command! IPythonCellRestart call slime#send("exit\r") | SlimeSend0 "!!\r\r"
 
 " send to anothoer tmux window , print the globals() variable
 " function! Showvar()
@@ -149,6 +133,9 @@ for p in sys.path:
     vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
 EOF
 
+if( has_key(g:plugs, "coc.nvim") )
+  set tagfunc=CocTagFunc
+endif
 
 " ------------ un use --------------------------
 

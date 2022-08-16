@@ -37,7 +37,7 @@ nnoremap * *``
 inoremap <M-h> <Left>| inoremap <M-l> <right>
 inoremap <M-j> <down>| inoremap <M-k> <up>
 inoremap <c-h> <c-left>| inoremap <c-l> <c-right>
-inoremap <M-H> <c-Left>| inoremap <M-L> <c-right>
+inoremap <M-H> <home>| inoremap <M-L> <end>
 inoremap <M-J> <end>| inoremap <M-K> <Home>
 
 " Behave Vim
@@ -62,29 +62,58 @@ inoremap <c-z> <c-o>u
 
 " no hlsearch or terminal back to normal mode
 nnoremap <expr> <F2> &bt!="terminal" ? ":nohlsearch<cr>" : "i"
-nnoremap <silent> <F6> :Tlist<CR>
 command! VirEditToggle exe 'set ve=' . (&ve== "all"? "" : "all")|se ve
 command! Number set number! relativenumber!
 
 "terminal mapping
-set termwinkey=<c-_>
-tnoremap <m-h> <c-_>h
-tnoremap <m-l> <c-_>l
-tnoremap <m-j> <c-_>j
-tnoremap <m-k> <c-_>k
-tnoremap <m-N> <c-_>p
+set termwinkey=<m-;>
+tnoremap <m-h> <Cmd>wincmd h<cr>
+tnoremap <m-l> <Cmd>wincmd l<cr>
+tnoremap <m-j> <Cmd>wincmd j<cr>
+tnoremap <m-k> <Cmd>wincmd k<cr>
+tnoremap <m-N> <Cmd>wincmd p<cr>
 tnoremap <m-q> <c-\><c-n>
 tnoremap <m--> <c-_>"0
+execute 'tnoremap <m--> '..&termwinkey..'"0'
 
 " be changed
 tnoremap <m-p> <c-_>"0
-tnoremap <F2> <C-_>N<CR>  
+tnoremap <F2> <C-\><C-N><CR>  
 
 " tab 間移動
-nnoremap <silent> <C-h> :tabp<CR>
-nnoremap <silent> <C-l> :tabn<CR>
-tnoremap <silent> <C-h> <C-_>:tabp<CR>
-tnoremap <silent> <C-l> <C-_>:tabn<CR>
+nnoremap <silent> <C-h> <Cmd>tabp<CR>
+nnoremap <silent> <C-l> <Cmd>tabn<CR>
+tnoremap <silent> <C-h> <Cmd>tabp<CR>
+tnoremap <silent> <C-l> <Cmd>tabn<CR>
+
+" terminal 之間跳轉
+nnoremap <m-w> <Cmd>call JumpTerminalWin()<cr>
+tnoremap <m-w> <Cmd>call JumpTerminalWin()<cr>
+tmap <m-e> <f2>| map <m-e> <f2>
+"找出所有 terminal buffer, 聯集winbuffer, 找出 buffer , 轉換 winid , 跳躍
+" return terminal buffer num in current page
+function! GetWinTerminalBuffer() 
+  for i in term_list()
+    for j in tabpagebuflist()
+      if i == j| return i| endif
+    endfor
+  endfor
+  return -1
+endfunction
+function! JumpTerminalWin()
+  if &bt=='' && GetWinTerminalBuffer() != -1
+    echo win_gotoid( bufwinid( GetWinTerminalBuffer() ) )
+    return
+  endif
+  if &ft=='' && &bt=='terminal' 
+    execute "normal \<c-w>p"| return
+  endif
+endfunction
+
+" move fast by paragraph
+nnoremap <c-j> }
+nnoremap <c-k> {
+
 
 " Moving text
 nnoremap <silent> <M-K> :m .-2<CR>
@@ -117,7 +146,7 @@ nnoremap gx :call system("explorer.exe ".expand('<cWORD>'))<CR>
 "cmd abbreviation
 cabbre h vert bo h
 cabbre th tab h
-cabbre term vert terminal
+cabbre term rightbelow vertical terminal
 cabbre tterm tab terminal
 cabbre ee tabe
 " write file with sudo permission
@@ -145,6 +174,7 @@ xnoremap <tab> >gv| xnoremap <s-tab> <gv
 
 " open configuration about filetype
 nnoremap <leader>v :tabe $MYVIMRC<cr>
+nnoremap <leader>z :tabe ~/.zshrc<cr>
 nnoremap <leader>p :tabe $VIMFILES/after/plug.vim<CR>
 nnoremap <leader>m :tabedit $VIMFILES/after/commonMap.vim<cr>
 nnoremap <leader>V :exec "tabe $VIMFILES/after/ftplugin/" .&ft .".vim"<cr>
@@ -204,5 +234,9 @@ call s:key_escape('<F1>', 'OP')
 call s:key_escape('<F2>', 'OQ')
 call s:key_escape('<F3>', 'OR')
 call s:key_escape('<F4>', 'OS')
+
+
+
+
 
 
