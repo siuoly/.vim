@@ -64,7 +64,7 @@ filetype indent on
 filetype plugin on
 syntax on
 
-if has('gui')
+if has('gui_running')
   let $VIMFILES=$HOME..'/vimfiles'
   set guifont=Cascadia\ Code:h11:cANSI
   " maxmum window
