@@ -64,6 +64,7 @@ inoremap <c-z> <c-o>u
 nnoremap <expr> <F2> &bt!="terminal" ? ":nohlsearch<cr>" : "i"
 command! VirEditToggle exe 'set ve=' . (&ve== "all"? "" : "all")|se ve
 command! Number set number! relativenumber!
+command! Path let @+= expand('%:p')|echo @+
 
 "terminal mapping
 set termwinkey=<m-;>

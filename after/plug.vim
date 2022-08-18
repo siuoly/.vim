@@ -369,7 +369,8 @@ endif
   endfunction
 
 if( has_key(g:plugs, "ultisnips") ) 
-  nnoremap \u  <Cmd>UltiSnipsEdit<cr><c-^><Cmd>tabe #<cr>
+  nnoremap \u  <Cmd>UltiSnipsEdit<cr>
+  let g:UltiSnipsEditSplit='tabdo'
   let g:UltiSnipsListSnippets='<c-j>'
   let g:UltiSnipsExpandTrigger = '\<Nop>'
   inoremap <expr> <space> UltiSnips#CanExpandSnippet()? "\<C-R>=UltiSnips#ExpandSnippetOrJump()\<CR>":" "
