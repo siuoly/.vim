@@ -60,7 +60,7 @@ command -buffer QTconsole !jupyter qtconsole&
 """""" Ipython Vim display variable to REPL window
 " fold region, move to bottom boundary (### > 3 or EOF), VisualLine select ,
 " and move to top boundary (### >3 or Begin of file)
-nnoremap <space>d <Cmd>IPythonCellNextCell<cr>m"<Cmd>IPythonCellPrevCell<cr><Cmd>.,'"-1fold<cr>
+nnoremap <space>d <Cmd>IPythonCellNextCell<cr>:call search('^.','b')<cr>m"<Cmd>IPythonCellPrevCell<cr><Cmd>.,'"fold<cr>
 " copy region
 nnoremap <space>y m"/###\<bar>\%$/-1<cr>V?###\<bar>\%^<cr>y`"
 " send word
