@@ -1,18 +1,25 @@
 # refresh
 # call UltiSnips#RefreshSnippets()
+
+snippet tordata "torch dataset" b
+class Mydataset(Dataset):
+    def __init__(self,path=''):
+        self.data = np.load(path)
+    def __getitem__(self,index):
+        return self.x[index], self.y[index]
+    def __len__(self):
+        return len( self.x )
+dataset = Mydataset()
+endsnippet
+
 snippet imtorch "import pytorch package" b
-import torch
-import torch.nn as nn
-import torch.optim as optim
+import torch, torch.nn as nn, torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
-import numpy as np, csv,os
+import numpy as np, csv,os, random
 import matplotlib.pyplot as plt
 endsnippet
 
-snippet sseed "setting random seed" b
-import numpy as np
-import torch
-import random
+snippet torchsed "setting random seed" b
 torch.manual_seed( 1212 )
 random.seed(1212)
 np.random.seed(1212)
@@ -21,11 +28,11 @@ torch.backends.cudnn.benchmark = False  # not need
 torch.backends.cudnn.deterministic = True # not need
 endsnippet
 
-snippet imdevice "wether device variable cuda or cup" b
+snippet torchdev "wether device variable cuda or cup" b
 device = "cuda" if torch.cuda.is_available() else "cpu"
 endsnippet
 
-snippet snipdataset "dataser template" b
+snippet torchdataset "dataser template" b
 class ${1:MyDataSet}(Dataset ):
 ''' Dataset for loading and preprocessing the dataset '''
 	def __init__(self, path, mode='train' ):

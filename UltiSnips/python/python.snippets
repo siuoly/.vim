@@ -103,9 +103,9 @@ endsnippet
 snippet snipConcurrent "concurnet thread" b
 from concurrent.futures import ThreadPoolExecutor ,as_completed
 with ThreadPoolExecutor(max_workers=5) as executor:
-		params = [[1,i] for i in range(100)]
-		results  = executor.map( lambda args: f(*args), params )
-		print( list(results))
+	params = [[1,i] for i in range(100)]
+	results  = executor.map( lambda args: f(*args), params )
+	print( list(results))
 endsnippet
 
 
