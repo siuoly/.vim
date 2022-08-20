@@ -43,6 +43,7 @@
   "suggest.noselect": true,
 
   "snippets":{
+    "userSnippetsDirectory": "/home/siuoly/.vim/UltiSnips",
     "shortcut": "S"
   },
   "tsserver":{

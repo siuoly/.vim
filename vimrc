@@ -127,7 +127,9 @@ command! -complete=file -nargs=1 Csv tabe| .!column -s, -t <args>
 command! Now execute 'normal! i ' ."\<c-r>=strftime('%H:%M:%S')\<cr>"
 
 " put the output of command, e.g. PutCommand map, show all the mapping keys
-command! -nargs=+ PutCommand put =execute( '<args>')
+command! -nargs=+ PutCommand put=execute( '<args>')
+
+
 
 " delete file command
 command! -complete=file -nargs=1 Delete 

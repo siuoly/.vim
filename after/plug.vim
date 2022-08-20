@@ -371,13 +371,11 @@ endif
 if( has_key(g:plugs, "ultisnips") ) 
   nnoremap \u  <Cmd>UltiSnipsEdit<cr>
   let g:UltiSnipsEditSplit='tabdo'
-  let g:UltiSnipsListSnippets='<c-j>'
-  let g:UltiSnipsExpandTrigger = '\<Nop>'
-  inoremap <expr> <space> UltiSnips#CanExpandSnippet()? "\<C-R>=UltiSnips#ExpandSnippetOrJump()\<CR>":" "
-  xnoremap <expr> <space> UltiSnips#CanExpandSnippet()? "\<C-R>=UltiSnips#ExpandSnippetOrJump()\<CR>":" "
-  command! SnipRefresh call UltiSnips#RefreshSnippets() 
+  let g:UltiSnipsExpandTrigger = 'µ\<Nop>'
+  " let g:UltiSnipsListSnippets='<c-j>'
+  " inoremap <expr> <space> UltiSnips#CanExpandSnippet()? "\<C-R>=UltiSnips#ExpandSnippetOrJump()\<CR>":" "
+  " xnoremap <expr> <space> UltiSnips#CanExpandSnippet()? "\<C-R>=UltiSnips#ExpandSnippetOrJump()\<CR>":" "
   nnoremap <m-u> <Cmd>Snippets<cr>
-
 endif
 
 let g:slime_python_ipython=1

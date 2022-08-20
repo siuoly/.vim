@@ -1,3 +1,30 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+
 # key alias
 # call UltiSnips#RefreshSnippets()
 snippet pp "print()" b
@@ -292,4 +319,10 @@ endsnippet
 
 snippet padda "parser add argument" b
 parser.add_argument('--$1', type=${2:str}, default='$3', help='$4')
+endsnippet
+
+
+snippet garbge_collect "gc collect garbge, used for pytorch data delect" b
+import gc
+gc.collect()
 endsnippet

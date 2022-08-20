@@ -20,10 +20,22 @@ set shortmess+=c
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 
+
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1):
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
+imap <expr><space> coc#expandableOrJumpable() ? coc#_insert_key('request', 'snippets-expand', 1) : ' '
+xmap <leader>x  <Plug>(coc-convert-snippet)
+" imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" inoremap <silent><expr> <TAB>
+"       \ coc#pum#visible() ? coc#pum#next(1):
+"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"       \ CheckBackspace() ? "\<TAB>" :
+"       \ coc#refresh()
+
+" let g:coc_snippet_next = '<tab>'
 
 function! CheckBackspace() abort
   let col = col('.') - 1
@@ -32,7 +44,6 @@ endfunction
 
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-let g:coc_snippet_next = '<tab>'
 
 " Use <c-space> to trigger completion.
 if has('nvim')
