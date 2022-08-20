@@ -23,7 +23,7 @@ set ssop-=fold,option "no save map,fode imformtion
 set foldlevelstart=0
 " You can also use one of ¦, ┆, │, ⎸, or ▏ , ❚   
 " 關閉fold 水平線, 設定foldcolumn風格, " beatufile window split board
-set fillchars=fold:\ ,foldsep:\|,foldopen:▾,foldclose:▸,vert:\|
+set fillchars=fold:\ ,foldsep:\|,foldopen:▾,foldclose:▸,vert:\|,eob:\ 
 set foldcolumn=1 " 設定 fold 左欄提示
 set signcolumn=number
 set list
