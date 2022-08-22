@@ -65,12 +65,13 @@
   "python":{
     "linting":{
       "enabled" :  false ,
-      "flake8Enabled": true,
+      "flake8Enabled": true
     }
   },
   "pairs":{
     "disableLanguages": [ "python", "c" ],
     "enableCharacters":  ["(", "[", "{", "<", "'", "\"", "`" ]
-  }
+  },
+  "Lua.telemetry.enable": true
 }
 

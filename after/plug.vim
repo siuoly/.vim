@@ -277,9 +277,7 @@ if( has_key(g:plugs, "vim-markdown") )
   let g:vim_markdown_conceal_code_blocks = 0
   let g:tex_conceal = ""
   let g:vim_markdown_strikethrough = 1 "enable strikethrough ~~xx~~
-  highlight htmlBold ctermfg=blue
-  highlight htmlItalic cterm=italic ctermfg=yellow
-  highlight htmlBoldItalic cterm=italic ctermfg=blue
+  source $VIMFILES/after/highlight.vim
 endif
 
 "----------- COS setting ---------------------
