@@ -76,8 +76,8 @@ endif
 " hilight current line only
 augroup CursorLine
     au!
-    au WinEnter * setlocal cursorline 
-    au WinLeave * setlocal nocursorline 
+    " au WinEnter * setlocal cursorline 
+    " au WinLeave * setlocal nocursorline 
 augroup END
 
 autocmd TerminalOpen * setlocal nonumber norelativenumber
