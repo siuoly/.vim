@@ -111,17 +111,6 @@ function! SnippetPython()
 endfunction
 
 
-" down, size exit directly"
-if exists("g:PythonFunc") | finish | endif
-" run line1 ~ line2 code
-let g:PythonFunc=1
-function! RunPy(line1,line2)
-  let tname = tempname()
-  exec a:line1..","..a:line2 .. "w!  " .. tname
-  exec "pyxfile" .. tname
-  call delete( tname )
-endfunc
-
 " using "gf" jump the the module file
 " https://vim.fandom.com/wiki/Automatically_add_Python_paths_to_Vim_path
 python3 <<EOF
@@ -140,14 +129,10 @@ endif
 " ------------ un use --------------------------
 
 " function --> command
-command! -buffer -range -nargs=0 RunPy call RunPy(<line1>, <line2>)
 " python console terminal
 command! -buffer PythonConsole belowright terminal ++rows=10 ++close python3.8
 " run current line code
-nnoremap <buffer><C-s> :exe "pyx "..getline(".")<cr>
 " run region code in visual mode
-" xnoremap <buffer><c-s> :RunPy<cr>
 " run region code in normal mode
-nnoremap <buffer><m-s> vip:RunPy<cr>
 
 

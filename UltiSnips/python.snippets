@@ -326,3 +326,13 @@ snippet garbge_collect "gc collect garbge, used for pytorch data delect" b
 import gc
 gc.collect()
 endsnippet
+
+
+snippet thread_pool "multiple thread process multiple data" b
+with concurrent.futures.ThreadPoolExecutor() as ex:
+		for ${1:result1,result2...} in tqdm(
+						ex.map( ${2:process_func} , ${3:iterable_items} )),
+						total=len( ${3:iterable_items} )
+		):
+				${4:# process ing result .....}
+endsnippet

@@ -90,8 +90,10 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-bindkey '^P' history-search-backward
-bindkey '^N' history-search-forward
+# bindkey '^P' history-search-backward
+# bindkey '^N' history-search-forward
+# bindkey "^P" up-line-or-search
+
 
 # User configuration
 

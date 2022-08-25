@@ -171,13 +171,15 @@ if( has_key(g:plugs, "sideways.vim") )
   nnoremap <m-L> :SidewaysRight<cr>
 endif
 
+if( has_key(g:plugs, "LeaderF") )  " TODO add file history
+  nnoremap <m-g> :Leaderf rg --type py<cr>
+endif
 if( has_key(g:plugs, "vim-clap") )  " TODO add file history
   nnoremap <m-o> <Cmd>Clap files<cr>
   nnoremap <m-p> <Cmd>Clap<cr>
   nnoremap <m-i> <Cmd>Clap oldfiles<cr>
   nnoremap <m-b> <Cmd>Clap buffers<cr>
   tnoremap <m-b> <Cmd>Clap buffers<cr>
-  nnoremap <m-g> <Cmd>Clap grep<cr>
   let g:clap_preview_direction = 'UP'
   let g:clap_layout = { 'width': '80%', 'height': '60%', 'row': '10%', 'col': '10%','relative':'editor'}
   let g:clap_preview_size=3
