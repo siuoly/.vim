@@ -86,7 +86,8 @@ nnoremap <space>F :lvimgrep/###/j % <bar>llist<cr>:silent ll
 
 " Ctrl-c ,stop ipython running, send  signal
 nnoremap <c-c> :SlimeSend0 "<c-v><c-c>"<cr>
-command! Tmux rightbelow vertical terminal ++close tmux new-session ipython
+" open ipython, in tmux, on right pane,  and not move cursor
+command! Tmux exec "rightbelow vertical terminal ++close tmux new-session ipython" | wincmd h
 command! IPythonCellRestart call slime#send("exit\r") | SlimeSend0 "!!\r\r"
 
 " send to anothoer tmux window , print the globals() variable
