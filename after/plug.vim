@@ -293,7 +293,8 @@ if( has_key(g:plugs, "coc.nvim") )
 
   source $VIMFILES/after/cocset.vim
   let g:coc_node_path="/usr/bin/node"
-  let g:coc_global_extensions = [ "coc-pyright"]
+  let g:coc_global_extensions = ["coc-snippets","coc-pairs",
+        \"coc-highlight","coc-vimlsp","coc-sumneko-lua", "coc-pyright"]
   nnoremap <leader>C :CocCommand<cr>
   nnoremap <leader>c :tabe <bar>CocConfig<cr>
   hi! link CocBold htmlBold
