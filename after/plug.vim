@@ -128,7 +128,7 @@ endif
 
 if( has_key(g:plugs, "indentLine") )
 let g:indentLine_bufTypeExclude = ['help']
-let g:indentLine_fileTypeExclude = ['']
+let g:indentLine_fileType = ['c', 'cpp', 'python', 'javascript']
 let g:indentLine_char='▏' " You can also use one of ¦, ┆, │, ⎸, or ▏ , ▏   
 autocmd TerminalOpen * IndentLinesDisable
 endif
