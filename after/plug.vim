@@ -164,6 +164,8 @@ if( has_key(g:plugs, "vim-interestingwords") )
   command! HiClear call UncolorAllWords()
   nnoremap <silent> n :call WordNavigation(1)<cr>
   nnoremap <silent> N :call WordNavigation(0)<cr>
+  " <shift>8 --> *  | <alt>8 --> Hi 
+  nnoremap <m-8> <Cmd>Hi<cr>
 endif
 
 if( has_key(g:plugs, "sideways.vim") )
