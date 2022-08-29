@@ -129,7 +129,7 @@ endif
 if( has_key(g:plugs, "indentLine") )
 let g:indentLine_bufTypeExclude = ['help']
 let g:indentLine_fileType = ['c', 'cpp', 'python', 'javascript']
-let g:indentLine_char='▏' " You can also use one of ¦, ┆, │, ⎸, or ▏ , ▏   
+let g:indentLine_char='▏' " You can also use one of ¦, ┆, │, ⎸, or ▏ 
 autocmd TerminalOpen * IndentLinesDisable
 endif
 
@@ -152,6 +152,9 @@ let g:mkdp_preview_options = {
     \ }
 endif
 
+if( has_key(g:plugs, 'fzf.vim' ) )
+  nnoremap <m-H> :Helptag<cr>
+endif
 
 if( has_key(g:plugs, "vim-interestingwords") )
   let g:interestingWordsDefaultMappings = 0
@@ -164,6 +167,9 @@ if( has_key(g:plugs, "vim-interestingwords") )
   command! HiClear call UncolorAllWords()
   nnoremap <silent> n :call WordNavigation(1)<cr>
   nnoremap <silent> N :call WordNavigation(0)<cr>
+  " <shift>8 --> *  | <alt>8 --> Hi 
+  nnoremap <m-8> :call InterestingWords('n')<cr>
+  xnoremap <m-8> :Hi<cr>
 endif
 
 if( has_key(g:plugs, "sideways.vim") )
@@ -172,7 +178,8 @@ if( has_key(g:plugs, "sideways.vim") )
 endif
 
 if( has_key(g:plugs, "LeaderF") )  " TODO add file history
-  nnoremap <m-g> :Leaderf rg --type py<cr>
+  nnoremap <m-G> :Leaderf rg --type py<cr>
+  nnoremap <m-g> <Plug>LeaderfRgBangCwordLiteralBoundary
 endif
 if( has_key(g:plugs, "vim-clap") )  " TODO add file history
   nnoremap <m-o> <Cmd>Clap files<cr>
@@ -264,11 +271,12 @@ if( has_key(g:plugs, "vim-colorschemes") )
   " colorscheme Atelier_SeasideDark
   colorscheme OceanicNext
   " 游標行的背景色,  註解斜體字
-  " hi CursorLine   ctermbg=234 
+  hi CursorLine   term=None cterm=None ctermbg=237 guibg=#1b2b34
   " hi CursorColumn ctermbg=234
   " hi Comment cterm=italic
   " hi foldcolumn ctermfg=red ctermbg=None
   hi Folded ctermbg=None cterm=italic guibg=NONE
+  source $VIMFILES/after/highlight.vim
 endif
 
 if( has_key(g:plugs, "vim-markdown") )
@@ -279,7 +287,6 @@ if( has_key(g:plugs, "vim-markdown") )
   let g:vim_markdown_conceal_code_blocks = 0
   let g:tex_conceal = ""
   let g:vim_markdown_strikethrough = 1 "enable strikethrough ~~xx~~
-  source $VIMFILES/after/highlight.vim
 endif
 
 "----------- COS setting ---------------------

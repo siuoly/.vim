@@ -14,7 +14,6 @@ set enc=utf-8 cpoptions+=y " ("1y) ("1p) using
 set shiftwidth=2 tabstop=2 softtabstop=2 expandtab autoindent 
 set hlsearch incsearch ignorecase smartcase
 autocmd! InsertEnter * call feedkeys("\<Cmd>noh\<cr>" , 'n') " close hlsearch when search
-set ambiwidth=double        "prevent enter replace mode on Conemu"
 call setcellwidths([[0x2588, 0x258f, 1]])
 set modeline exrc secure
 set scrolloff=9
@@ -23,10 +22,10 @@ set ssop-=fold,option "no save map,fode imformtion
 set foldlevelstart=0
 " You can also use one of ¦, ┆, │, ⎸, or ▏ , ❚   
 " 關閉fold 水平線, 設定foldcolumn風格, " beatufile window split board
-set fillchars=fold:\ ,foldsep:\|,foldopen:▾,foldclose:▸,vert:\|,eob:\ 
+set fillchars=fold:\ ,foldsep:\|,foldopen:▾,foldclose:▸,vert:\│,eob:\ 
 set foldcolumn=1 " 設定 fold 左欄提示
 set signcolumn=number
-set list
+" set list
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,
 set showbreak=↪
 
