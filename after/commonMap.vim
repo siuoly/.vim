@@ -22,7 +22,6 @@ nnoremap <BS> <C-^>
 
 " Home End
 noremap H ^| noremap L g_
-nnoremap M gM
 
 " omap 
 onoremap b i(| onoremap p ip| onoremap B iB

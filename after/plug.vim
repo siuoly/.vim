@@ -168,12 +168,8 @@ if( has_key(g:plugs, "vim-interestingwords") )
   nnoremap <silent> n :call WordNavigation(1)<cr>
   nnoremap <silent> N :call WordNavigation(0)<cr>
   " <shift>8 --> *  | <alt>8 --> Hi 
-<<<<<<< HEAD
   nnoremap <m-8> :call InterestingWords('n')<cr>
   xnoremap <m-8> :Hi<cr>
-=======
-  nnoremap <m-8> <Cmd>Hi<cr>
->>>>>>> f47b508d44330b07a1c8872f63e8ba1ae1e65179
 endif
 
 if( has_key(g:plugs, "sideways.vim") )
