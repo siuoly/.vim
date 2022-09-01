@@ -20,6 +20,7 @@ call plug#begin( '~/.vim/plugged' )
 " Plug 'pi314/ime.vim'
 
 " must use
+Plug 'tpope/vim-fugitive'           " git integrate
 Plug 'wellle/context.vim'            " context look
 Plug 'rhysd/clever-f.vim'            " f,F,t,T move quickly
 Plug 'terryma/vim-multiple-cursors'  " <c-n> multiple select
@@ -178,8 +179,8 @@ if( has_key(g:plugs, "sideways.vim") )
 endif
 
 if( has_key(g:plugs, "LeaderF") )  " TODO add file history
-  nnoremap <m-G> :Leaderf rg --type py<cr>
-  nnoremap <m-g> <Plug>LeaderfRgBangCwordLiteralBoundary
+  nnoremap <m-g> :Leaderf rg --type py<cr>
+  nnoremap <m-G> <Plug>LeaderfRgBangCwordLiteralBoundary
 endif
 if( has_key(g:plugs, "vim-clap") )  " TODO add file history
   nnoremap <m-o> <Cmd>Clap files<cr>
