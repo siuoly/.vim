@@ -1,5 +1,6 @@
 "open python.vim
 " nnoremap <buffer>\V :vsp ~/.vim/after/ftplugin/python.vim
+setlocal makeprg=python\ %:S " :make \| copen \<cr> to debug 
 
 ""run test  replace by "async-task plugin"
 nnoremap <buffer><m-d> :w<CR>:exec "H python " ..expand('%')<cr>
