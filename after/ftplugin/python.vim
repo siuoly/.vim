@@ -4,8 +4,8 @@ setlocal makeprg=python\ %:S " :make \| copen \<cr> to debug
 
 ""run test  replace by "async-task plugin"
 nnoremap <buffer><m-d> :w<CR>:exec "H python " ..expand('%')<cr>
+nnoremap <buffer><f9> :w<CR>:exec "!python " ..expand('%')<cr>
 " stop the Task
-map <buffer><m-c> <Cmd>call JumpTerminalWin()<cr><c-c>
 
 " for "chmod +x" autoload
 setlocal autoread

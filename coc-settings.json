@@ -1,6 +1,6 @@
 {
   // "coc.preferences.enableMarkdown": true,
-  "修正pyright &nbsp提示錯誤" :"",
+  //  "修正pyright &nbsp提示錯誤" :"",
   "languageserver": {
     "go": {
       "command": "gopls",
@@ -32,20 +32,20 @@
         }
       },
       "filetypes": [ "vim" ]
-    },
-    "clangd": {
-      "command": "clangd",
-      "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
-      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
     }
+    // "clangd": {
+    //   "command": "clangd",
+    //   "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
+    //   "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
+    // }
   },
   // tab 第一下 選擇第一項目，false則是跳至第二項
-  "suggest.noselect": true,
 
+  "suggest.noselect": true,
   "snippets":{
-    "userSnippetsDirectory": "/home/siuoly/.vim/UltiSnips",
     "shortcut": "S"
   },
+  "snippets.ultisnips.directories": ["UltiSnips","$PWD/.snip"],
   "tsserver":{
     "enable" : true,
     "githubUrl": " https://github.com/neoclide/coc-tsserver "
@@ -56,12 +56,12 @@
     "command" : "對於ture, false等命令, 不須加上引號, 但是對於其他字串則需要" ,
     "disableDiagnostics" :   true,
     "description" : "上面用途 關閉左側欄位 很煩的錯誤行提示 linting",
-    "completion.snippetSupport": false,
     "analysis":{
-      "autoSearchPaths": true,
+      "autoSearchPaths": true
     },
-    "trace.server": "verbose" ,
+    "trace.server": "verbose" 
   },
+  "pyright.completion.snippetSupport": false,
   "python":{
     "linting":{
       "enabled" :  false ,
@@ -69,7 +69,7 @@
     }
   },
   "pairs":{
-    "disableLanguages": [ "python", "c" ],
+    "disableLanguages": [ "python", "c", "cpp" ],
     "enableCharacters":  ["(", "[", "{", "<", "'", "\"", "`" ]
   },
   "Lua.telemetry.enable": true

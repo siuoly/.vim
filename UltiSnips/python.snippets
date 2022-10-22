@@ -31,10 +31,6 @@ snippet pp "print()" b
 print( ${1:${VISUAL}} )
 endsnippet
 
-snippet "([^\s].*)\.pp" "print() postfix" r
-print( `!p snip.rv = match.group(1)`) $1
-endsnippet
-
 snippet "([^\s]+)\.sh" "show() postfix" r
 print( f"{`!p snip.rv = match.group(1)`=}" ) $1
 endsnippet
@@ -49,6 +45,10 @@ endsnippet
 
 snippet "([^\s]+)\.li" "list() postfix" r
 list( `!p snip.rv = match.group(1)`) $1
+endsnippet
+
+snippet "([^\s].*)\.pp" "print() postfix" r
+print( `!p snip.rv = match.group(1)`) $1
 endsnippet
 
 

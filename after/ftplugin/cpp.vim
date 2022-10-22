@@ -3,6 +3,7 @@
 "setlocal makeprg=c++\ -g\ -Wall\ -Wextra\ %\ &&./a.out
 " nnoremap <buffer> <C-D> :w<CR>:!c++ % -std=c++2a -I ~/projects/c++/Tool/ &&  ./a.out<CR>
 " nnoremap <buffer> <C-C> :w<CR>:!c++ -std=c++2a -g -pedantic -Wfatal-errors -w -DDEBUG % -I ~/projects/c++/Tool/ &&./a.out<CR>
+nnoremap <buffer><f6> <Cmd>!c++ % -std=c++2a -I ~/projects/c++/Tool/ && ./a.out<cr>
 nnoremap <buffer><expr> <m-d> ':w<cr>'.expandcmd(':H c++ % -std=c++2a -I ~/projects/c++/Tool/ && ./a.out<cr>')
 
 

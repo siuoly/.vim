@@ -8,7 +8,8 @@ call omni#cpp#complete#Init()
 "setlocal makeprg=c++\ -g\ -Wall\ -Wextra\ %\ &&./a.out
 " map <buffer><C-D> :w <bar> !cc -g -pedantic -Wall -Wextra % -lncurses -lmenu &&./a.out<CR>
 " map <buffer><C-C> :w<CR>:!cc -g -pedantic -Wfatal-errors -w -DDEBUG % -lncurses -lmenu &&./a.out<CR>
-nnoremap <buffer> <m-d> :w<cr>:exe 'H gcc '.expand('%').. '&& ./a.out'<cr>
+" nnoremap <buffer> <m-d> :w<cr>:exe 'H gcc '.expand('%').. '&& ./a.out'<cr>
+nnoremap <buffer> <f6> :w<cr>:exe '!gcc '.expand('%').. '&& ./a.out'<cr>
 
 
 

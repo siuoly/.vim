@@ -378,7 +378,9 @@ endif
   endfunction
 
 if( has_key(g:plugs, "ultisnips") ) 
-  nnoremap \u  <Cmd>UltiSnipsEdit<cr>
+  nnoremap \u  <Cmd>CocCommand snippets.openSnippetFiles<cr>
+  " set rtp+=$PWD
+  let g:UltiSnipsSnippetDirectories = ['UltiSnips']
   let g:UltiSnipsEditSplit='tabdo'
   let g:UltiSnipsExpandTrigger = 'µ\<Nop>'
   " let g:UltiSnipsListSnippets='<c-j>'
