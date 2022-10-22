@@ -23,7 +23,6 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 imap <expr><space> coc#expandableOrJumpable() ? coc#_insert_key('request', 'snippets-expand', 1) : ' '
 xmap <leader>x  <Plug>(coc-convert-snippet)
-" imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 " inoremap <silent><expr> <TAB>
 "       \ coc#pum#visible() ? coc#pum#next(1):
@@ -50,8 +49,9 @@ endif
 " 不需要啦
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "<C-y>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -95,6 +95,7 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
+hi CocMenuSel ctermbg=109 guibg=#13354A
 
 " Symbol renaming.
 " nmap <leader>rn <Plug>(coc-rename)

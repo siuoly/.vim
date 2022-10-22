@@ -335,6 +335,13 @@ with concurrent.futures.ThreadPoolExecutor() as ex:
 				${4:# process ing result .....}
 endsnippet
 
+snippet ParallelJob "parallel job" b
+endsnippet
+snippet subpro "subprocess"
+import subprocess
+subprocess.run( "${1:command}", shell=True)
+endsnippet
+
 
 snippet sysexit "exit" b
 import sys; sys.exit(0)
