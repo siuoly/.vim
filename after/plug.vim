@@ -299,7 +299,7 @@ if( has_key(g:plugs, "coc.nvim") )
     autocmd CursorHold * call plug#load('coc.nvim') | autocmd! load_us_coc
   augroup END
 
-  source $VIMFILES/after/cocset.vim
+  source $VIMFILES/cocrc.vim
   let g:coc_node_path="/usr/bin/node"
   let g:coc_global_extensions = ["coc-snippets","coc-pairs",
         \"coc-highlight","coc-vimlsp","coc-sumneko-lua", "coc-pyright"]
