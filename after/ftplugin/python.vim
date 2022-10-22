@@ -44,7 +44,7 @@ let g:ipython_cell_insert_tag='###'
 " append below,above cell, split cell,
 nnoremap <buffer><c-j> :IPythonCellNextCell<cr>
 nnoremap <buffer><c-k> :IPythonCellPrevCell<cr>
-nnoremap <space>s <Cmd>call append('.',g:ipython_cell_insert_tag)<cr>
+nnoremap <space>c <Cmd>call append('.',g:ipython_cell_insert_tag)<cr>
 nnoremap <space>a <Cmd>IPythonCellInsertAbove<cr>
 nnoremap <space>b <Cmd>IPythonCellInsertBelow<cr>
 nnoremap <space>B o<c-o>50i#<esc>
@@ -71,7 +71,7 @@ xnoremap <space>w y:execute 'SlimeSend1 '.. @+ <cr>
 " sned print
 nnoremap <space>t :execute 'SlimeSend1 type('.. expand("<cword>")..")"<cr>
 " send variable.shape
-" nnoremap <space>s :execute 'SlimeSend1 '.. expand("<cword>")..".shape"<cr>
+nnoremap <space>s :execute 'SlimeSend1 '.. expand("<cword>")..".shape"<cr>
 nnoremap <space>S :execute 'SlimeSend1 '.. expand("<cWORD>")..".shape"<cr>
 xnoremap <space>s y:execute 'SlimeSend1 '.. @+ ..".shape"<cr>
 " send len(variable)

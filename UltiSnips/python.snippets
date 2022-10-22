@@ -110,13 +110,13 @@ plt.legend(shadow=True, fontsize=12, facecolor='inherit', edgecolor='inherit', l
 endsnippet
 
 snippet splot "plt.subplots() and show" b
-fig, ax = plt.subplots(1,1)
+fig, (ax1,ax2) = plt.subplots( 2,1 ,figsize=(5,15), tight_layout=True )
 fig.suptitle( 'long fig title' )
 
-ax.plot($1)
-ax.set_title("$2")
-ax.set_xlabel("$3")
-ax.set_ylabel("$4")
+# ax.plot($1)
+# ax.set_title("$2")
+# ax.set_xlabel("$3")
+# ax.set_ylabel("$4")
 
 fig.show()
 endsnippet
@@ -339,3 +339,6 @@ endsnippet
 snippet sysexit "exit" b
 import sys; sys.exit(0)
 endsnippet
+
+
+

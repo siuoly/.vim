@@ -234,9 +234,3 @@ call s:key_escape('<F1>', 'OP')
 call s:key_escape('<F2>', 'OQ')
 call s:key_escape('<F3>', 'OR')
 call s:key_escape('<F4>', 'OS')
-
-
-
-
-
-

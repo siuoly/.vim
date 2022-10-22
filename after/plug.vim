@@ -42,7 +42,7 @@ Plug 'tpope/vim-repeat'                       " surround repeat
 Plug 'mattn/emmet-vim',{'for':['html','php']} " html tag
 Plug 'captbaritone/better-indent-support-for-php-with-html'
 Plug 'michaeljsmith/vim-indent-object'        " vii, vai 選擇 縮排區塊
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 " " Snippets are separated from the engine. Add this if you want them:
 " Plug 'honza/vim-snippets'
 " Plug 'frazrepo/vim-rainbow' " 括號顏色
