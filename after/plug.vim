@@ -154,7 +154,6 @@ let g:mkdp_preview_options = {
 endif
 
 if( has_key(g:plugs, 'fzf.vim' ) )
-  nnoremap <m-H> :Helptag<cr>
 endif
 
 if( has_key(g:plugs, "vim-interestingwords") )
@@ -181,6 +180,7 @@ endif
 if( has_key(g:plugs, "LeaderF") )  " TODO add file history
   nnoremap <m-g> :Leaderf rg --type py<cr>
   nnoremap <m-G> <Plug>LeaderfRgBangCwordLiteralBoundary
+  nnoremap <m-H> <Cmd>LeaderfHelp<cr>
 endif
 if( has_key(g:plugs, "vim-clap") )  " TODO add file history
   nnoremap <m-o> <Cmd>Clap files<cr>
@@ -233,7 +233,6 @@ if( has_key(g:plugs, "vim-commentary") )
   " omap gc  <Plug>Commentary
   " nmap gcp <Plug>Commentaryip}
 endif
-
 if(has_key(g:plugs, "goyo.vim") )
   let g:goyo_width = 100
 endif
