@@ -336,6 +336,8 @@ with concurrent.futures.ThreadPoolExecutor() as ex:
 endsnippet
 
 snippet ParallelJob "parallel job" b
+from joblib import Parallel, delayed
+ret = Parallel( n_jobs=${1:1} ${2:,verbose=10})( delayed( ${3:func})(arg) for arg in args )
 endsnippet
 snippet subpro "subprocess"
 import subprocess

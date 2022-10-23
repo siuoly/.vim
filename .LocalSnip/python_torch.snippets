@@ -19,13 +19,15 @@ import numpy as np, csv,os, random
 import matplotlib.pyplot as plt
 endsnippet
 
-snippet torchsed "setting random seed" b
-torch.manual_seed( 1212 )
-random.seed(1212)
-np.random.seed(1212)
-torch.backends.cudnn.enabled = False  # need
-torch.backends.cudnn.benchmark = False  # not need
-torch.backends.cudnn.deterministic = True # not need
+snippet seed_everything "setting random seed" b
+def seed_everything(seed):
+    logging.info("random seed = %d" % seed)
+    random.seed(seed)
+    np.random.seed(seed)
+    os.environ["PYTHONHASHSEED"] = str(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.backends.cudnn.deterministic = True
 endsnippet
 
 snippet torchdev "wether device variable cuda or cup" b
