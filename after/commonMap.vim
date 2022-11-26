@@ -10,7 +10,11 @@ inoremap kj <esc>
 cnoremap jk <c-c>
 cnoremap kj <c-c>
 " nnoremap q :silent! wall<CR>
-cnoremap qq q!<cr>
+" 臨時關閉檔案，不刪暫存
+command! ExitVim if expand('%')=='' && &modified==0 |  q | endif
+cnoremap qq bd!<cr>:ExitVim<cr>
+cnoremap ww w<bar>bd<cr>:ExitVim<cr>
+" 退出vim，儲存並關閉
 cnoremap qw silent! wall <bar>bufdo qa!<cr>
 nnoremap <M-q> :q<cr>
 tnoremap <M-q> exit<cr>
