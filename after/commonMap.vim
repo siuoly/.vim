@@ -56,9 +56,6 @@ inoremap ( (<c-g>u
 inoremap , ,<c-g>u
 inoremap . .<c-g>u
 
-" <c-z> in insert mode for simulate windows system
-inoremap <c-z> <c-o>u
-
 " no hlsearch or terminal back to normal mode
 nnoremap <expr> <F2> &bt!="terminal" ? ":nohlsearch<cr>" : "i"
 command! VirEditToggle exe 'set ve=' . (&ve== "all"? "" : "all")|se ve
@@ -85,6 +82,9 @@ nnoremap <silent> <C-h> <Cmd>tabp<CR>
 nnoremap <silent> <C-l> <Cmd>tabn<CR>
 tnoremap <silent> <C-h> <Cmd>tabp<CR>
 tnoremap <silent> <C-l> <Cmd>tabn<CR>
+
+" 分割畫面視窗 開啟新tab
+nnoremap <silent> <c-w><c-t> <c-w>T
 
 " terminal 之間跳轉
 nnoremap <m-w> <Cmd>call JumpTerminalWin()<cr>
@@ -114,7 +114,6 @@ endfunction
 nnoremap <c-j> }
 nnoremap <c-k> {
 
-
 " Moving text
 nnoremap <silent> <M-K> :m .-2<CR>
 nnoremap <silent> <M-J> :m .+1<CR>
@@ -131,17 +130,16 @@ nnoremap <silent><m-l> :wincmd l<CR>
 nnoremap <c-left>  <C-w><| nnoremap <c-right> <C-w>>
 nnoremap <c-up>    <C-w>+| nnoremap <c-down>  <C-w>-
 nnoremap <M-.> <C-w>><Cmd>echo "using c-arrow"<cr>
-nnoremap <M-,> <C-w><<Cmd>echo "using c-arrow"<cr>
+nnoremap <M--> <C-w><<Cmd>echo "using c-arrow"<cr>
 tnoremap <c-left>  <Cmd>vert res -1<cr>
 tnoremap <c-right>  <Cmd>vert res +1<cr>
-tnoremap <m-,>  <Cmd>vert res -1<cr>
-tnoremap <m-.>  <Cmd>vert res +1<cr>
+tnoremap <m-->  <Cmd>vert res -1<cr>
+tnoremap <m-=>  <Cmd>vert res +1<cr>
 tnoremap <c-up> <Cmd> res +1<cr>
 tnoremap <c-down> <Cmd> res -1<cr>
 
 " browser open url , set .zshrc :
 nnoremap gx :call system("explorer.exe ".expand('<cWORD>'))<CR>
-
 
 "cmd abbreviation
 cabbre h vert bo h

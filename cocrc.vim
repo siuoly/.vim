@@ -94,7 +94,7 @@ function! s:show_documentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 hi CocMenuSel ctermbg=109 guibg=#13354A
 
 " Symbol renaming.

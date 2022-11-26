@@ -20,7 +20,7 @@ call plug#begin( '~/.vim/plugged' )
 " Plug 'pi314/ime.vim'
 
 " must use
-Plug 'tpope/vim-fugitive'           " git integrate
+"Plug 'tpope/vim-fugitive'           " git integrate
 Plug 'wellle/context.vim'            " context look
 Plug 'rhysd/clever-f.vim'            " f,F,t,T move quickly
 Plug 'terryma/vim-multiple-cursors'  " <c-n> multiple select
@@ -75,6 +75,7 @@ Plug 'hanschen/vim-ipython-cell',{'for':'python'}
 Plug 'jpalardy/vim-slime',{'for':'python','on':'SlimeConfig'}
 Plug 'plasticboy/vim-markdown'                                           " markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  } " preview
+Plug 'jrudess/vim-foldtext'                                              "foldtext setting
 " Plug 'siuoly/md-img-paste.vim' ,{ 'for': 'markdown' }                     " my fork,  paste the markdown image
 
 " Plug 'ap/vim-css-color', { 'for': ['html', 'css'] } " preview css color on vim
@@ -275,7 +276,7 @@ if( has_key(g:plugs, "vim-colorschemes") )
   " hi CursorColumn ctermbg=234
   " hi Comment cterm=italic
   " hi foldcolumn ctermfg=red ctermbg=None
-  hi Folded ctermbg=None cterm=italic guibg=NONE
+  hi Folded ctermbg=None cterm=strikethrough guibg=NONE guifg=#495762
   source $VIMFILES/after/highlight.vim
 endif
 

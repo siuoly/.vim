@@ -48,7 +48,7 @@ nnoremap <space>c <Cmd>call append('.',g:ipython_cell_insert_tag)<cr>
 nnoremap <space>a <Cmd>IPythonCellInsertAbove<cr>
 nnoremap <space>b <Cmd>IPythonCellInsertBelow<cr>
 nnoremap <space>B o<c-o>50i#<esc>
-nnoremap <f5> :tab terminal pudb3 %:p<cr>
+nnoremap <f5> ?###<cr>o%%writefile tmp.py<esc>:IPythonCellExecuteCell<cr>:SlimeSend1 %run -d -i tmp.py<cr>:d<cr><c-w>l
 nnoremap <f6> :Tmux<cr>
 " Ipython Vim
 nmap <space><space> <Plug>SlimeSendCell

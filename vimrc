@@ -29,10 +29,11 @@ set signcolumn=number
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,
 set showbreak=↪
 
-set clipboard=unnamedplus	"yank to the system register (*) by default  " work on xlaunch
+set clipboard=unnamedplus	 "yank to the system register (*) by default  " work on xlaunch
 set noshowmatch		" Cursor no shows matching ) and }
 set showmode		" Show current mode
 set wildmenu    " wild char completion menu
+set wildcharm=9 "enable macro <tab> completion on command mode input
 
 set nrformats-=octal " <c-a> <c-x> use
 
@@ -162,11 +163,8 @@ endif
 "   let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
 " endif
 
-
-
 "source map
 source $VIMFILES/after/commonMap.vim
-
 "confugure
 source $VIMFILES/after/configure.vim
 
@@ -175,12 +173,5 @@ source $VIMFILES/after/plug.vim
 
 let folddigest_options = "vertical,flexnumwidth"
 let folddigest_size = 30
-
-
-" remote server
-command! KDD tab terminal ++close ssh siuoly@140.118.46.94 -p 2222
-
-
-
 
 
